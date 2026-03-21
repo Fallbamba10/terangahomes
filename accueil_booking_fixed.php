@@ -11,34 +11,232 @@ if (isset($_SESSION['user_id'])) {
 
 // Détecter la langue de l'utilisateur
 $default_lang = 'fr';
-$supported_langs = ['fr', 'en', 'es', 'ar', 'zh', 'pt'];
+$supported_langs = [
+    'fr' => 'Français', 'en' => 'English', 'es' => 'Español', 'ar' => 'العربية', 
+    'zh' => '中文', 'pt' => 'Português', 'de' => 'Deutsch', 'it' => 'Italiano',
+    'nl' => 'Nederlands', 'ru' => 'Русский', 'ja' => '日本語', 'ko' => '한국어',
+    'hi' => 'हिन्दी', 'tr' => 'Türkçe', 'pl' => 'Polski', 'sv' => 'Svenska',
+    'no' => 'Norsk', 'da' => 'Dansk', 'fi' => 'Suomi', 'el' => 'Ελληνικά',
+    'he' => 'עברית', 'th' => 'ไทย', 'vi' => 'Tiếng Việt', 'id' => 'Bahasa Indonesia',
+    'ms' => 'Bahasa Melayu', 'cs' => 'Čeština', 'hu' => 'Magyar', 'ro' => 'Română',
+    'bg' => 'Български', 'hr' => 'Hrvatski', 'sr' => 'Српски', 'sk' => 'Slovenčina',
+    'et' => 'Eesti', 'lv' => 'Latviešu', 'lt' => 'Lietuvių', 'uk' => 'Українська',
+    'be' => 'Беларуская', 'ka' => 'ქართული', 'am' => 'አማርኛ', 'sw' => 'Kiswahili',
+    'zu' => 'isiZulu', 'af' => 'Afrikaans', 'is' => 'Íslenska', 'mt' => 'Malti',
+    'cy' => 'Cymraeg', 'ga' => 'Gaeilge', 'gd' => 'Gàidhlig', 'eu' => 'Euskara',
+    'ca' => 'Català', 'gl' => 'Galego', 'ast' => 'Asturianu', 'lb' => 'Lëtzebuergesch'
+];
 
 // Détecter la langue depuis le navigateur ou la session
-if (isset($_SESSION['lang']) && in_array($_SESSION['lang'], $supported_langs)) {
+if (isset($_SESSION['lang']) && array_key_exists($_SESSION['lang'], $supported_langs)) {
     $lang = $_SESSION['lang'];
 } else {
     $browser_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'fr', 0, 2);
-    $lang = in_array($browser_lang, $supported_langs) ? $browser_lang : $default_lang;
+    $lang = array_key_exists($browser_lang, $supported_langs) ? $browser_lang : $default_lang;
     $_SESSION['lang'] = $lang;
 }
 
 // Détecter la devise
 $default_currency = 'XOF';
-$supported_currencies = ['XOF', 'EUR', 'USD', 'GBP', 'CAD', 'AUD', 'JPY', 'CNY'];
+$supported_currencies = [
+    'XOF' => ['name' => 'FCFA', 'countries' => ['SN', 'ML', 'BF', 'NE', 'CI', 'TG', 'BJ', 'GW', 'MR']],
+    'EUR' => ['name' => 'Euro', 'countries' => ['FR', 'DE', 'IT', 'ES', 'BE', 'NL', 'AT', 'PT', 'IE', 'FI', 'GR', 'LU', 'CY', 'MT', 'SI', 'SK', 'EE', 'LV', 'LT']],
+    'USD' => ['name' => 'Dollar', 'countries' => ['US', 'CA', 'AU', 'NZ', 'SG', 'HK', 'TW', 'KR', 'PH', 'MY', 'TH', 'VN', 'ID', 'IN', 'PK', 'BD', 'LK', 'NP', 'BT', 'MV']],
+    'GBP' => ['name' => 'Pound', 'countries' => ['GB', 'JE', 'GG', 'IM']],
+    'CAD' => ['name' => 'Dollar CAD', 'countries' => ['CA']],
+    'AUD' => ['name' => 'Dollar AUD', 'countries' => ['AU', 'NZ', 'FJ', 'PG', 'SB', 'VU', 'NC', 'PF', 'WS', 'TO', 'KI', 'TV', 'NR', 'PW', 'FM', 'MH']],
+    'JPY' => ['name' => 'Yen', 'countries' => ['JP']],
+    'CNY' => ['name' => 'Yuan', 'countries' => ['CN']],
+    'INR' => ['name' => 'Rupee', 'countries' => ['IN']],
+    'BRL' => ['name' => 'Real', 'countries' => ['BR']],
+    'MXN' => ['name' => 'Peso', 'countries' => ['MX']],
+    'ARS' => ['name' => 'Peso', 'countries' => ['AR']],
+    'CLP' => ['name' => 'Peso', 'countries' => ['CL']],
+    'COP' => ['name' => 'Peso', 'countries' => ['CO']],
+    'PEN' => ['name' => 'Sol', 'countries' => ['PE']],
+    'UYU' => ['name' => 'Peso', 'countries' => ['UY']],
+    'PYG' => ['name' => 'Guarani', 'countries' => ['PY']],
+    'BOB' => ['name' => 'Boliviano', 'countries' => ['BO']],
+    'VES' => ['name' => 'Bolívar', 'countries' => ['VE']],
+    'CRC' => ['name' => 'Colón', 'countries' => ['CR']],
+    'GTQ' => ['name' => 'Quetzal', 'countries' => ['GT']],
+    'HNL' => ['name' => 'Lempira', 'countries' => ['HN']],
+    'NIO' => ['name' => 'Córdoba', 'countries' => ['NI']],
+    'PAB' => ['name' => 'Balboa', 'countries' => ['PA']],
+    'DOP' => ['name' => 'Peso', 'countries' => ['DO']],
+    'JMD' => ['name' => 'Dollar', 'countries' => ['JM']],
+    'TTD' => ['name' => 'Dollar', 'countries' => ['TT']],
+    'BBD' => ['name' => 'Dollar', 'countries' => ['BB']],
+    'XCD' => ['name' => 'Dollar', 'countries' => ['AG', 'DM', 'GD', 'KN', 'LC', 'VC']],
+    'BSD' => ['name' => 'Dollar', 'countries' => ['BS']],
+    'KYD' => ['name' => 'Dollar', 'countries' => ['KY']],
+    'BMD' => ['name' => 'Dollar', 'countries' => ['BM']],
+    'ANG' => ['name' => 'Guilder', 'countries' => ['CW', 'SX', 'BQ']],
+    'AWG' => ['name' => 'Florin', 'countries' => ['AW']],
+    'SRD' => ['name' => 'Dollar', 'countries' => ['SR']],
+    'GYD' => ['name' => 'Dollar', 'countries' => ['GY']],
+    'TWD' => ['name' => 'Dollar', 'countries' => ['TW']],
+    'HKD' => ['name' => 'Dollar', 'countries' => ['HK']],
+    'SGD' => ['name' => 'Dollar', 'countries' => ['SG']],
+    'MYR' => ['name' => 'Ringgit', 'countries' => ['MY']],
+    'THB' => ['name' => 'Baht', 'countries' => ['TH']],
+    'VND' => ['name' => 'Dong', 'countries' => ['VN']],
+    'IDR' => ['name' => 'Rupiah', 'countries' => ['ID']],
+    'PHP' => ['name' => 'Peso', 'countries' => ['PH']],
+    'LKR' => ['name' => 'Rupee', 'countries' => ['LK']],
+    'PKR' => ['name' => 'Rupee', 'countries' => ['PK']],
+    'BDT' => ['name' => 'Taka', 'countries' => ['BD']],
+    'NPR' => ['name' => 'Rupee', 'countries' => ['NP']],
+    'BTN' => ['name' => 'Ngultrum', 'countries' => ['BT']],
+    'MVR' => ['name' => 'Rufiyaa', 'countries' => ['MV']],
+    'KRW' => ['name' => 'Won', 'countries' => ['KR']],
+    'MNT' => ['name' => 'Tugrik', 'countries' => ['MN']],
+    'KZT' => ['name' => 'Tenge', 'countries' => ['KZ']],
+    'KGS' => ['name' => 'Som', 'countries' => ['KG']],
+    'UZS' => ['name' => 'Som', 'countries' => ['UZ']],
+    'TJS' => ['name' => 'Somoni', 'countries' => ['TJ']],
+    'AFN' => ['name' => 'Afghani', 'countries' => ['AF']],
+    'IRR' => ['name' => 'Rial', 'countries' => ['IR']],
+    'IQD' => ['name' => 'Dinar', 'countries' => ['IQ']],
+    'SAR' => ['name' => 'Riyal', 'countries' => ['SA']],
+    'KWD' => ['name' => 'Dinar', 'countries' => ['KW']],
+    'BHD' => ['name' => 'Dinar', 'countries' => ['BH']],
+    'QAR' => ['name' => 'Riyal', 'countries' => ['QA']],
+    'AED' => ['name' => 'Dirham', 'countries' => ['AE']],
+    'OMR' => ['name' => 'Rial', 'countries' => ['OM']],
+    'JOD' => ['name' => 'Dinar', 'countries' => ['JO']],
+    'LBP' => ['name' => 'Pound', 'countries' => ['LB']],
+    'SYP' => ['name' => 'Pound', 'countries' => ['SY']],
+    'EGP' => ['name' => 'Pound', 'countries' => ['EG']],
+    'SDD' => ['name' => 'Dinar', 'countries' => ['SD']],
+    'LYD' => ['name' => 'Dinar', 'countries' => ['LY']],
+    'TND' => ['name' => 'Dinar', 'countries' => ['TN']],
+    'DZD' => ['name' => 'Dinar', 'countries' => ['DZ']],
+    'MAD' => ['name' => 'Dirham', 'countries' => ['MA']],
+    'ZAR' => ['name' => 'Rand', 'countries' => ['ZA', 'LS', 'SZ']],
+    'BWP' => ['name' => 'Pula', 'countries' => ['BW']],
+    'NAD' => ['name' => 'Dollar', 'countries' => ['NA']],
+    'SZL' => ['name' => 'Lilangeni', 'countries' => ['SZ']],
+    'AOA' => ['name' => 'Kwanza', 'countries' => ['AO']],
+    'XAF' => ['name' => 'CFA', 'countries' => ['CM', 'CF', 'TD', 'GQ', 'GA']],
+    'XPF' => ['name' => 'CFP', 'countries' => ['NC', 'PF', 'WF']],
+    'SCR' => ['name' => 'Rupee', 'countries' => ['SC']],
+    'MUR' => ['name' => 'Rupee', 'countries' => ['MU']],
+    'KES' => ['name' => 'Shilling', 'countries' => ['KE']],
+    'UGX' => ['name' => 'Shilling', 'countries' => ['UG']],
+    'TZS' => ['name' => 'Shilling', 'countries' => ['TZ']],
+    'RWF' => ['name' => 'Franc', 'countries' => ['RW']],
+    'BIF' => ['name' => 'Franc', 'countries' => ['BI']],
+    'DJF' => ['name' => 'Franc', 'countries' => ['DJ']],
+    'ERN' => ['name' => 'Nakfa', 'countries' => ['ER']],
+    'ETB' => ['name' => 'Birr', 'countries' => ['ET']],
+    'SOS' => ['name' => 'Shilling', 'countries' => ['SO']],
+    'GMD' => ['name' => 'Dalasi', 'countries' => ['GM']],
+    'GNF' => ['name' => 'Franc', 'countries' => ['GN']],
+    'LRD' => ['name' => 'Dollar', 'countries' => ['LR']],
+    'SLL' => ['name' => 'Leone', 'countries' => ['SL']],
+    'CVE' => ['name' => 'Escudo', 'countries' => ['CV']],
+    'STN' => ['name' => 'Dobra', 'countries' => ['ST']],
+    'GHS' => ['name' => 'Cedi', 'countries' => ['GH']],
+    'NGN' => ['name' => 'Naira', 'countries' => ['NG']],
+    'XOF' => ['name' => 'FCFA', 'countries' => ['SN', 'ML', 'BF', 'NE', 'CI', 'TG', 'BJ', 'GW', 'MR']],
+    'ZMW' => ['name' => 'Kwacha', 'countries' => ['ZM']],
+    'MWK' => ['name' => 'Kwacha', 'countries' => ['MW']],
+    'BZD' => ['name' => 'Dollar', 'countries' => ['BZ']],
+    'GTQ' => ['name' => 'Quetzal', 'countries' => ['GT']],
+    'HNL' => ['name' => 'Lempira', 'countries' => ['HN']],
+    'NIO' => ['name' => 'Córdoba', 'countries' => ['NI']],
+    'CRC' => ['name' => 'Colón', 'countries' => ['CR']],
+    'PAB' => ['name' => 'Balboa', 'countries' => ['PA']],
+    'DOP' => ['name' => 'Peso', 'countries' => ['DO']],
+    'HTG' => ['name' => 'Gourde', 'countries' => ['HT']],
+    'XCD' => ['name' => 'Dollar', 'countries' => ['AG', 'DM', 'GD', 'KN', 'LC', 'VC']],
+    'JMD' => ['name' => 'Dollar', 'countries' => ['JM']],
+    'TTD' => ['name' => 'Dollar', 'countries' => ['TT']],
+    'BBD' => ['name' => 'Dollar', 'countries' => ['BB']],
+    'KYD' => ['name' => 'Dollar', 'countries' => ['KY']],
+    'BMD' => ['name' => 'Dollar', 'countries' => ['BM']],
+    'ANG' => ['name' => 'Guilder', 'countries' => ['CW', 'SX', 'BQ']],
+    'AWG' => ['name' => 'Florin', 'countries' => ['AW']],
+    'SRD' => ['name' => 'Dollar', 'countries' => ['SR']],
+    'GYD' => ['name' => 'Dollar', 'countries' => ['GY']],
+    'FKP' => ['name' => 'Pound', 'countries' => ['FK']],
+    'GIP' => ['name' => 'Pound', 'countries' => ['GI']],
+    'SHP' => ['name' => 'Pound', 'countries' => ['SH']],
+    'SBD' => ['name' => 'Dollar', 'countries' => ['SB']],
+    'VUV' => ['name' => 'Vatu', 'countries' => ['VU']],
+    'WST' => ['name' => 'Tala', 'countries' => ['WS']],
+    'TOP' => ['name' => 'Paʻanga', 'countries' => ['TO']],
+    'KID' => ['name' => 'Dollar', 'countries' => ['KI']],
+    'TVD' => ['name' => 'Dollar', 'countries' => ['TV']],
+    'NRD' => ['name' => 'Dollar', 'countries' => ['NR']],
+    'PWD' => ['name' => 'Dollar', 'countries' => ['PW']],
+    'FMD' => ['name' => 'Dollar', 'countries' => ['FM']],
+    'MHD' => ['name' => 'Dollar', 'countries' => ['MH']],
+    'AUD' => ['name' => 'Dollar', 'countries' => ['AU', 'NR', 'TV', 'KI', 'PW', 'FM', 'MH', 'FJ', 'PG', 'SB', 'VU', 'NC', 'PF', 'WS', 'TO']],
+    'NZD' => ['name' => 'Dollar', 'countries' => ['NZ', 'CK', 'NU', 'TK']],
+    'FJD' => ['name' => 'Dollar', 'countries' => ['FJ']],
+    'PGK' => ['name' => 'Kina', 'countries' => ['PG']],
+    'SBD' => ['name' => 'Dollar', 'countries' => ['SB']],
+    'VUV' => ['name' => 'Vatu', 'countries' => ['VU']],
+    'WST' => ['name' => 'Tala', 'countries' => ['WS']],
+    'TOP' => ['name' => 'Paʻanga', 'countries' => ['TO']],
+    'KID' => ['name' => 'Dollar', 'countries' => ['KI']],
+    'TVD' => ['name' => 'Dollar', 'countries' => ['TV']],
+    'NRD' => ['name' => 'Dollar', 'countries' => ['NR']],
+    'PWD' => ['name' => 'Dollar', 'countries' => ['PW']],
+    'FMD' => ['name' => 'Dollar', 'countries' => ['FM']],
+    'MHD' => ['name' => 'Dollar', 'countries' => ['MH']],
+    'NCL' => ['name' => 'Franc', 'countries' => ['NC']],
+    'PYF' => ['name' => 'Franc', 'countries' => ['PF']],
+    'WLF' => ['name' => 'Franc', 'countries' => ['WF']],
+    'CUC' => ['name' => 'Peso', 'countries' => ['CU']],
+    'CUP' => ['name' => 'Peso', 'countries' => ['CU']],
+    'USD' => ['name' => 'Dollar', 'countries' => ['US', 'EC', 'SV', 'PA', 'PW', 'FM', 'MH', 'MP', 'PR', 'TL', 'UM', 'VI', 'VG', 'VI']],
+    'EUR' => ['name' => 'Euro', 'countries' => ['AD', 'AT', 'AX', 'BE', 'BL', 'HR', 'CY', 'CZ', 'EE', 'FI', 'FR', 'GF', 'DE', 'GR', 'GP', 'GG', 'HU', 'IE', 'IT', 'JE', 'LV', 'LI', 'LT', 'LU', 'MT', 'MQ', 'YT', 'MC', 'ME', 'NL', 'NC', 'MK', 'NO', 'PF', 'PL', 'PT', 'RE', 'SM', 'RS', 'SK', 'SI', 'SJ', 'ES', 'SE', 'CH', 'TR', 'VA', 'WF']],
+    'GBP' => ['name' => 'Pound', 'countries' => ['GB', 'GG', 'IM', 'JE']],
+    'SEK' => ['name' => 'Krona', 'countries' => ['SE']],
+    'NOK' => ['name' => 'Krone', 'countries' => ['NO', 'SJ', 'BV']],
+    'DKK' => ['name' => 'Krone', 'countries' => ['DK', 'FO', 'GL']],
+    'ISK' => ['name' => 'Krona', 'countries' => ['IS']],
+    'CHF' => ['name' => 'Franc', 'countries' => ['CH', 'LI']],
+    'RUB' => ['name' => 'Ruble', 'countries' => ['RU', 'BY']],
+    'BYN' => ['name' => 'Ruble', 'countries' => ['BY']],
+    'UAH' => ['name' => 'Hryvnia', 'countries' => ['UA']],
+    'MDL' => ['name' => 'Leu', 'countries' => ['MD']],
+    'RON' => ['name' => 'Leu', 'countries' => ['RO']],
+    'BGN' => ['name' => 'Lev', 'countries' => ['BG']],
+    'HRK' => ['name' => 'Kuna', 'countries' => ['HR']],
+    'CZK' => ['name' => 'Koruna', 'countries' => ['CZ']],
+    'HUF' => ['name' => 'Forint', 'countries' => ['HU']],
+    'PLN' => ['name' => 'Zloty', 'countries' => ['PL']],
+    'RSD' => ['name' => 'Dinar', 'countries' => ['RS']],
+    'MKD' => ['name' => 'Denar', 'countries' => ['MK']],
+    'ALL' => ['name' => 'Lek', 'countries' => ['AL']],
+    'BAM' => ['name' => 'Mark', 'countries' => ['BA']],
+    'EUR' => ['name' => 'Euro', 'countries' => ['ME']],
+    'GEL' => ['name' => 'Lari', 'countries' => ['GE']],
+    'AMD' => ['name' => 'Dram', 'countries' => ['AM']],
+    'AZN' => ['name' => 'Manat', 'countries' => ['AZ']],
+    'TRY' => ['name' => 'Lira', 'countries' => ['TR']],
+    'CYP' => ['name' => 'Pound', 'countries' => ['CY']],
+    'EUR' => ['name' => 'Euro', 'countries' => ['CY']]
+];
 
-if (isset($_SESSION['currency']) && in_array($_SESSION['currency'], $supported_currencies)) {
+if (isset($_SESSION['currency']) && array_key_exists($_SESSION['currency'], $supported_currencies)) {
     $currency = $_SESSION['currency'];
 } else {
     // Détecter depuis le pays de l'utilisateur
     $user_country = $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'SN'; // Cloudflare ou défaut Sénégal
-    $currency = match($user_country) {
-        'FR', 'DE', 'IT', 'ES', 'BE' => 'EUR',
-        'US', 'CA', 'AU' => 'USD',
-        'GB' => 'GBP',
-        'JP' => 'JPY',
-        'CN' => 'CNY',
-        default => 'XOF'
-    };
+    
+    // Trouver la devise pour ce pays
+    $currency = $default_currency;
+    foreach ($supported_currencies as $code => $data) {
+        if (in_array($user_country, $data['countries'])) {
+            $currency = $code;
+            break;
+        }
+    }
     $_SESSION['currency'] = $currency;
 }
 
@@ -46,7 +244,7 @@ if (isset($_SESSION['currency']) && in_array($_SESSION['currency'], $supported_c
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['lang'])) {
         $new_lang = $_POST['lang'];
-        if (in_array($new_lang, $supported_langs)) {
+        if (array_key_exists($new_lang, $supported_langs)) {
             $_SESSION['lang'] = $new_lang;
             $lang = $new_lang;
         }
@@ -54,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_POST['currency'])) {
         $new_currency = $_POST['currency'];
-        if (in_array($new_currency, $supported_currencies)) {
+        if (array_key_exists($new_currency, $supported_currencies)) {
             $_SESSION['currency'] = $new_currency;
             $currency = $new_currency;
         }
@@ -282,19 +480,163 @@ $exchange_rates = [
     'CAD' => 0.0022,   // 1 XOF = 0.0022 CAD
     'AUD' => 0.0024,   // 1 XOF = 0.0024 AUD
     'JPY' => 0.24,     // 1 XOF = 0.24 JPY
-    'CNY' => 0.011     // 1 XOF = 0.011 CNY
+    'CNY' => 0.011,    // 1 XOF = 0.011 CNY
+    'INR' => 0.13,     // 1 XOF = 0.13 INR
+    'BRL' => 0.008,    // 1 XOF = 0.008 BRL
+    'MXN' => 0.032,    // 1 XOF = 0.032 MXN
+    'ARS' => 0.14,     // 1 XOF = 0.14 ARS
+    'CLP' => 1.3,      // 1 XOF = 1.3 CLP
+    'COP' => 5.8,      // 1 XOF = 5.8 COP
+    'PEN' => 0.006,    // 1 XOF = 0.006 PEN
+    'UYU' => 0.064,    // 1 XOF = 0.064 UYU
+    'PYG' => 11.5,     // 1 XOF = 11.5 PYG
+    'BOB' => 0.011,    // 1 XOF = 0.011 BOB
+    'VES' => 0.0004,   // 1 XOF = 0.0004 VES
+    'CRC' => 2.7,      // 1 XOF = 2.7 CRC
+    'GTQ' => 0.012,    // 1 XOF = 0.012 GTQ
+    'HNL' => 0.041,    // 1 XOF = 0.041 HNL
+    'NIO' => 0.046,    // 1 XOF = 0.046 NIO
+    'PAB' => 0.0016,   // 1 XOF = 0.0016 PAB
+    'DOP' => 0.091,    // 1 XOF = 0.091 DOP
+    'JMD' => 0.24,     // 1 XOF = 0.24 JMD
+    'TTD' => 0.011,    // 1 XOF = 0.011 TTD
+    'BBD' => 0.0032,   // 1 XOF = 0.0032 BBD
+    'XCD' => 0.0043,   // 1 XOF = 0.0043 XCD
+    'BSD' => 0.0016,   // 1 XOF = 0.0016 BSD
+    'KYD' => 0.0013,   // 1 XOF = 0.0013 KYD
+    'BMD' => 0.0016,   // 1 XOF = 0.0016 BMD
+    'ANG' => 0.0029,   // 1 XOF = 0.0029 ANG
+    'AWG' => 0.0029,   // 1 XOF = 0.0029 AWG
+    'SRD' => 0.12,     // 1 XOF = 0.12 SRD
+    'GYD' => 0.33,     // 1 XOF = 0.33 GYD
+    'TWD' => 0.051,    // 1 XOF = 0.051 TWD
+    'HKD' => 0.012,    // 1 XOF = 0.012 HKD
+    'SGD' => 0.0022,   // 1 XOF = 0.0022 SGD
+    'MYR' => 0.0075,   // 1 XOF = 0.0075 MYR
+    'THB' => 0.058,    // 1 XOF = 0.058 THB
+    'VND' => 38,       // 1 XOF = 38 VND
+    'IDR' => 25,       // 1 XOF = 25 IDR
+    'PHP' => 0.091,    // 1 XOF = 0.091 PHP
+    'LKR' => 0.59,     // 1 XOF = 0.59 LKR
+    'PKR' => 0.44,     // 1 XOF = 0.44 PKR
+    'BDT' => 0.19,     // 1 XOF = 0.19 BDT
+    'NPR' => 0.24,     // 1 XOF = 0.24 NPR
+    'BTN' => 0.12,     // 1 XOF = 0.12 BTN
+    'MVR' => 0.025,    // 1 XOF = 0.025 MVR
+    'KRW' => 2.1,      // 1 XOF = 2.1 KRW
+    'MNT' => 5.8,      // 1 XOF = 5.8 MNT
+    'KZT' => 0.75,     // 1 XOF = 0.75 KZT
+    'KGS' => 0.14,     // 1 XOF = 0.14 KGS
+    'UZS' => 13,       // 1 XOF = 13 UZS
+    'TJS' => 0.015,    // 1 XOF = 0.015 TJS
+    'AFN' => 0.12,     // 1 XOF = 0.12 AFN
+    'IRR' => 67,       // 1 XOF = 67 IRR
+    'IQD' => 2.1,      // 1 XOF = 2.1 IQD
+    'SAR' => 0.006,    // 1 XOF = 0.006 SAR
+    'KWD' => 0.0005,   // 1 XOF = 0.0005 KWD
+    'BHD' => 0.0006,   // 1 XOF = 0.0006 BHD
+    'QAR' => 0.0058,   // 1 XOF = 0.0058 QAR
+    'AED' => 0.0059,   // 1 XOF = 0.0059 AED
+    'OMR' => 0.0006,   // 1 XOF = 0.0006 OMR
+    'JOD' => 0.0011,   // 1 XOF = 0.0011 JOD
+    'LBP' => 24,       // 1 XOF = 24 LBP
+    'SYP' => 2.1,      // 1 XOF = 2.1 SYP
+    'EGP' => 0.05,     // 1 XOF = 0.05 EGP
+    'SDD' => 0.09,     // 1 XOF = 0.09 SDD
+    'LYD' => 0.0008,   // 1 XOF = 0.0008 LYD
+    'TND' => 0.005,    // 1 XOF = 0.005 TND
+    'DZD' => 0.21,     // 1 XOF = 0.21 DZD
+    'MAD' => 0.016,    // 1 XOF = 0.016 MAD
+    'ZAR' => 0.03,     // 1 XOF = 0.03 ZAR
+    'BWP' => 0.021,    // 1 XOF = 0.021 BWP
+    'NAD' => 0.03,     // 1 XOF = 0.03 NAD
+    'SZL' => 0.03,     // 1 XOF = 0.03 SZL
+    'AOA' => 0.012,    // 1 XOF = 0.012 AOA
+    'XAF' => 0.0015,   // 1 XOF = 0.0015 XAF
+    'XPF' => 0.18,     // 1 XOF = 0.18 XPF
+    'SCR' => 0.022,    // 1 XOF = 0.022 SCR
+    'MUR' => 0.073,    // 1 XOF = 0.073 MUR
+    'KES' => 0.19,     // 1 XOF = 0.19 KES
+    'UGX' => 6.1,      // 1 XOF = 6.1 UGX
+    'TZS' => 3.7,      // 1 XOF = 3.7 TZS
+    'RWF' => 1.6,      // 1 XOF = 1.6 RWF
+    'BIF' => 3.0,      // 1 XOF = 3.0 BIF
+    'DJF' => 0.29,     // 1 XOF = 0.29 DJF
+    'ERN' => 0.024,    // 1 XOF = 0.024 ERN
+    'ETB' => 0.09,     // 1 XOF = 0.09 ETB
+    'SOS' => 0.09,     // 1 XOF = 0.09 SOS
+    'GMD' => 0.12,     // 1 XOF = 0.12 GMD
+    'GNF' => 8.7,      // 1 XOF = 8.7 GNF
+    'LRD' => 0.27,     // 1 XOF = 0.27 LRD
+    'SLL' => 0.19,     // 1 XOF = 0.19 SLL
+    'CVE' => 0.018,    // 1 XOF = 0.018 CVE
+    'STN' => 0.043,    // 1 XOF = 0.043 STN
+    'GHS' => 0.019,    // 1 XOF = 0.019 GHS
+    'NGN' => 0.73,     // 1 XOF = 0.73 NGN
+    'ZMW' => 0.03,     // 1 XOF = 0.03 ZMW
+    'MWK' => 2.5,      // 1 XOF = 2.5 MWK
+    'BZD' => 0.0032,   // 1 XOF = 0.0032 BZD
+    'HTG' => 0.13,     // 1 XOF = 0.13 HTG
+    'FKP' => 0.0013,   // 1 XOF = 0.0013 FKP
+    'GIP' => 0.0013,   // 1 XOF = 0.0013 GIP
+    'SHP' => 0.0013,   // 1 XOF = 0.0013 SHP
+    'PGK' => 0.0055,   // 1 XOF = 0.0055 PGK
+    'WST' => 0.0045,   // 1 XOF = 0.0045 WST
+    'TOP' => 0.0038,   // 1 XOF = 0.0038 TOP
+    'KID' => 0.0013,   // 1 XOF = 0.0013 KID
+    'TVD' => 0.0021,   // 1 XOF = 0.0021 TVD
+    'NRD' => 0.0021,   // 1 XOF = 0.0021 NRD
+    'FJD' => 0.0035,   // 1 XOF = 0.0035 FJD
+    'NZD' => 0.0026,   // 1 XOF = 0.0026 NZD
+    'SEK' => 0.017,    // 1 XOF = 0.017 SEK
+    'NOK' => 0.017,    // 1 XOF = 0.017 NOK
+    'DKK' => 0.012,    // 1 XOF = 0.012 DKK
+    'ISK' => 0.22,     // 1 XOF = 0.22 ISK
+    'CHF' => 0.0015,   // 1 XOF = 0.0015 CHF
+    'RUB' => 0.14,     // 1 XOF = 0.14 RUB
+    'BYN' => 0.005,    // 1 XOF = 0.005 BYN
+    'UAH' => 0.062,    // 1 XOF = 0.062 UAH
+    'MDL' => 0.028,    // 1 XOF = 0.028 MDL
+    'RON' => 0.0075,   // 1 XOF = 0.0075 RON
+    'BGN' => 0.0029,   // 1 XOF = 0.0029 BGN
+    'HRK' => 0.011,    // 1 XOF = 0.011 HRK
+    'CZK' => 0.037,    // 1 XOF = 0.037 CZK
+    'HUF' => 0.58,     // 1 XOF = 0.58 HUF
+    'PLN' => 0.0066,   // 1 XOF = 0.0066 PLN
+    'RSD' => 0.015,    // 1 XOF = 0.015 RSD
+    'MKD' => 0.026,    // 1 XOF = 0.026 MKD
+    'ALL' => 0.16,     // 1 XOF = 0.16 ALL
+    'BAM' => 0.0029,   // 1 XOF = 0.0029 BAM
+    'GEL' => 0.0043,   // 1 XOF = 0.0043 GEL
+    'AMD' => 0.63,     // 1 XOF = 0.63 AMD
+    'AZN' => 0.0027,   // 1 XOF = 0.0027 AZN
+    'TRY' => 0.053,    // 1 XOF = 0.053 TRY
+    'CUC' => 0.0016,   // 1 XOF = 0.0016 CUC
+    'CUP' => 0.0016    // 1 XOF = 0.0016 CUP
 ];
 
 // Symboles de devise
 $currency_symbols = [
-    'XOF' => 'FCFA',
-    'EUR' => '€',
-    'USD' => '$',
-    'GBP' => '£',
-    'CAD' => 'C$',
-    'AUD' => 'A$',
-    'JPY' => '¥',
-    'CNY' => '¥'
+    'XOF' => 'FCFA', 'EUR' => '€', 'USD' => '$', 'GBP' => '£', 'CAD' => 'C$', 'AUD' => 'A$', 'JPY' => '¥', 'CNY' => '¥',
+    'INR' => '₹', 'BRL' => 'R$', 'MXN' => '$', 'ARS' => '$', 'CLP' => '$', 'COP' => '$', 'PEN' => 'S/', 'UYU' => '$',
+    'PYG' => '₲', 'BOB' => 'Bs', 'VES' => 'Bs', 'CRC' => '₡', 'GTQ' => 'Q', 'HNL' => 'L', 'NIO' => 'C$', 'PAB' => 'B/',
+    'DOP' => 'RD$', 'JMD' => 'J$', 'TTD' => 'TT$', 'BBD' => 'Bds$', 'XCD' => 'EC$', 'BSD' => 'B$', 'KYD' => 'CI$',
+    'BMD' => 'BD$', 'ANG' => 'ƒ', 'AWG' => 'ƒ', 'SRD' => '$', 'GYD' => 'G$', 'TWD' => 'NT$', 'HKD' => 'HK$',
+    'SGD' => 'S$', 'MYR' => 'RM', 'THB' => '฿', 'VND' => '₫', 'IDR' => 'Rp', 'PHP' => '₱', 'LKR' => 'Rs',
+    'PKR' => 'Rs', 'BDT' => '৳', 'NPR' => 'Rs', 'BTN' => 'Nu', 'MVR' => 'Rf', 'KRW' => '₩', 'MNT' => '₮',
+    'KZT' => '₸', 'KGS' => 'с', 'UZS' => 'so\'m', 'TJS' => 'SM', 'AFN' => '؋', 'IRR' => '﷼', 'IQD' => 'ع.د',
+    'SAR' => '﷼', 'KWD' => 'د.ك', 'BHD' => 'د.ب', 'QAR' => '﷼', 'AED' => 'د.إ', 'OMR' => 'ر.ع', 'JOD' => 'د.ا',
+    'LBP' => 'ل.ل', 'SYP' => '£', 'EGP' => 'ج.م', 'SDD' => 'ج.س', 'LYD' => 'د.ل', 'TND' => 'د.ت', 'DZD' => 'د.ج',
+    'MAD' => 'د.م', 'ZAR' => 'R', 'BWP' => 'P', 'NAD' => 'N$', 'SZL' => 'E', 'AOA' => 'Kz', 'XAF' => 'FCFA',
+    'XPF' => '₣', 'SCR' => '₨', 'MUR' => '₨', 'KES' => 'KSh', 'UGX' => 'USh', 'TZS' => 'TSh', 'RWF' => 'R₣',
+    'BIF' => 'FBu', 'DJF' => 'Fdj', 'ERN' => 'Nfk', 'ETB' => 'Br', 'SOS' => 'Sh.so', 'GMD' => 'D', 'GNF' => 'FG',
+    'LRD' => 'L$', 'SLL' => 'Le', 'CVE' => '$', 'STN' => 'Db', 'GHS' => 'GH₵', 'NGN' => '₦', 'ZMW' => 'ZK',
+    'MWK' => 'MK', 'BZD' => 'BZ$', 'HTG' => 'G', 'FKP' => '£', 'GIP' => '£', 'SHP' => '£', 'PGK' => 'K',
+    'WST' => 'WS$', 'TOP' => 'T$', 'KID' => '$', 'TVD' => '$', 'NRD' => '$', 'FJD' => 'FJ$', 'NZD' => 'NZ$',
+    'SEK' => 'kr', 'NOK' => 'kr', 'DKK' => 'kr', 'ISK' => 'kr', 'CHF' => 'CHF', 'RUB' => '₽', 'BYN' => 'Br',
+    'UAH' => '₴', 'MDL' => 'L', 'RON' => 'lei', 'BGN' => 'лв', 'HRK' => 'kn', 'CZK' => 'Kč', 'HUF' => 'Ft',
+    'PLN' => 'zł', 'RSD' => 'дин', 'MKD' => 'ден', 'ALL' => 'L', 'BAM' => 'KM', 'GEL' => '₾', 'AMD' => '֏',
+    'AZN' => '₼', 'TRY' => '₺', 'CUC' => 'C$', 'CUP' => '₱'
 ];
 
 // Fonction de conversion
@@ -975,22 +1317,72 @@ try {
                     <div class="language-currency-selector">
                         <form method="POST" style="display: inline;">
                             <select name="lang" class="selector-dropdown" onchange="this.form.submit()">
-                                <option value="fr" <?= $lang === 'fr' ? 'selected' : '' ?>>🇫🇷 FR</option>
-                                <option value="en" <?= $lang === 'en' ? 'selected' : '' ?>>🇬🇧 EN</option>
-                                <option value="es" <?= $lang === 'es' ? 'selected' : '' ?>>🇪🇸 ES</option>
-                                <option value="ar" <?= $lang === 'ar' ? 'selected' : '' ?>>🇸🇦 AR</option>
-                                <option value="zh" <?= $lang === 'zh' ? 'selected' : '' ?>>🇨🇳 ZH</option>
-                                <option value="pt" <?= $lang === 'pt' ? 'selected' : '' ?>>🇵🇹 PT</option>
+                                <?php foreach ($supported_langs as $code => $name): ?>
+                                    <option value="<?= $code ?>" <?= $lang === $code ? 'selected' : '' ?>>
+                                        <?= match($code) {
+                                            'fr' => '🇫🇷',
+                                            'en' => '🇬🇧',
+                                            'es' => '🇪🇸',
+                                            'ar' => '🇸🇦',
+                                            'zh' => '🇨🇳',
+                                            'pt' => '🇵🇹',
+                                            'de' => '��',
+                                            'it' => '🇮🇹',
+                                            'nl' => '🇳🇱',
+                                            'ru' => '🇷🇺',
+                                            'ja' => '🇯🇵',
+                                            'ko' => '��',
+                                            'hi' => '🇮🇳',
+                                            'tr' => '🇹🇷',
+                                            'pl' => '🇵🇱',
+                                            'sv' => '🇸🇪',
+                                            'no' => '🇳🇴',
+                                            'da' => '🇩🇰',
+                                            'fi' => '🇫🇮',
+                                            'el' => '🇬🇷',
+                                            'he' => '🇮🇱',
+                                            'th' => '🇹🇭',
+                                            'vi' => '��',
+                                            'id' => '🇮🇩',
+                                            'ms' => '🇲🇾',
+                                            'cs' => '🇨🇿',
+                                            'hu' => '🇭🇺',
+                                            'ro' => '🇷🇴',
+                                            'bg' => '🇧🇬',
+                                            'hr' => '🇭🇷',
+                                            'sr' => '🇷🇸',
+                                            'sk' => '🇸🇰',
+                                            'et' => '🇪🇪',
+                                            'lv' => '🇱🇻',
+                                            'lt' => '🇱🇹',
+                                            'uk' => '🇺🇦',
+                                            'be' => '🇧🇾',
+                                            'ka' => '🇬🇪',
+                                            'am' => '🇪🇹',
+                                            'sw' => '🇰🇪',
+                                            'zu' => '🇿🇦',
+                                            'af' => '🇿🇦',
+                                            'is' => '🇮🇸',
+                                            'mt' => '🇲🇹',
+                                            'cy' => '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+                                            'ga' => '🇮🇪',
+                                            'gd' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+                                            'eu' => '🏴󠁥󠁳󠁰󠁶󠁿',
+                                            'ca' => '🏴󠁥󠁳󠁣󠁴󠁿',
+                                            'gl' => '🏴󠁥󠁳󠁣󠁴󠁿',
+                                            'ast' => '🏴󠁥󠁳󠁣󠁴󠁿',
+                                            'lb' => '🇱🇺',
+                                            default => '🌍'
+                                        } ?> <?= strtoupper($code) ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                             <select name="currency" class="selector-dropdown" onchange="this.form.submit()">
-                                <option value="XOF" <?= $currency === 'XOF' ? 'selected' : '' ?>>FCFA</option>
-                                <option value="EUR" <?= $currency === 'EUR' ? 'selected' : '' ?>>€ EUR</option>
-                                <option value="USD" <?= $currency === 'USD' ? 'selected' : '' ?>>$ USD</option>
-                                <option value="GBP" <?= $currency === 'GBP' ? 'selected' : '' ?>>£ GBP</option>
-                                <option value="CAD" <?= $currency === 'CAD' ? 'selected' : '' ?>>C$ CAD</option>
-                                <option value="AUD" <?= $currency === 'AUD' ? 'selected' : '' ?>>A$ AUD</option>
-                                <option value="JPY" <?= $currency === 'JPY' ? 'selected' : '' ?>>¥ JPY</option>
-                                <option value="CNY" <?= $currency === 'CNY' ? 'selected' : '' ?>>¥ CNY</option>
+                                <?php foreach ($supported_currencies as $code => $data): ?>
+                                    <option value="<?= $code ?>" <?= $currency === $code ? 'selected' : '' ?>>
+                                        <?= $currency_symbols[$code] ?> <?= $data['name'] ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </form>
                     </div>
