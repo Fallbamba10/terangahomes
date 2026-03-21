@@ -1327,40 +1327,158 @@ try {
         
         /* Features Section */
         .features-section {
-            padding: 80px 0;
-            background: var(--booking-light-gray);
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+        
+        .features-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--booking-blue), transparent);
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             margin: 0 auto;
             padding: 0 32px;
-            max-width: 1000px;
+            max-width: 1180px;
             text-align: center;
         }
         
         .feature-item {
             text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--booking-blue);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .feature-item:hover::before {
+            width: 120px;
         }
         
         .feature-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--booking-blue);
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(0,53,128,0.3));
         }
         
         .feature-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
             color: var(--booking-dark);
+            line-height: 1.3;
         }
         
         .feature-description {
             color: var(--booking-gray);
             line-height: 1.6;
+            font-size: 1rem;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: var(--booking-orange);
+            color: var(--booking-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Feature numbers */
+        .feature-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--booking-blue);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        /* Alternative layout for features */
+        .features-alternative {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .feature-left, .feature-right {
+            text-align: left;
+            padding: 30px;
+        }
+        
+        .feature-left {
+            border-right: 2px solid var(--booking-light-gray);
+        }
+        
+        .feature-icon-large {
+            font-size: 4rem;
+            color: var(--booking-blue);
+            margin-bottom: 20px;
+            float: left;
+            margin-right: 20px;
+        }
+        
+        .feature-content {
+            overflow: hidden;
+        }
+        
+        .feature-title-large {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--booking-dark);
+        }
+        
+        .feature-description-large {
+            color: var(--booking-gray);
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
         
         /* Footer */
@@ -1856,39 +1974,58 @@ try {
     <section class="features-section">
         <div class="section-header">
             <h2 class="section-title"><?= $t['why_choose_us'] ?></h2>
+            <p style="font-size: 1.2rem; color: var(--booking-gray); max-width: 600px; margin: 0 auto;">
+                <?= $lang === 'fr' ? 'Découvrez pourquoi des milliers de voyageurs nous font confiance pour leurs séjours au Sénégal' : 'Discover why thousands of travelers trust us for their stays in Senegal' ?>
+            </p>
         </div>
         
         <div class="features-grid">
             <div class="feature-item">
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3 class="feature-title"><?= $t['instant_booking'] ?></h3>
-                <p class="feature-description"><?= $lang === 'fr' ? 'Réservez instantanément sans attendre' : 'Book instantly without waiting' ?></p>
-            </div>
-            
-            <div class="feature-item">
-                <div class="feature-icon">
-                    <i class="fas fa-tag"></i>
-                </div>
-                <h3 class="feature-title"><?= $t['best_prices'] ?></h3>
-                <p class="feature-description"><?= $lang === 'fr' ? 'Tarifs compétitifs et transparents' : 'Competitive and transparent prices' ?></p>
-            </div>
-            
-            <div class="feature-item">
+                <div class="feature-number">24/7</div>
                 <div class="feature-icon">
                     <i class="fas fa-headset"></i>
                 </div>
                 <h3 class="feature-title"><?= $t['24_support'] ?></h3>
-                <p class="feature-description"><?= $lang === 'fr' ? 'Support client disponible 24/7' : 'Customer support available 24/7' ?></p>
+                <p class="feature-description">
+                    <?= $lang === 'fr' ? 'Notre équipe d\'experts est disponible 24h/24 et 7j/7 pour vous assister à chaque étape de votre réservation.' : 'Our expert team is available 24/7 to assist you at every step of your booking.' ?>
+                </p>
+                <div class="feature-badge"><?= $lang === 'fr' ? 'RAPIDE' : 'FAST' ?></div>
             </div>
             
             <div class="feature-item">
+                <div class="feature-number">100%</div>
                 <div class="feature-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <h3 class="feature-title"><?= $t['secure_payment'] ?></h3>
-                <p class="feature-description"><?= $lang === 'fr' ? 'Paiements sécurisés et protégés' : 'Secure and protected payments' ?></p>
+                <p class="feature-description">
+                    <?= $lang === 'fr' ? 'Paiements 100% sécurisés avec cryptage SSL et protection contre la fraude garantissant vos transactions.' : '100% secure payments with SSL encryption and fraud protection guaranteeing your transactions.' ?>
+                </p>
+                <div class="feature-badge"><?= $lang === 'fr' ? 'SÉCURISÉ' : 'SECURE' ?></div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-number">⚡</div>
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title"><?= $t['instant_booking'] ?></h3>
+                <p class="feature-description">
+                    <?= $lang === 'fr' ? 'Réservez instantanément sans attente. Confirmation immédiate et accès direct à votre hébergement.' : 'Book instantly without waiting. Immediate confirmation and direct access to your accommodation.' ?>
+                </p>
+                <div class="feature-badge"><?= $lang === 'fr' ? 'INSTANTANÉ' : 'INSTANT' ?></div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-number">💰</div>
+                <div class="feature-icon">
+                    <i class="fas fa-tag"></i>
+                </div>
+                <h3 class="feature-title"><?= $t['best_prices'] ?></h3>
+                <p class="feature-description">
+                    <?= $lang === 'fr' ? 'Tarifs compétitifs et transparents. Pas de frais cachés, garantissant le meilleur rapport qualité-prix.' : 'Competitive and transparent prices. No hidden fees, guaranteeing the best value for money.' ?>
+                </p>
+                <div class="feature-badge"><?= $lang === 'fr' ? 'AVANTAGEUX' : 'VALUE' ?></div>
             </div>
         </div>
     </section>
