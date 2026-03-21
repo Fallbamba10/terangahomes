@@ -1740,6 +1740,7 @@ try {
                             <div class="d-flex justify-content-between">
                                 <span><?= $lang === 'fr' ? 'Nombre de nuits' : 'Number of nights' ?>:</span>
                                 <span id="numberOfNights">0</span>
+                                <small class="text-muted ms-2">(<?= $lang === 'fr' ? 'Arrivée le 15, Départ le 16 = 1 nuit' : 'Check-in 15th, Check-out 16th = 1 night' ?>)</small>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between fw-bold">
@@ -1917,7 +1918,10 @@ try {
             const endDate = new Date(checkOut);
             
             if (endDate > startDate) {
-                const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                // Calcul correct : différence en jours - 1 (arrivée et départ ne comptent pas)
+                const timeDiff = endDate.getTime() - startDate.getTime();
+                const nights = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                
                 const total = nights * currentProperty.price;
                 
                 document.getElementById('numberOfNights').textContent = nights;
