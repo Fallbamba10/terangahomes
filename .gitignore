@@ -1,0 +1,51 @@
+# Fichiers et dossiers à ignorer dans Git
+
+# Uploads (fichiers utilisateurs)
+uploads/*
+!uploads/.gitkeep
+
+# Configuration sensible
+config/database_local.php
+config/config_local.php
+
+# Logs et erreurs
+*.log
+error.log
+access.log
+
+# Cache et temporaires
+cache/
+tmp/
+temp/
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Backup et copies
+*backup*
+*copy*
+*.bak
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Node modules (si ajouté plus tard)
+node_modules/
+
+# Composer (si ajouté plus tard)
+vendor/
+
+# Tests et debug (déjà supprimés mais au cas où)
+debug_*
+test_*
+*_test.php
