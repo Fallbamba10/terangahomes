@@ -1984,7 +1984,240 @@ try {
             font-size: 0.8rem;
         }
         
-        /* Experience scroll buttons */
+        /* Restaurant scroll buttons */
+        .restaurant-scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .restaurant-scroll-button:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+            box-shadow: 0 4px 12px rgba(0,53,128,0.15);
+        }
+        
+        .restaurant-scroll-button.prev {
+            left: 12px;
+        }
+        
+        .restaurant-scroll-button.next {
+            right: 12px;
+        }
+        
+        /* Restaurants Section */
+        .restaurants-section {
+            padding: 40px 0;
+            background: var(--booking-light-gray);
+        }
+        
+        .restaurants-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 32px;
+        }
+        
+        .restaurants-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--booking-dark);
+        }
+        
+        .restaurants-subtitle {
+            font-size: 1rem;
+            color: var(--booking-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .restaurants-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 0 32px;
+            flex-wrap: wrap;
+        }
+        
+        .restaurant-tab {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 20px;
+            color: var(--booking-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+        
+        .restaurant-tab:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+        }
+        
+        .restaurant-tab.active {
+            background: var(--booking-blue);
+            border-color: var(--booking-blue);
+            color: white;
+        }
+        
+        /* Restaurants Scrollable Container */
+        .restaurants-container {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 0 32px;
+            max-width: 1180px;
+        }
+        
+        .restaurants-grid {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .restaurants-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .restaurants-grid::-webkit-scrollbar-track {
+            background: white;
+            border-radius: 3px;
+        }
+        
+        .restaurants-grid::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 3px;
+        }
+        
+        .restaurant-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .restaurant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .restaurant-image {
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .restaurant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .restaurant-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--booking-orange);
+            color: var(--booking-dark);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .restaurant-content {
+            padding: 16px;
+        }
+        
+        .restaurant-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--booking-dark);
+            line-height: 1.3;
+        }
+        
+        .restaurant-description {
+            font-size: 0.8rem;
+            color: var(--booking-gray);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--booking-gray);
+        }
+        
+        .restaurant-cuisine {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .restaurant-cuisine i {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .restaurant-price {
+            font-weight: 600;
+            color: var(--booking-blue);
+        }
+        
+        .restaurant-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+        
+        .restaurant-rating i {
+            color: #ffc107;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive restaurants */
+        @media (max-width: 768px) {
+            .restaurants-grid {
+                gap: 12px;
+            }
+            
+            .restaurant-card {
+                flex: 0 0 240px;
+            }
+            
+            .restaurant-content {
+                padding: 12px;
+            }
+        }
         .experience-scroll-button {
             position: absolute;
             top: 50%;
