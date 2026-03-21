@@ -1424,6 +1424,19 @@ try {
             padding: 60px 0;
         }
         
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 32px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--booking-dark);
+        }
+        
         .properties-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1589,6 +1602,27 @@ try {
             padding: 40px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
+        }
+        
+        .features-section .section-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding: 0 32px;
+        }
+        
+        .features-section .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--booking-dark);
+        }
+        
+        .features-section .section-header p {
+            font-size: 1rem;
+            color: var(--booking-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
         }
         
         .features-section::before {
