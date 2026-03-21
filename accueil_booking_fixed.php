@@ -1053,8 +1053,8 @@ try {
         
         .properties-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
@@ -1075,7 +1075,7 @@ try {
         }
         
         .property-image-booking {
-            height: 240px;
+            height: 180px;
             position: relative;
             overflow: hidden;
         }
@@ -1120,69 +1120,88 @@ try {
         }
         
         .property-content-booking {
-            padding: 20px;
+            padding: 16px;
         }
         
         .property-title-booking {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--booking-dark);
-            line-height: 1.4;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            /* Fallback for other browsers */
+            max-height: 2.6em;
+            position: relative;
+        }
+        
+        .property-title-booking::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 20px;
+            height: 1.3em;
+            background: linear-gradient(transparent, white);
         }
         
         .property-location-booking {
             color: var(--booking-gray);
-            font-size: 14px;
-            margin-bottom: 12px;
+            font-size: 13px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
         
         .property-price-booking {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--booking-dark);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         
         .property-rating {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 6px;
+            margin-bottom: 12px;
         }
         
         .stars {
             color: var(--booking-orange);
+            font-size: 12px;
         }
         
         .rating-number {
             font-weight: 600;
             color: var(--booking-dark);
+            font-size: 13px;
         }
         
         .property-footer-booking {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 16px;
+            padding-top: 12px;
             border-top: 1px solid var(--booking-border);
         }
         
         .property-host {
             color: var(--booking-gray);
-            font-size: 14px;
+            font-size: 12px;
         }
         
         .btn-book-booking {
             background: var(--booking-blue);
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
