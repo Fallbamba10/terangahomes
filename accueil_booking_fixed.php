@@ -274,8 +274,8 @@ $translations = [
         'guests' => 'Voyageurs',
         'search_btn' => 'Rechercher',
         'properties' => 'Propriétés',
-        'experiences' => 'Expériences',
-        'restaurants' => 'Restaurants',
+        'car_rental' => 'Location Voiture',
+        'airport_transfer' => 'Taxi Aéroport',
         'login' => 'Se connecter',
         'register' => "S'inscrire",
         'list_property' => 'Déposer une annonce',
@@ -308,8 +308,8 @@ $translations = [
         'guests' => 'Guests',
         'search_btn' => 'Search',
         'properties' => 'Properties',
-        'experiences' => 'Experiences',
-        'restaurants' => 'Restaurants',
+        'car_rental' => 'Car Rental',
+        'airport_transfer' => 'Airport Taxi',
         'login' => 'Sign in',
         'register' => 'Register',
         'list_property' => 'List your property',
@@ -342,8 +342,8 @@ $translations = [
         'guests' => 'Huéspedes',
         'search_btn' => 'Buscar',
         'properties' => 'Propiedades',
-        'experiences' => 'Experiencias',
-        'restaurants' => 'Restaurantes',
+        'car_rental' => 'Alquiler de coches',
+        'airport_transfer' => 'Taxi Aeropuerto',
         'login' => 'Iniciar sesión',
         'register' => 'Registrarse',
         'list_property' => 'Publicar propiedad',
@@ -376,8 +376,8 @@ $translations = [
         'guests' => 'الضيوف',
         'search_btn' => 'بحث',
         'properties' => 'العقارات',
-        'experiences' => 'التجارب',
-        'restaurants' => 'المطاعم',
+        'car_rental' => 'تأجير السيارات',
+        'airport_transfer' => 'تاكسي المطار',
         'login' => 'تسجيل الدخول',
         'register' => 'التسجيل',
         'list_property' => 'إدراج العقار',
@@ -410,8 +410,8 @@ $translations = [
         'guests' => '客人',
         'search_btn' => '搜索',
         'properties' => '房产',
-        'experiences' => '体验',
-        'restaurants' => '餐厅',
+        'car_rental' => '租车',
+        'airport_transfer' => '机场出租车',
         'login' => '登录',
         'register' => '注册',
         'list_property' => '发布房产',
@@ -444,8 +444,8 @@ $translations = [
         'guests' => 'Hóspedes',
         'search_btn' => 'Pesquisar',
         'properties' => 'Propriedades',
-        'experiences' => 'Experiências',
-        'restaurants' => 'Restaurantes',
+        'car_rental' => 'Aluguel de carros',
+        'airport_transfer' => 'Táxi aeroporto',
         'login' => 'Entrar',
         'register' => 'Registrar',
         'list_property' => 'Anunciar propriedade',
@@ -2261,8 +2261,8 @@ try {
                 
                 <nav class="nav-center">
                     <a href="#" class="nav-item-booking active"><?= $t['properties'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['experiences'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['restaurants'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['car_rental'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['airport_transfer'] ?></a>
                 </nav>
                 
                 <div class="header-right">
