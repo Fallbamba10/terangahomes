@@ -2181,7 +2181,7 @@ try {
             <div class="footer-section">
                 <h4 class="footer-title"><?= $t['contact_host'] ?></h4>
                 <ul class="footer-links">
-                    <li><i class="fas fa-phone me-2"></i>+221 33 123 45 67</li>
+                    <li><i class="fas fa-phone me-2"></i>+221 78 600 00 28</li>
                     <li><i class="fas fa-envelope me-2"></i>contact@terangahomes.com</li>
                     <li><i class="fas fa-map-marker-alt me-2"></i>Dakar, Sénégal</li>
                     <li><i class="fas fa-clock me-2"></i>24/7 <?= $t['24_support'] ?></li>
