@@ -1541,7 +1541,7 @@ try {
                         <span class="property-host">
                             <?= htmlspecialchars($annonce['proprietaire_prenom']) ?>
                         </span>
-                        <button class="btn-book-booking" onclick="event.stopPropagation()">
+                        <button class="btn-book-booking" onclick="event.stopPropagation(); showBookingModal(<?= $annonce['id'] ?>, '<?= htmlspecialchars($annonce['titre']) ?>', <?= convert_price($annonce['prix'], $currency, $exchange_rates) ?>, '<?= $currency ?>', '<?= $currency_symbols[$currency] ?>')">
                             <?= $t['book_now'] ?>
                         </button>
                     </div>
@@ -1654,6 +1654,144 @@ try {
         </div>
     </footer>
 
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">
+                        <i class="fas fa-calendar-check me-2"></i>
+                        <span id="bookingTitle"><?= $lang === 'fr' ? 'Réserver' : 'Book' ?></span>: <span id="propertyTitle"></span>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bookingForm">
+                        <input type="hidden" id="propertyId" name="property_id">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="checkInDate" class="form-label"><?= $t['check_in'] ?></label>
+                                    <input type="date" class="form-control" id="checkInDate" name="check_in" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="checkOutDate" class="form-label"><?= $t['check_out'] ?></label>
+                                    <input type="date" class="form-control" id="checkOutDate" name="check_out" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guestCount" class="form-label"><?= $t['guests'] ?></label>
+                                    <select class="form-control" id="guestCount" name="guests" required>
+                                        <option value="1">1 <?= $lang === 'fr' ? 'voyageur' : 'guest' ?></option>
+                                        <option value="2">2 <?= $lang === 'fr' ? 'voyageurs' : 'guests' ?></option>
+                                        <option value="3">3 <?= $lang === 'fr' ? 'voyageurs' : 'guests' ?></option>
+                                        <option value="4">4+ <?= $lang === 'fr' ? 'voyageurs' : 'guests' ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="bookingCurrency" class="form-label"><?= $t['currency'] ?></label>
+                                    <select class="form-control" id="bookingCurrency" name="currency_display" readonly>
+                                        <option value="<?= $currency ?>"><?= $currency_symbols[$currency] ?> <?= $supported_currencies[$currency]['name'] ?></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="guestName" class="form-label"><?= $lang === 'fr' ? 'Nom complet' : 'Full Name' ?></label>
+                            <input type="text" class="form-control" id="guestName" name="guest_name" required 
+                                   placeholder="<?= $lang === 'fr' ? 'Entrez votre nom complet' : 'Enter your full name' ?>">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="guestEmail" class="form-label"><?= $lang === 'fr' ? 'Email' : 'Email' ?></label>
+                            <input type="email" class="form-control" id="guestEmail" name="guest_email" required 
+                                   placeholder="<?= $lang === 'fr' ? 'Entrez votre email' : 'Enter your email' ?>">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="guestPhone" class="form-label"><?= $lang === 'fr' ? 'Téléphone' : 'Phone' ?></label>
+                            <input type="tel" class="form-control" id="guestPhone" name="guest_phone" required 
+                                   placeholder="<?= $lang === 'fr' ? 'Entrez votre numéro de téléphone' : 'Enter your phone number' ?>">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="specialRequests" class="form-label"><?= $lang === 'fr' ? 'Demandes spéciales (optionnel)' : 'Special Requests (Optional)' ?></label>
+                            <textarea class="form-control" id="specialRequests" name="special_requests" rows="3" 
+                                      placeholder="<?= $lang === 'fr' ? 'Demandes spéciales, allergies, préférences...' : 'Special requests, allergies, preferences...' ?>"></textarea>
+                        </div>
+                        
+                        <!-- Price Summary -->
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-calculator me-2"></i><?= $lang === 'fr' ? 'Résumé des prix' : 'Price Summary' ?></h6>
+                            <div class="d-flex justify-content-between">
+                                <span><?= $lang === 'fr' ? 'Prix par nuit' : 'Price per night' ?>:</span>
+                                <span id="pricePerNight"></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span><?= $lang === 'fr' ? 'Nombre de nuits' : 'Number of nights' ?>:</span>
+                                <span id="numberOfNights">0</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span><?= $lang === 'fr' ? 'Total' : 'Total' ?>:</span>
+                                <span id="totalPrice"></span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <?= $lang === 'fr' ? 'Annuler' : 'Cancel' ?>
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="submitBooking()">
+                        <i class="fas fa-check me-2"></i><?= $lang === 'fr' ? 'Confirmer la réservation' : 'Confirm Booking' ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="successModalLabel">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <?= $lang === 'fr' ? 'Réservation confirmée !' : 'Booking Confirmed!' ?>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        <h4 class="mt-3"><?= $lang === 'fr' ? 'Votre réservation a été confirmée' : 'Your booking has been confirmed' ?></h4>
+                        <p class="text-muted"><?= $lang === 'fr' ? 'Vous recevrez un email de confirmation dans quelques instants.' : 'You will receive a confirmation email shortly.' ?></p>
+                        <div class="alert alert-light">
+                            <strong><?= $lang === 'fr' ? 'Numéro de réservation' : 'Booking Reference' ?>:</strong> 
+                            <span id="bookingReference"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                        <?= $lang === 'fr' ? 'OK' : 'OK' ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -1710,6 +1848,136 @@ try {
                 }
             }
         });
+    }
+    
+    // Booking Modal Functions
+    let currentProperty = {
+        id: null,
+        title: '',
+        price: 0,
+        currency: '',
+        symbol: ''
+    };
+    
+    function showBookingModal(propertyId, propertyTitle, price, currency, symbol) {
+        currentProperty = {
+            id: propertyId,
+            title: propertyTitle,
+            price: price,
+            currency: currency,
+            symbol: symbol
+        };
+        
+        // Set property info
+        document.getElementById('propertyId').value = propertyId;
+        document.getElementById('propertyTitle').textContent = propertyTitle;
+        document.getElementById('pricePerNight').textContent = formatPriceDisplay(price, symbol);
+        
+        // Reset form
+        document.getElementById('bookingForm').reset();
+        document.getElementById('numberOfNights').textContent = '0';
+        document.getElementById('totalPrice').textContent = formatPriceDisplay(0, symbol);
+        
+        // Set minimum dates
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkInDate').min = today;
+        document.getElementById('checkOutDate').min = today;
+        
+        // Show modal
+        const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
+        modal.show();
+    }
+    
+    function formatPriceDisplay(price, symbol) {
+        // Format based on currency
+        if (currentProperty.currency === 'XOF' || currentProperty.currency === 'EUR') {
+            return number_format(price, 0, '.', ' ') + ' ' + symbol;
+        } else {
+            return symbol + number_format(price, 0, '.', ',');
+        }
+    }
+    
+    function number_format(number, decimals, dec_point, thousands_sep) {
+        // Simple number formatting
+        const parts = parseFloat(number).toFixed(decimals).split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousands_sep);
+        return parts.join(dec_point);
+    }
+    
+    // Calculate total price when dates change
+    document.getElementById('checkInDate')?.addEventListener('change', calculateTotal);
+    document.getElementById('checkOutDate')?.addEventListener('change', calculateTotal);
+    
+    function calculateTotal() {
+        const checkIn = document.getElementById('checkInDate').value;
+        const checkOut = document.getElementById('checkOutDate').value;
+        
+        if (checkIn && checkOut) {
+            const startDate = new Date(checkIn);
+            const endDate = new Date(checkOut);
+            
+            if (endDate > startDate) {
+                const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                const total = nights * currentProperty.price;
+                
+                document.getElementById('numberOfNights').textContent = nights;
+                document.getElementById('totalPrice').textContent = formatPriceDisplay(total, currentProperty.symbol);
+            } else {
+                document.getElementById('numberOfNights').textContent = '0';
+                document.getElementById('totalPrice').textContent = formatPriceDisplay(0, currentProperty.symbol);
+            }
+        }
+    }
+    
+    function submitBooking() {
+        const form = document.getElementById('bookingForm');
+        
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        
+        // Get form data
+        const formData = new FormData(form);
+        const bookingData = {
+            property_id: formData.get('property_id'),
+            check_in: formData.get('check_in'),
+            check_out: formData.get('check_out'),
+            guests: formData.get('guests'),
+            currency: formData.get('currency_display'),
+            guest_name: formData.get('guest_name'),
+            guest_email: formData.get('guest_email'),
+            guest_phone: formData.get('guest_phone'),
+            special_requests: formData.get('special_requests'),
+            total_price: document.getElementById('totalPrice').textContent,
+            booking_reference: generateBookingReference()
+        };
+        
+        // Simulate booking submission (in real app, this would be an AJAX call)
+        console.log('Booking data:', bookingData);
+        
+        // Close booking modal
+        bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+        
+        // Show success modal
+        document.getElementById('bookingReference').textContent = bookingData.booking_reference;
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+        
+        // In a real application, you would send this data to your server
+        // fetch('/api/bookings', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(bookingData)
+        // })
+    }
+    
+    function generateBookingReference() {
+        const prefix = 'TH'; // TerangaHomes
+        const timestamp = Date.now().toString().slice(-6);
+        const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+        return `${prefix}${timestamp}${random}`;
     }
     </script>
 </body>
