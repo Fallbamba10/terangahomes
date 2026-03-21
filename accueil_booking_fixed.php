@@ -647,7 +647,8 @@ function convert_price($price_xof, $to_currency, $rates) {
 // Fonction de formatage
 function format_price($price, $currency, $symbol, $lang) {
     $formatted = match($currency) {
-        'XOF', 'EUR' => number_format($price, 0, '.', ' ') . ' ' . $symbol,
+        'XOF' => number_format($price, 0, '.', ' ') . ' ' . $symbol,
+        'EUR' => number_format($price, 0, '.', ' ') . ' ' . $symbol,
         'USD', 'GBP', 'CAD', 'AUD' => $symbol . number_format($price, 0, '.', ','),
         'JPY', 'CNY' => $symbol . number_format($price, 0, '.', ','),
         default => $symbol . number_format($price, 0, '.', ',')
@@ -2037,9 +2038,11 @@ try {
     }
     
     function formatPriceDisplay(price, symbol) {
-        // Format based on currency
-        if (currentProperty.currency === 'XOF' || currentProperty.currency === 'EUR') {
-            return number_format(price, 0, '.', ' ') + ' ' + symbol;
+        // Format based on currency - éviter double affichage pour FCFA
+        if (currentProperty.currency === 'XOF') {
+            return number_format(price, 0, '.', ' ') + ' ' + 'FCFA';
+        } else if (currentProperty.currency === 'EUR') {
+            return number_format(price, 0, '.', ' ') + ' ' + '€';
         } else {
             return symbol + number_format(price, 0, '.', ',');
         }
