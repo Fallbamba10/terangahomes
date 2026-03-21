@@ -178,8 +178,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             grid-template-columns: 1fr 1fr;
             overflow: hidden;
             min-height: 600px;
-            position: sticky;
-            top: 80px; /* Position sticky sous le header */
+            /* Retiré position: sticky pour page épurée */
         }
         
         /* Left panel - Form */
@@ -517,47 +516,13 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             font-size: 18px;
         }
         
-        /* Demo accounts */
+        /* Demo accounts - SUPPRIMÉ */
         .demo-accounts {
-            background: var(--seloger-light-blue);
-            border: 1px solid rgba(0,102,204,0.2);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 24px;
-        }
-        
-        .demo-accounts h6 {
-            color: var(--seloger-blue);
-            font-weight: 600;
-            margin-bottom: 15px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: none; /* Masqué pour page épurée */
         }
         
         .demo-account {
-            background: white;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(0,102,204,0.1);
-            font-size: 13px;
-        }
-        
-        .demo-account:last-child {
-            margin-bottom: 0;
-        }
-        
-        .demo-account strong {
-            color: var(--seloger-blue);
-            display: block;
-            margin-bottom: 4px;
-        }
-        
-        .demo-account small {
-            color: var(--seloger-gray);
-            line-height: 1.4;
+            display: none; /* Masqué pour page épurée */
         }
         
         /* Responsive */
@@ -608,68 +573,17 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             }
         }
         
-        /* Contenu additionnel pour le défilement */
+        /* Contenu additionnel pour le défilement - SUPPRIMÉ */
         .scroll-content {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-top: 40px;
-        }
-        
-        .scroll-section {
-            margin-bottom: 60px;
-        }
-        
-        .scroll-section h2 {
-            color: var(--seloger-blue);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        
-        .scroll-section p {
-            color: var(--seloger-gray);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            display: none; /* Masqué pour page épurée */
         }
         
         .features-grid-scroll {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
+            display: none; /* Masqué pour page épurée */
         }
         
         .feature-card {
-            background: var(--seloger-light-blue);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-card i {
-            font-size: 3rem;
-            color: var(--seloger-blue);
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            color: #2c3e50;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-        
-        .feature-card p {
-            color: var(--seloger-gray);
-            line-height: 1.5;
+            display: none; /* Masqué pour page épurée */
         }
         
         /* Animations */
@@ -726,21 +640,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
                             <span><?= $error ?></span>
                         </div>
                     <?php endif; ?>
-                    
-                    <!-- Comptes de démonstration -->
-                    <div class="demo-accounts">
-                        <h6><i class="fas fa-info-circle"></i>Comptes de démonstration</h6>
-                        <div class="demo-account">
-                            <strong>Utilisateur normal</strong>
-                            <small>Email: jean.dupont@terangahomes.com</small><br>
-                            <small>Mot de passe: password123</small>
-                        </div>
-                        <div class="demo-account">
-                            <strong>Administrateur</strong>
-                            <small>Email: admin@terangahomes.com</small><br>
-                            <small>Mot de passe: admin123</small>
-                        </div>
-                    </div>
                     
                     <div class="form-group">
                         <label for="email" class="form-label">Adresse email</label>
@@ -801,33 +700,33 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             <div class="login-visual-panel">
                 <div class="visual-content">
                     <div class="visual-icon">
-                        <i class="fas fa-building"></i>
+                        <i class="fas fa-key"></i>
                     </div>
-                    <h2 class="visual-title">La plateforme immobilière de référence au Sénégal</h2>
+                    <h2 class="visual-title">Accédez à votre espace personnel</h2>
                     <p class="visual-description">
-                        Rejoignez des milliers de propriétaires et locataires qui font confiance à TerangaHomes pour leurs transactions immobilières.
+                        Connectez-vous pour gérer vos annonces, contacter des propriétaires et accéder à toutes les fonctionnalités exclusives de TerangaHomes.
                     </p>
                     
                     <div class="visual-features">
                         <div class="visual-feature">
-                            <i class="fas fa-shield-alt"></i>
+                            <i class="fas fa-home"></i>
                             <div class="visual-feature-text">
-                                <strong>100% Sécurisé</strong><br>
-                                Transactions protégées et vérifiées
+                                <strong>Gérez vos annonces</strong><br>
+                                Publiez et modifiez vos biens en temps réel
                             </div>
                         </div>
                         <div class="visual-feature">
-                            <i class="fas fa-bolt"></i>
+                            <i class="fas fa-envelope"></i>
                             <div class="visual-feature-text">
-                                <strong>Rapide & Efficace</strong><br>
-                                Publication instantanée de vos annonces
+                                <strong>Messagerie instantanée</strong><br>
+                                Communiquez directement avec les propriétaires
                             </div>
                         </div>
                         <div class="visual-feature">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-heart"></i>
                             <div class="visual-feature-text">
-                                <strong>Support 24/7</strong><br>
-                                Assistance professionnelle disponible
+                                <strong>Favoris et alertes</strong><br>
+                                Sauvegardez vos recherches et recevez des alertes
                             </div>
                         </div>
                     </div>
@@ -835,83 +734,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             </div>
         </div>
     </main>
-    
-    <!-- Contenu additionnel pour le défilement -->
-    <section class="scroll-content">
-        <div class="scroll-section">
-            <h2><i class="fas fa-shield-alt me-3"></i>Pourquoi choisir TerangaHomes ?</h2>
-            <p>
-                TerangaHomes est la plateforme immobilière de référence au Sénégal, offrant des solutions innovantes 
-                pour les propriétaires et les locataires. Notre engagement est de fournir une expérience 
-                exceptionnelle avec des outils modernes et un support dédié.
-            </p>
-            
-            <div class="features-grid-scroll">
-                <div class="feature-card">
-                    <i class="fas fa-lock"></i>
-                    <h3>Sécurité Maximale</h3>
-                    <p>Vos données et transactions sont protégées par un cryptage de pointe et une surveillance 24/7.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-bolt"></i>
-                    <h3>Rapidité Extrême</h3>
-                    <p>Publiez vos annonces en quelques clics et trouvez des locataires qualifiés rapidement.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>Support 24/7</h3>
-                    <p>Notre équipe d'experts est disponible à tout moment pour vous assister dans vos démarches.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Analytics Avancés</h3>
-                    <p>Suivez les performances de vos annonces avec des statistiques détaillées et des insights précieux.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="scroll-section">
-            <h2><i class="fas fa-users me-3"></i>Rejoignez notre communauté</h2>
-            <p>
-                Des milliers de propriétaires et locataires nous font déjà confiance pour leurs transactions 
-                immobilières au Sénégal. Rejoignez une communauté dynamique et bénéficiez d'un réseau 
-                professionnel pour optimiser vos investissements.
-            </p>
-            <p>
-                Que vous soyez propriétaire souhaitant louer votre bien, ou locataire à la recherche 
-                du logement idéal, TerangaHomes vous accompagne à chaque étape avec des outils 
-                adaptés et des conseils d'experts.
-            </p>
-        </div>
-        
-        <div class="scroll-section">
-            <h2><i class="fas fa-mobile-alt me-3"></i>Application Mobile</h2>
-            <p>
-                Gérez vos annonces partout et à tout moment avec notre application mobile disponible 
-                sur iOS et Android. Recevez des notifications en temps réel, communiquez directement 
-                avec les locataires, et accédez à toutes les fonctionnalités de la plateforme.
-            </p>
-            <p>
-                L'application TerangaHomes offre une expérience utilisateur optimisée pour les mobiles, 
-                avec une interface intuitive et des fonctionnalités exclusives pour une gestion 
-                simplifiée de vos biens immobiliers.
-            </p>
-        </div>
-        
-        <div class="scroll-section">
-            <h2><i class="fas fa-award me-3"></i>Garantie de Satisfaction</h2>
-            <p>
-                Nous garantissons une qualité de service exceptionnelle. Si vous n'êtes pas 
-                entièrement satisfait de notre plateforme, nous nous engageons à améliorer 
-                continuellement nos services pour répondre à vos attentes.
-            </p>
-            <p>
-                Notre programme de fidélité récompense nos membres les plus actifs avec des 
-                avantages exclusifs, des réductions sur nos services premium, et un accès 
-                prioritaire à nos nouvelles fonctionnalités.
-            </p>
-        </div>
-    </section>
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
