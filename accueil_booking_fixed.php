@@ -274,8 +274,9 @@ $translations = [
         'guests' => 'Voyageurs',
         'search_btn' => 'Rechercher',
         'properties' => 'Propriétés',
-        'experiences' => 'Expériences',
-        'restaurants' => 'Restaurants',
+        'car_rental' => 'Location de voiture',
+        'airport_transfer' => 'Transfert Aéroport',
+        'vtc_services' => 'Services VTC',
         'login' => 'Se connecter',
         'register' => "S'inscrire",
         'list_property' => 'Déposer une annonce',
@@ -308,8 +309,9 @@ $translations = [
         'guests' => 'Guests',
         'search_btn' => 'Search',
         'properties' => 'Properties',
-        'experiences' => 'Experiences',
-        'restaurants' => 'Restaurants',
+        'car_rental' => 'Car Rental',
+        'airport_transfer' => 'Airport Transfer',
+        'vtc_services' => 'VTC Services',
         'login' => 'Sign in',
         'register' => 'Register',
         'list_property' => 'List your property',
@@ -342,8 +344,9 @@ $translations = [
         'guests' => 'Huéspedes',
         'search_btn' => 'Buscar',
         'properties' => 'Propiedades',
-        'experiences' => 'Experiencias',
-        'restaurants' => 'Restaurantes',
+        'car_rental' => 'Alquiler de coches',
+        'airport_transfer' => 'Traslado aeropuerto',
+        'vtc_services' => 'Servicios VTC',
         'login' => 'Iniciar sesión',
         'register' => 'Registrarse',
         'list_property' => 'Publicar propiedad',
@@ -376,8 +379,9 @@ $translations = [
         'guests' => 'الضيوف',
         'search_btn' => 'بحث',
         'properties' => 'العقارات',
-        'experiences' => 'التجارب',
-        'restaurants' => 'المطاعم',
+        'car_rental' => 'تأجير السيارات',
+        'airport_transfer' => 'نقل المطار',
+        'vtc_services' => 'خدمات VTC',
         'login' => 'تسجيل الدخول',
         'register' => 'التسجيل',
         'list_property' => 'إدراج العقار',
@@ -410,8 +414,9 @@ $translations = [
         'guests' => '客人',
         'search_btn' => '搜索',
         'properties' => '房产',
-        'experiences' => '体验',
-        'restaurants' => '餐厅',
+        'car_rental' => '租车',
+        'airport_transfer' => '机场接送',
+        'vtc_services' => 'VTC服务',
         'login' => '登录',
         'register' => '注册',
         'list_property' => '发布房产',
@@ -444,8 +449,9 @@ $translations = [
         'guests' => 'Hóspedes',
         'search_btn' => 'Pesquisar',
         'properties' => 'Propriedades',
-        'experiences' => 'Experiências',
-        'restaurants' => 'Restaurantes',
+        'car_rental' => 'Aluguel de carros',
+        'airport_transfer' => 'Transferência aeroporto',
+        'vtc_services' => 'Serviços VTC',
         'login' => 'Entrar',
         'register' => 'Registrar',
         'list_property' => 'Anunciar propriedade',
@@ -1419,7 +1425,320 @@ try {
             color: var(--booking-gray);
         }
         
-        /* Experiences Section */
+        /* Car Rental Section */
+        .car-rental-section {
+            padding: 40px 0;
+            background: white;
+        }
+        
+        .car-rental-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 32px;
+        }
+        
+        .car-rental-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--booking-dark);
+        }
+        
+        .car-rental-subtitle {
+            font-size: 1rem;
+            color: var(--booking-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .car-rental-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 0 32px;
+            flex-wrap: wrap;
+        }
+        
+        .car-tab {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 20px;
+            color: var(--booking-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+        
+        .car-tab:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+        }
+        
+        .car-tab.active {
+            background: var(--booking-blue);
+            border-color: var(--booking-blue);
+            color: white;
+        }
+        
+        /* Car Rental Grid */
+        .car-rental-container {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 0 32px;
+            max-width: 1180px;
+        }
+        
+        .car-rental-grid {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .car-rental-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .car-rental-grid::-webkit-scrollbar-track {
+            background: var(--booking-light-gray);
+            border-radius: 3px;
+        }
+        
+        .car-rental-grid::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 3px;
+        }
+        
+        .car-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .car-image {
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .car-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .car-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--booking-orange);
+            color: var(--booking-dark);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .car-content {
+            padding: 16px;
+        }
+        
+        .car-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--booking-dark);
+            line-height: 1.3;
+        }
+        
+        .car-description {
+            font-size: 0.8rem;
+            color: var(--booking-gray);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .car-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--booking-gray);
+        }
+        
+        .car-specs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .car-spec {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        
+        .car-spec i {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .car-price {
+            font-weight: 600;
+            color: var(--booking-blue);
+        }
+        
+        .car-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+        
+        .car-rating i {
+            color: #ffc107;
+            font-size: 0.8rem;
+        }
+        
+        /* Airport Transfer Section */
+        .airport-transfer-section {
+            padding: 40px 0;
+            background: var(--booking-light-gray);
+        }
+        
+        .airport-transfer-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 32px;
+        }
+        
+        .airport-transfer-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--booking-dark);
+        }
+        
+        .airport-transfer-subtitle {
+            font-size: 1rem;
+            color: var(--booking-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .transfer-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 0 auto;
+            padding: 0 32px;
+            max-width: 1180px;
+        }
+        
+        .transfer-option {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .transfer-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .transfer-icon {
+            font-size: 2.5rem;
+            color: var(--booking-blue);
+            margin-bottom: 16px;
+        }
+        
+        .transfer-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--booking-dark);
+        }
+        
+        .transfer-description {
+            font-size: 0.9rem;
+            color: var(--booking-gray);
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+        
+        .transfer-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--booking-blue);
+            margin-bottom: 8px;
+        }
+        
+        .transfer-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .transfer-features li {
+            font-size: 0.8rem;
+            color: var(--booking-gray);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .transfer-features i {
+            color: var(--booking-blue);
+            font-size: 0.7rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .car-rental-grid {
+                gap: 12px;
+            }
+            
+            .car-card {
+                flex: 0 0 240px;
+            }
+            
+            .car-content {
+                padding: 12px;
+            }
+            
+            .transfer-options {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .transfer-option {
+                padding: 20px;
+            }
+        }
         .experiences-section {
             padding: 40px 0;
             background: white;
@@ -2261,8 +2580,8 @@ try {
                 
                 <nav class="nav-center">
                     <a href="#" class="nav-item-booking active"><?= $t['properties'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['experiences'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['restaurants'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['car_rental'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['airport_transfer'] ?></a>
                 </nav>
                 
                 <div class="header-right">
@@ -2683,223 +3002,391 @@ try {
         </div>
     </section>
 
-    <!-- Experiences Section -->
-    <section class="experiences-section">
-        <div class="experiences-header">
-            <h2 class="experiences-title">Expériences</h2>
-            <p class="experiences-subtitle">
-                Découvrez les meilleures activités et expériences authentiques du Sénégal.
+    <!-- Car Rental Section -->
+    <section class="car-rental-section">
+        <div class="car-rental-header">
+            <h2 class="car-rental-title">Location de voiture</h2>
+            <p class="car-rental-subtitle">
+                Explorez le Sénégal en toute liberté avec notre flotte de véhicules modernes.
             </p>
         </div>
         
-        <div class="experiences-tabs">
-            <button class="experience-tab active" onclick="filterExperiences('all')">Toutes</button>
-            <button class="experience-tab" onclick="filterExperiences('tours')">Tours</button>
-            <button class="experience-tab" onclick="filterExperiences('culture')">Culture</button>
-            <button class="experience-tab" onclick="filterExperiences('nature')">Nature</button>
-            <button class="experience-tab" onclick="filterExperiences('adventure')">Aventure</button>
+        <div class="car-rental-tabs">
+            <button class="car-tab active" onclick="filterCars('all')">Toutes</button>
+            <button class="car-tab" onclick="filterCars('economy')">Économique</button>
+            <button class="car-tab" onclick="filterCars('comfort')">Confort</button>
+            <button class="car-tab" onclick="filterCars('suv')">SUV</button>
+            <button class="car-tab" onclick="filterCars('luxury')">Luxe</button>
         </div>
         
-        <div class="experiences-container">
-            <button class="experience-scroll-button prev" onclick="scrollExperiences('prev')">
+        <div class="car-rental-container">
+            <button class="experience-scroll-button prev" onclick="scrollCars('prev')">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="experience-scroll-button next" onclick="scrollExperiences('next')">
+            <button class="experience-scroll-button next" onclick="scrollCars('next')">
                 <i class="fas fa-chevron-right"></i>
             </button>
             
-            <div class="experiences-grid">
-                <!-- Tour de Dakar -->
-                <div class="experience-card" data-category="tours culture">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Tour de Dakar">
-                        <span class="experience-badge">Populaire</span>
+            <div class="car-rental-grid">
+                <!-- Renault Clio -->
+                <div class="car-card" data-category="economy">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Renault Clio">
+                        <span class="car-badge">Économique</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Tour complet de Dakar</h3>
-                        <p class="experience-description">Découvrez la capitale vibrante avec ses marchés, musées et monuments.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>4h</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Renault Clio</h3>
+                        <p class="car-description">Idéal pour la ville, économique et facile à garer.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>4</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Manuel</span>
+                                </div>
                             </div>
-                            <div class="experience-price">25€</div>
+                            <div class="car-price">25€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.8 (234 avis)</span>
+                            <span>4.6 (156 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Île de Gorée -->
-                <div class="experience-card" data-category="tours culture history">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Île de Gorée">
-                        <span class="experience-badge">UNESCO</span>
+                <!-- Dacia Logan -->
+                <div class="car-card" data-category="economy comfort">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Dacia Logan">
+                        <span class="car-badge">Confort</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Journée à Gorée</h3>
-                        <p class="experience-description">Explorez l'histoire poignante de cette île classée au patrimoine mondial.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>Journée</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Dacia Logan</h3>
+                        <p class="car-description">Spacieux et confortable, parfait pour les longs trajets.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Manuel</span>
+                                </div>
                             </div>
-                            <div class="experience-price">45€</div>
+                            <div class="car-price">30€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.9 (189 avis)</span>
+                            <span>4.5 (203 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Lac Rose -->
-                <div class="experience-card" data-category="nature tours">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Lac Rose">
-                        <span class="experience-badge">Unique</span>
+                <!-- Peugeot 3008 -->
+                <div class="car-card" data-category="comfort">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Peugeot 3008">
+                        <span class="car-badge">Familial</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Aventure au Lac Rose</h3>
-                        <p class="experience-description">Découvrez le lac aux eaux roses et ses dunes environnantes.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>Demi-journée</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Peugeot 3008</h3>
+                        <p class="car-description">Compact familial avec grand coffre et technologie moderne.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
                             </div>
-                            <div class="experience-price">35€</div>
+                            <div class="car-price">45€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.7 (156 avis)</span>
+                            <span>4.7 (189 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Parc Djoudj -->
-                <div class="experience-card" data-category="nature wildlife">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Parc Djoudj">
-                        <span class="experience-badge">Nature</span>
+                <!-- Toyota RAV4 -->
+                <div class="car-card" data-category="suv">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Toyota RAV4">
+                        <span class="car-badge">SUV</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Safari oiseaux Djoudj</h3>
-                        <p class="experience-description">Observez des milliers d'oiseaux migrateurs dans ce parc unique.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>Journée</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Toyota RAV4</h3>
+                        <p class="car-description">4x4 parfait pour les routes sénégalaises et aventures.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
                             </div>
-                            <div class="experience-price">55€</div>
+                            <div class="car-price">65€/jour</div>
                         </div>
-                        <div class="experience-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (98 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Saint-Louis -->
-                <div class="experience-card" data-category="culture tours history">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Saint-Louis">
-                        <span class="experience-badge">Historique</span>
-                    </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Saint-Louis et ses trésors</h3>
-                        <p class="experience-description">Explorez la ville historique avec son architecture coloniale.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>2 jours</span>
-                            </div>
-                            <div class="experience-price">120€</div>
-                        </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
                             <span>4.8 (145 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Pêche artisanale -->
-                <div class="experience-card" data-category="culture adventure">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Pêche artisanale">
-                        <span class="experience-badge">Authentique</span>
+                <!-- Mercedes E-Class -->
+                <div class="car-card" data-category="luxury">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Mercedes E-Class">
+                        <span class="car-badge">Luxe</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Pêche traditionnelle</h3>
-                        <p class="experience-description">Vivez l'expérience de la pêche artisanale avec les locaux.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>Demi-journée</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Mercedes E-Class</h3>
+                        <p class="car-description">Élégance et performance pour voyager avec prestige.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
                             </div>
-                            <div class="experience-price">30€</div>
+                            <div class="car-price">120€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.6 (87 avis)</span>
+                            <span>4.9 (87 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Marché Sandaga -->
-                <div class="experience-card" data-category="culture tours">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Marché Sandaga">
-                        <span class="experience-badge">Local</span>
+                <!-- Hyundai Tucson -->
+                <div class="car-card" data-category="suv comfort">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Hyundai Tucson">
+                        <span class="car-badge">SUV</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Marchés de Dakar</h3>
-                        <p class="experience-description">Immergez-vous dans l'ambiance des marchés locaux colorés.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>3h</span>
+                    <div class="car-content">
+                        <h3 class="car-title">Hyundai Tucson</h3>
+                        <p class="car-description">SUV moderne avec sécurité et technologie avancée.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
                             </div>
-                            <div class="experience-price">20€</div>
+                            <div class="car-price">55€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.7 (203 avis)</span>
+                            <span>4.7 (167 avis)</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Désert de Lompoul -->
-                <div class="experience-card" data-category="nature adventure">
-                    <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Désert de Lompoul">
-                        <span class="experience-badge">Aventure</span>
+                <!-- BMW X5 -->
+                <div class="car-card" data-category="suv luxury">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="BMW X5">
+                        <span class="car-badge">Premium</span>
                     </div>
-                    <div class="experience-content">
-                        <h3 class="experience-title">Nuit au désert Lompoul</h3>
-                        <p class="experience-description">Aventure inoubliable dans les dunes du désert sénégalais.</p>
-                        <div class="experience-meta">
-                            <div class="experience-duration">
-                                <i class="fas fa-clock"></i>
-                                <span>2 jours</span>
+                    <div class="car-content">
+                        <h3 class="car-title">BMW X5</h3>
+                        <p class="car-description">Sportif et luxueux, idéal pour voyager avec style.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>7</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
                             </div>
-                            <div class="experience-price">95€</div>
+                            <div class="car-price">95€/jour</div>
                         </div>
-                        <div class="experience-rating">
+                        <div class="car-rating">
                             <i class="fas fa-star"></i>
-                            <span>4.9 (112 avis)</span>
+                            <span>4.9 (98 avis)</span>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Volkswagen Golf -->
+                <div class="car-card" data-category="economy comfort">
+                    <div class="car-image">
+                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Volkswagen Golf">
+                        <span class="car-badge">Polyvalent</span>
+                    </div>
+                    <div class="car-content">
+                        <h3 class="car-title">Volkswagen Golf</h3>
+                        <p class="car-description">Compact fiable et confortable pour tous vos déplacements.</p>
+                        <div class="car-meta">
+                            <div class="car-specs">
+                                <div class="car-spec">
+                                    <i class="fas fa-users"></i>
+                                    <span>5</span>
+                                </div>
+                                <div class="car-spec">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Auto</span>
+                                </div>
+                            </div>
+                            <div class="car-price">35€/jour</div>
+                        </div>
+                        <div class="car-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6 (234 avis)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Airport Transfer Section -->
+    <section class="airport-transfer-section">
+        <div class="airport-transfer-header">
+            <h2 class="airport-transfer-title">Transfert Aéroport</h2>
+            <p class="airport-transfer-subtitle">
+                Services de transport fiables et confortables depuis/vers tous les aéroports du Sénégal.
+            </p>
+        </div>
+        
+        <div class="transfer-options">
+            <!-- VTC Standard -->
+            <div class="transfer-option" onclick="bookTransfer('vtc_standard')">
+                <div class="transfer-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3 class="transfer-title">VTC Standard</h3>
+                <p class="transfer-description">
+                    Véhicule confortable avec chauffeur professionnel, idéal pour 1-4 passagers.
+                </p>
+                <div class="transfer-price">25€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Climatisation</li>
+                    <li><i class="fas fa-check"></i> WiFi gratuit</li>
+                    <li><i class="fas fa-check"></i> Bagages inclus</li>
+                    <li><i class="fas fa-check"></i> 24/7 disponible</li>
+                </ul>
+            </div>
+            
+            <!-- VTC Premium -->
+            <div class="transfer-option" onclick="bookTransfer('vtc_premium')">
+                <div class="transfer-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <h3 class="transfer-title">VTC Premium</h3>
+                <p class="transfer-description">
+                    Véhicule haut de gamme avec chauffeur en tenue, service VIP inclus.
+                </p>
+                <div class="transfer-price">45€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Véhicule premium</li>
+                    <li><i class="fas fa-check"></i> Chauffeur professionnel</li>
+                    <li><i class="fas fa-check"></i> Boissons gratuites</li>
+                    <li><i class="fas fa-check"></i> Priorité aéroport</li>
+                </ul>
+            </div>
+            
+            <!-- Taxi Collectif -->
+            <div class="transfer-option" onclick="bookTransfer('taxi_shared')">
+                <div class="transfer-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="transfer-title">Taxi Collectif</h3>
+                <p class="transfer-description">
+                    Partagez votre trajet avec d'autres passagers, économique et écologique.
+                </p>
+                <div class="transfer-price">12€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Prix avantageux</li>
+                    <li><i class="fas fa-check"></i> Trajets partagés</li>
+                    <li><i class="fas fa-check"></i> Réservation facile</li>
+                    <li><i class="fas fa-check"></i> Service rapide</li>
+                </ul>
+            </div>
+            
+            <!-- Minibus -->
+            <div class="transfer-option" onclick="bookTransfer('minibus')">
+                <div class="transfer-icon">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <h3 class="transfer-title">Minibus</h3>
+                <p class="transfer-description">
+                    Transport pour groupes jusqu'à 15 personnes, idéal pour familles et équipes.
+                </p>
+                <div class="transfer-price">65€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Jusqu'à 15 passagers</li>
+                    <li><i class="fas fa-check"></i> Grand espace bagages</li>
+                    <li><i class="fas fa-check"></i> Chauffeur expérimenté</li>
+                    <li><i class="fas fa-check"></i> Flexibilité horaire</li>
+                </ul>
+            </div>
+            
+            <!-- Moto-Taxi -->
+            <div class="transfer-option" onclick="bookTransfer('moto_taxi')">
+                <div class="transfer-icon">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <h3 class="transfer-title">Moto-Taxi</h3>
+                <p class="transfer-description">
+                    Rapide et agile pour les déplacements urbains, évite les embouteillages.
+                </p>
+                <div class="transfer-price">8€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Casque fourni</li>
+                    <li><i class="fas fa-check"></i> Très rapide</li>
+                    <li><i class="fas fa-check"></i> Idéal centre-ville</li>
+                    <li><i class="fas fa-check"></i> 24/7 disponible</li>
+                </ul>
+            </div>
+            
+            <!-- VIP Service -->
+            <div class="transfer-option" onclick="bookTransfer('vip_service')">
+                <div class="transfer-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3 class="transfer-title">Service VIP</h3>
+                <p class="transfer-description">
+                    Service exclusif avec véhicule de luxe, chauffeur personnel et assistance complète.
+                </p>
+                <div class="transfer-price">120€</div>
+                <ul class="transfer-features">
+                    <li><i class="fas fa-check"></i> Véhicule de luxe</li>
+                    <li><i class="fas fa-check"></i> Chauffeur dédicacé</li>
+                    <li><i class="fas fa-check"></i> Service d'assistance</li>
+                    <li><i class="fas fa-check"></i> Priorité absolue</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -3078,32 +3565,6 @@ try {
                     <li><a href="annonces_direct_fixed.php"><?= $lang === 'fr' ? 'Toutes les annonces' : 'All listings' ?></a></li>
                     <li><a href="search_with_map.php"><?= $t['search_btn'] ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Dernières annonces' : 'Latest listings' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Annonces populaires' : 'Popular listings' ?></a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4 class="footer-title"><?= $t['experiences'] ?></h4>
-                <ul class="footer-links">
-                    <li><a href="#"><?= $lang === 'fr' ? 'Tours guidés' : 'Guided tours' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Activités locales' : 'Local activities' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Événements' : 'Events' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Guide de voyage' : 'Travel guide' ?></a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4 class="footer-title"><?= $t['help'] ?></h4>
-                <ul class="footer-links">
-                    <li><a href="connexion_simple.php"><?= $t['login'] ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Centre d\'aide' : 'Help center' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'FAQ' : 'FAQ' ?></a></li>
-                    <li><a href="#"><?= $lang === 'fr' ? 'Contact' : 'Contact' ?></a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4 class="footer-title"><?= $t['contact_host'] ?></h4>
                 <ul class="footer-links">
                     <li><i class="fas fa-phone me-2"></i>+221 78 600 00 28</li>
                     <li><i class="fas fa-envelope me-2"></i>contact@terangahomes.com</li>
@@ -3529,6 +3990,50 @@ try {
         });
     });
     
+    // Animation des voitures
+    function filterCars(category) {
+        const tabs = document.querySelectorAll('.car-tab');
+        const cards = document.querySelectorAll('.car-card');
+        
+        // Update active tab
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Filter cards
+        cards.forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+            } else {
+                const cardCategories = card.getAttribute('data-category');
+                if (cardCategories && cardCategories.includes(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+    
+    // Scroll voitures
+    function scrollCars(direction) {
+        const container = document.querySelector('.car-rental-grid');
+        const scrollAmount = 300; // Width of one card + gap
+        
+        if (direction === 'prev') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+    
+    // Réservation transfert
+    function bookTransfer(type) {
+        // Simuler la réservation
+        alert(`Réservation du service ${type} - Redirection vers la page de réservation...`);
+        // En production, rediriger vers la page de réservation
+        // window.location.href = `booking_transfer.php?type=${type}`;
+    }
+    
     // Animation des expériences
     function filterExperiences(category) {
         const tabs = document.querySelectorAll('.experience-tab');
@@ -3639,8 +4144,8 @@ try {
             }, 800 + (index * 50));
         });
         
-        const experienceCards = document.querySelectorAll('.experience-card');
-        experienceCards.forEach((card, index) => {
+        const carCards = document.querySelectorAll('.car-card');
+        carCards.forEach((card, index) => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             
@@ -3649,6 +4154,18 @@ try {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
             }, 1200 + (index * 100));
+        });
+        
+        const transferOptions = document.querySelectorAll('.transfer-option');
+        transferOptions.forEach((option, index) => {
+            option.style.opacity = '0';
+            option.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                option.style.transition = 'all 0.6s ease';
+                option.style.opacity = '1';
+                option.style.transform = 'translateY(0)';
+            }, 1600 + (index * 100));
         });
     });
     
