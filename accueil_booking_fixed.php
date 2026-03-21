@@ -718,6 +718,24 @@ try {
             background: white;
         }
         
+        /* Container widths - Booking.com style */
+        .booking-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .booking-container-narrow {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .booking-container-wide {
+            max-width: 1680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
         /* Header Booking Style */
         .booking-header {
             background: white;
@@ -728,9 +746,8 @@ try {
         }
         
         .header-container {
-            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
         
         .header-main {
@@ -738,6 +755,8 @@ try {
             justify-content: space-between;
             align-items: center;
             padding: 16px 0;
+            max-width: 1440px;
+            margin: 0 auto;
         }
         
         .logo-booking {
@@ -844,11 +863,11 @@ try {
         }
         
         .hero-content {
-            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             text-align: center;
             color: white;
+            max-width: 1440px;
         }
         
         .hero-title {
@@ -967,6 +986,7 @@ try {
         .section-header {
             text-align: center;
             margin-bottom: 48px;
+            padding: 0 24px;
         }
         
         .section-title {
@@ -980,9 +1000,9 @@ try {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
-            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+            max-width: 1440px;
         }
         
         .destination-card {
@@ -1035,9 +1055,9 @@ try {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 32px;
-            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+            max-width: 1440px;
         }
         
         .property-card-booking {
@@ -1182,9 +1202,9 @@ try {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
+            max-width: 1200px;
             text-align: center;
         }
         
@@ -1218,12 +1238,12 @@ try {
         }
         
         .footer-content {
-            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
             gap: 40px;
+            max-width: 1440px;
         }
         
         .footer-brand-booking {
