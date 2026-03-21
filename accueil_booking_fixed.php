@@ -756,19 +756,21 @@ try {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 8px 0;
+            height: 64px;
             max-width: 1180px;
             margin: 0 auto;
         }
         
         .logo-booking {
-            font-size: 1.75rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--booking-blue);
             text-decoration: none;
             display: flex;
             align-items: center;
             transition: color 0.2s ease;
+            white-space: nowrap;
         }
         
         .logo-booking:hover {
@@ -777,23 +779,25 @@ try {
         
         .logo-booking i {
             margin-right: 8px;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
         }
         
         .nav-center {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             align-items: center;
+            flex-wrap: nowrap;
         }
         
         .nav-item-booking {
             color: var(--booking-dark);
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px;
-            padding: 8px 12px;
-            border-radius: 8px;
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
             transition: all 0.2s ease;
+            white-space: nowrap;
             position: relative;
         }
         
