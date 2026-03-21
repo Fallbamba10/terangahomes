@@ -699,11 +699,12 @@ try {
         :root {
             --booking-blue: #003580;
             --booking-light-blue: #0071c2;
+            --booking-dark: #2d3748;
+            --booking-gray: #4a5568;
+            --booking-light-gray: #f7fafc;
+            --booking-border: #e2e8f0;
             --booking-orange: #febb02;
-            --booking-dark: #222222;
-            --booking-gray: #717171;
-            --booking-light-gray: #f7f7f7;
-            --booking-border: #dddddd;
+            --booking-shadow: rgba(0,0,0,0.1);
         }
         
         * {
@@ -971,9 +972,38 @@ try {
         
         /* Hero Section */
         .hero-booking {
-            background: linear-gradient(135deg, var(--booking-blue) 0%, var(--booking-light-blue) 100%);
+            background: linear-gradient(135deg, var(--booking-blue) 0%, var(--booking-light-blue) 50%, #004a99 100%);
             padding: 80px 0;
             position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-booking::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="booking-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="0" cy="0" r="0.5" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="40" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23booking-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-booking::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
         }
         
         .hero-content {
@@ -982,6 +1012,8 @@ try {
             text-align: center;
             color: white;
             max-width: 1180px;
+            position: relative;
+            z-index: 1;
         }
         
         .hero-title {
@@ -1001,10 +1033,36 @@ try {
         .search-box-booking {
             background: white;
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0,53,128,0.15);
             max-width: 1000px;
             margin: 0 auto;
+            border: 2px solid var(--booking-blue);
+            position: relative;
+        }
+        
+        .search-box-booking::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
+            border-radius: 16px;
+            z-index: -1;
+        }
+        
+        .search-box-booking::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 14px;
+            z-index: -1;
         }
         
         .search-tabs {
@@ -1074,7 +1132,7 @@ try {
         }
         
         .btn-search-booking {
-            background: var(--booking-orange);
+            background: linear-gradient(135deg, var(--booking-orange) 0%, #f3c432 100%);
             color: var(--booking-dark);
             border: none;
             border-radius: 8px;
@@ -1084,11 +1142,18 @@ try {
             cursor: pointer;
             transition: all 0.2s ease;
             white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(254,187,2,0.3);
         }
         
         .btn-search-booking:hover {
-            background: #f3c432;
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #f3c432 0%, var(--booking-orange) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(254,187,2,0.4);
+        }
+        
+        .btn-search-booking:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(254,187,2,0.3);
         }
         
         /* Destinations Section */
