@@ -274,9 +274,8 @@ $translations = [
         'guests' => 'Voyageurs',
         'search_btn' => 'Rechercher',
         'properties' => 'Propriétés',
-        'car_rental' => 'Location de voiture',
-        'airport_transfer' => 'Transfert Aéroport',
-        'vtc_services' => 'Services VTC',
+        'experiences' => 'Expériences',
+        'restaurants' => 'Restaurants',
         'login' => 'Se connecter',
         'register' => "S'inscrire",
         'list_property' => 'Déposer une annonce',
@@ -309,9 +308,8 @@ $translations = [
         'guests' => 'Guests',
         'search_btn' => 'Search',
         'properties' => 'Properties',
-        'car_rental' => 'Car Rental',
-        'airport_transfer' => 'Airport Transfer',
-        'vtc_services' => 'VTC Services',
+        'experiences' => 'Experiences',
+        'restaurants' => 'Restaurants',
         'login' => 'Sign in',
         'register' => 'Register',
         'list_property' => 'List your property',
@@ -344,9 +342,8 @@ $translations = [
         'guests' => 'Huéspedes',
         'search_btn' => 'Buscar',
         'properties' => 'Propiedades',
-        'car_rental' => 'Alquiler de coches',
-        'airport_transfer' => 'Traslado aeropuerto',
-        'vtc_services' => 'Servicios VTC',
+        'experiences' => 'Experiencias',
+        'restaurants' => 'Restaurantes',
         'login' => 'Iniciar sesión',
         'register' => 'Registrarse',
         'list_property' => 'Publicar propiedad',
@@ -379,9 +376,8 @@ $translations = [
         'guests' => 'الضيوف',
         'search_btn' => 'بحث',
         'properties' => 'العقارات',
-        'car_rental' => 'تأجير السيارات',
-        'airport_transfer' => 'نقل المطار',
-        'vtc_services' => 'خدمات VTC',
+        'experiences' => 'التجارب',
+        'restaurants' => 'المطاعم',
         'login' => 'تسجيل الدخول',
         'register' => 'التسجيل',
         'list_property' => 'إدراج العقار',
@@ -414,9 +410,8 @@ $translations = [
         'guests' => '客人',
         'search_btn' => '搜索',
         'properties' => '房产',
-        'car_rental' => '租车',
-        'airport_transfer' => '机场接送',
-        'vtc_services' => 'VTC服务',
+        'experiences' => '体验',
+        'restaurants' => '餐厅',
         'login' => '登录',
         'register' => '注册',
         'list_property' => '发布房产',
@@ -449,9 +444,8 @@ $translations = [
         'guests' => 'Hóspedes',
         'search_btn' => 'Pesquisar',
         'properties' => 'Propriedades',
-        'car_rental' => 'Aluguel de carros',
-        'airport_transfer' => 'Transferência aeroporto',
-        'vtc_services' => 'Serviços VTC',
+        'experiences' => 'Experiências',
+        'restaurants' => 'Restaurantes',
         'login' => 'Entrar',
         'register' => 'Registrar',
         'list_property' => 'Anunciar propriedade',
@@ -2645,8 +2639,8 @@ try {
                 
                 <nav class="nav-center">
                     <a href="#" class="nav-item-booking active"><?= $t['properties'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['car_rental'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['airport_transfer'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['experiences'] ?></a>
+                    <a href="#" class="nav-item-booking"><?= $t['restaurants'] ?></a>
                 </nav>
                 
                 <div class="header-right">
@@ -3067,89 +3061,394 @@ try {
         </div>
     </section>
 
-    <!-- Compact Transport Section -->
-    <section class="compact-transport-section">
-        <div class="compact-transport-container">
-            <h3 class="compact-transport-title">Services de Transport</h3>
-            <div class="compact-transport-options">
-                <!-- VTC Standard -->
-                <div class="compact-transport-card" onclick="bookTransfer('vtc_standard')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-car"></i>
+    <!-- Experiences Section -->
+    <section class="experiences-section">
+        <div class="experiences-header">
+            <h2 class="experiences-title">Expériences</h2>
+            <p class="experiences-subtitle">
+                Découvrez les meilleures activités et expériences authentiques du Sénégal.
+            </p>
+        </div>
+        
+        <div class="experiences-tabs">
+            <button class="experience-tab active" onclick="filterExperiences('all')">Toutes</button>
+            <button class="experience-tab" onclick="filterExperiences('tours')">Tours</button>
+            <button class="experience-tab" onclick="filterExperiences('culture')">Culture</button>
+            <button class="experience-tab" onclick="filterExperiences('nature')">Nature</button>
+            <button class="experience-tab" onclick="filterExperiences('adventure')">Aventure</button>
+        </div>
+        
+        <div class="experiences-container">
+            <button class="experience-scroll-button prev" onclick="scrollExperiences('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="experience-scroll-button next" onclick="scrollExperiences('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="experiences-grid">
+                <!-- Tour de Dakar -->
+                <div class="experience-card" data-category="tours culture">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Tour de Dakar">
+                        <span class="experience-badge">Populaire</span>
                     </div>
-                    <div class="compact-transport-name">VTC Standard</div>
-                    <div class="compact-transport-price">25€</div>
-                    <div class="compact-transport-desc">1-4 passagers, climatisation</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Tour complet de Dakar</h3>
+                        <p class="experience-description">Découvrez la capitale vibrante avec ses marchés, musées et monuments.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>4h</span>
+                            </div>
+                            <div class="experience-price">25€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (234 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Location Voiture -->
-                <div class="compact-transport-card" onclick="bookTransfer('car_rental')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-key"></i>
+                <!-- Île de Gorée -->
+                <div class="experience-card" data-category="tours culture history">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Île de Gorée">
+                        <span class="experience-badge">UNESCO</span>
                     </div>
-                    <div class="compact-transport-name">Location Voiture</div>
-                    <div class="compact-transport-price">25€/jour</div>
-                    <div class="compact-transport-desc">Voitures économiques à luxe</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Journée à Gorée</h3>
+                        <p class="experience-description">Explorez l'histoire poignante de cette île classée au patrimoine mondial.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Journée</span>
+                            </div>
+                            <div class="experience-price">45€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (189 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- VTC Premium -->
-                <div class="compact-transport-card" onclick="bookTransfer('vtc_premium')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-car-side"></i>
+                <!-- Lac Rose -->
+                <div class="experience-card" data-category="nature tours">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Lac Rose">
+                        <span class="experience-badge">Unique</span>
                     </div>
-                    <div class="compact-transport-name">VTC Premium</div>
-                    <div class="compact-transport-price">45€</div>
-                    <div class="compact-transport-desc">Service VIP, véhicule premium</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Aventure au Lac Rose</h3>
+                        <p class="experience-description">Découvrez le lac aux eaux roses et ses dunes environnantes.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Demi-journée</span>
+                            </div>
+                            <div class="experience-price">35€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (156 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Taxi Collectif -->
-                <div class="compact-transport-card" onclick="bookTransfer('taxi_shared')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-users"></i>
+                <!-- Parc Djoudj -->
+                <div class="experience-card" data-category="nature wildlife">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Parc Djoudj">
+                        <span class="experience-badge">Nature</span>
                     </div>
-                    <div class="compact-transport-name">Taxi Collectif</div>
-                    <div class="compact-transport-price">12€</div>
-                    <div class="compact-transport-desc">Économique, trajets partagés</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Safari oiseaux Djoudj</h3>
+                        <p class="experience-description">Observez des milliers d'oiseaux migrateurs dans ce parc unique.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Journée</span>
+                            </div>
+                            <div class="experience-price">55€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (98 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Minibus -->
-                <div class="compact-transport-card" onclick="bookTransfer('minibus')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-bus"></i>
+                <!-- Saint-Louis -->
+                <div class="experience-card" data-category="culture tours history">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Saint-Louis">
+                        <span class="experience-badge">Historique</span>
                     </div>
-                    <div class="compact-transport-name">Minibus</div>
-                    <div class="compact-transport-price">65€</div>
-                    <div class="compact-transport-desc">Jusqu'à 15 passagers</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Saint-Louis et ses trésors</h3>
+                        <p class="experience-description">Explorez la ville historique avec son architecture coloniale.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>2 jours</span>
+                            </div>
+                            <div class="experience-price">120€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (145 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Moto-Taxi -->
-                <div class="compact-transport-card" onclick="bookTransfer('moto_taxi')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-motorcycle"></i>
+                <!-- Pêche artisanale -->
+                <div class="experience-card" data-category="culture adventure">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Pêche artisanale">
+                        <span class="experience-badge">Authentique</span>
                     </div>
-                    <div class="compact-transport-name">Moto-Taxi</div>
-                    <div class="compact-transport-price">8€</div>
-                    <div class="compact-transport-desc">Rapide, centre-ville</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Pêche traditionnelle</h3>
+                        <p class="experience-description">Vivez l'expérience de la pêche artisanale avec les locaux.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Demi-journée</span>
+                            </div>
+                            <div class="experience-price">30€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6 (87 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- VIP Service -->
-                <div class="compact-transport-card" onclick="bookTransfer('vip_service')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-crown"></i>
+                <!-- Marché Sandaga -->
+                <div class="experience-card" data-category="culture tours">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Marché Sandaga">
+                        <span class="experience-badge">Local</span>
                     </div>
-                    <div class="compact-transport-name">Service VIP</div>
-                    <div class="compact-transport-price">120€</div>
-                    <div class="compact-transport-desc">Luxe exclusif, assistance</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Marchés de Dakar</h3>
+                        <p class="experience-description">Immergez-vous dans l'ambiance des marchés locaux colorés.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>3h</span>
+                            </div>
+                            <div class="experience-price">20€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (203 avis)</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- SUV Location -->
-                <div class="compact-transport-card" onclick="bookTransfer('suv_rental')">
-                    <div class="compact-transport-icon">
-                        <i class="fas fa-truck"></i>
+                <!-- Désert de Lompoul -->
+                <div class="experience-card" data-category="nature adventure">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Désert de Lompoul">
+                        <span class="experience-badge">Aventure</span>
                     </div>
-                    <div class="compact-transport-name">SUV Location</div>
-                    <div class="compact-transport-price">65€/jour</div>
-                    <div class="compact-transport-desc">4x4 pour routes sénégalaises</div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Nuit au désert Lompoul</h3>
+                        <p class="experience-description">Aventure inoubliable dans les dunes du désert sénégalais.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>2 jours</span>
+                            </div>
+                            <div class="experience-price">95€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (112 avis)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Restaurants Section -->
+    <section class="restaurants-section">
+        <div class="restaurants-header">
+            <h2 class="restaurants-title">Restaurants</h2>
+            <p class="restaurants-subtitle">
+                Dégustez les meilleures saveurs de la cuisine sénégalaise et internationale.
+            </p>
+        </div>
+        
+        <div class="restaurants-tabs">
+            <button class="restaurant-tab active" onclick="filterRestaurants('all')">Tous</button>
+            <button class="restaurant-tab" onclick="filterRestaurants('senegalese')">Sénégalais</button>
+            <button class="restaurant-tab" onclick="filterRestaurants('international')">International</button>
+            <button class="restaurant-tab" onclick="filterRestaurants('seafood')">Fruits de mer</button>
+        </div>
+        
+        <div class="restaurants-container">
+            <button class="restaurant-scroll-button prev" onclick="scrollRestaurants('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="restaurant-scroll-button next" onclick="scrollRestaurants('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="restaurants-grid">
+                <!-- Restaurant La Terrasse -->
+                <div class="restaurant-card" data-category="senegalese">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Restaurant La Terrasse">
+                        <span class="restaurant-badge">Traditionnel</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">La Terrasse</h3>
+                        <p class="restaurant-description">Spécialités sénégalaises authentiques avec vue sur l'océan.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-utensils"></i>
+                                <span>Sénégalais</span>
+                            </div>
+                            <div class="restaurant-price">€€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (312 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Le Ngor -->
+                <div class="restaurant-card" data-category="seafood international">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Le Ngor">
+                        <span class="restaurant-badge">Fruits de mer</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">Le Ngor</h3>
+                        <p class="restaurant-description">Fruits de mer frais et cuisine méditerranéenne en bord de mer.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-fish"></i>
+                                <span>Fruits de mer</span>
+                            </div>
+                            <div class="restaurant-price">€€€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (198 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chez Lamine -->
+                <div class="restaurant-card" data-category="senegalese">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Chez Lamine">
+                        <span class="restaurant-badge">Populaire</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">Chez Lamine</h3>
+                        <p class="restaurant-description">Thieboudienne et yassa faits maison dans une ambiance chaleureuse.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-utensils"></i>
+                                <span>Sénégalais</span>
+                            </div>
+                            <div class="restaurant-price">€€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6 (267 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Le Bougainville -->
+                <div class="restaurant-card" data-category="international">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Le Bougainville">
+                        <span class="restaurant-badge">Gastronomique</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">Le Bougainville</h3>
+                        <p class="restaurant-description">Cuisine française raffinée avec produits locaux et vins sélectionnés.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-wine-glass"></i>
+                                <span>Français</span>
+                            </div>
+                            <div class="restaurant-price">€€€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (145 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Le Phare -->
+                <div class="restaurant-card" data-category="seafood senegalese">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Le Phare">
+                        <span class="restaurant-badge">Vue mer</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">Le Phare</h3>
+                        <p class="restaurant-description">Spécialités côtières et cocktails face au coucher de soleil.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-cocktail"></i>
+                                <span>Mixte</span>
+                            </div>
+                            <div class="restaurant-price">€€€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (189 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Le Petit Dakar -->
+                <div class="restaurant-card" data-category="senegalese">
+                    <div class="restaurant-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Le Petit Dakar">
+                        <span class="restaurant-badge">Authentique</span>
+                    </div>
+                    <div class="restaurant-content">
+                        <h3 class="restaurant-title">Le Petit Dakar</h3>
+                        <p class="restaurant-description">Street food sénégalais gourmet dans un cadre moderne et branché.</p>
+                        <div class="restaurant-meta">
+                            <div class="restaurant-cuisine">
+                                <i class="fas fa-utensils"></i>
+                                <span>Street food</span>
+                            </div>
+                            <div class="restaurant-price">€</div>
+                        </div>
+                        <div class="restaurant-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.5 (234 avis)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
