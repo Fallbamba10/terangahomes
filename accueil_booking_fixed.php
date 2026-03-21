@@ -1158,25 +1158,25 @@ try {
         
         /* Explore Senegal Section - Booking.com Style */
         .explore-senegal-section {
-            padding: 60px 0;
+            padding: 40px 0;
             background: white;
         }
         
         .explore-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding: 0 32px;
         }
         
         .explore-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--booking-dark);
         }
         
         .explore-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--booking-gray);
             max-width: 600px;
             margin: 0 auto;
@@ -1187,13 +1187,13 @@ try {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             padding: 0 32px;
             flex-wrap: wrap;
         }
         
         .explore-tab {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: white;
             border: 1px solid var(--booking-border);
             border-radius: 20px;
@@ -1202,7 +1202,7 @@ try {
             cursor: pointer;
             transition: all 0.2s ease;
             white-space: nowrap;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         
         .explore-tab:hover {
@@ -1257,7 +1257,7 @@ try {
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            height: 200px;
+            height: 180px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -1281,36 +1281,36 @@ try {
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            padding: 16px 12px 12px;
+            padding: 12px 10px 10px;
         }
         
         .senegal-destination-name {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         
         .senegal-destination-description {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             opacity: 0.9;
             line-height: 1.3;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .senegal-destination-stats {
             display: flex;
-            gap: 12px;
-            font-size: 0.75rem;
+            gap: 10px;
+            font-size: 0.7rem;
         }
         
         .destination-stat {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
         }
         
         .destination-stat i {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             opacity: 0.8;
         }
         
@@ -1322,8 +1322,8 @@ try {
             background: white;
             border: 1px solid var(--booking-border);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1349,7 +1349,7 @@ try {
         
         /* Popular Cities Scrollable */
         .popular-cities-section {
-            padding: 40px 0;
+            padding: 30px 0;
             background: var(--booking-light-gray);
         }
         
@@ -1385,10 +1385,10 @@ try {
         }
         
         .city-card {
-            flex: 0 0 160px;
+            flex: 0 0 140px;
             background: white;
             border-radius: 8px;
-            padding: 16px 12px;
+            padding: 12px 8px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -1402,26 +1402,26 @@ try {
         }
         
         .city-icon {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--booking-blue);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .city-name {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: var(--booking-dark);
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         
         .city-count {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--booking-gray);
         }
         
         /* Properties Section */
         .properties-section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
         
         .properties-grid {
@@ -1586,7 +1586,7 @@ try {
         
         /* Features Section */
         .features-section {
-            padding: 60px 0;
+            padding: 40px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
@@ -1604,7 +1604,7 @@ try {
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 16px;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
@@ -1614,7 +1614,7 @@ try {
         
         .feature-item {
             text-align: center;
-            padding: 24px 16px;
+            padding: 20px 12px;
             background: white;
             border-radius: 12px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -1641,8 +1641,8 @@ try {
         }
         
         .feature-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
         
         .feature-item:hover::before {
@@ -1650,9 +1650,9 @@ try {
         }
         
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--booking-blue);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
             background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
             -webkit-background-clip: text;
@@ -1666,18 +1666,18 @@ try {
         }
         
         .feature-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--booking-dark);
             line-height: 1.3;
         }
         
         .feature-description {
             color: var(--booking-gray);
-            line-height: 1.5;
-            font-size: 0.9rem;
-            max-width: 240px;
+            line-height: 1.4;
+            font-size: 0.85rem;
+            max-width: 220px;
             margin: 0 auto;
             flex-grow: 1;
         }
@@ -1686,11 +1686,11 @@ try {
             display: inline-block;
             background: var(--booking-orange);
             color: var(--booking-dark);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.6rem;
             font-weight: 600;
-            margin-top: 12px;
+            margin-top: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             align-self: center;
@@ -1698,10 +1698,10 @@ try {
         
         /* Feature numbers */
         .feature-number {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--booking-blue);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: block;
         }
         
@@ -1709,31 +1709,31 @@ try {
         @media (max-width: 1024px) {
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
+                gap: 20px;
             }
         }
         
         @media (max-width: 768px) {
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 16px;
                 padding: 0 20px;
             }
             
             .feature-item {
-                padding: 30px 20px;
+                padding: 24px 16px;
             }
             
             .feature-icon {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
             
             .feature-title {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
             
-            .feature-number {
-                font-size: 2rem;
+            .feature-description {
+                font-size: 0.9rem;
             }
         }
         .features-alternative {
