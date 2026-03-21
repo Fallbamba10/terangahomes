@@ -1158,50 +1158,51 @@ try {
         
         /* Explore Senegal Section - Booking.com Style */
         .explore-senegal-section {
-            padding: 80px 0;
+            padding: 60px 0;
             background: white;
         }
         
         .explore-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             padding: 0 32px;
         }
         
         .explore-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--booking-dark);
         }
         
         .explore-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--booking-gray);
             max-width: 600px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.5;
         }
         
         .explore-tabs {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             padding: 0 32px;
             flex-wrap: wrap;
         }
         
         .explore-tab {
-            padding: 12px 24px;
+            padding: 10px 20px;
             background: white;
             border: 1px solid var(--booking-border);
-            border-radius: 24px;
+            border-radius: 20px;
             color: var(--booking-gray);
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s ease;
             white-space: nowrap;
+            font-size: 0.9rem;
         }
         
         .explore-tab:hover {
@@ -1215,28 +1216,56 @@ try {
             color: white;
         }
         
-        .senegal-destinations {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
+        /* Destinations Scrollable Container */
+        .senegal-destinations-container {
+            position: relative;
+            overflow: hidden;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
         }
         
+        .senegal-destinations {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .senegal-destinations::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .senegal-destinations::-webkit-scrollbar-track {
+            background: var(--booking-light-gray);
+            border-radius: 3px;
+        }
+        
+        .senegal-destinations::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 3px;
+        }
+        
+        .senegal-destinations::-webkit-scrollbar-thumb:hover {
+            background: var(--booking-light-blue);
+        }
+        
         .senegal-destination-card {
+            flex: 0 0 280px;
             position: relative;
             border-radius: 12px;
             overflow: hidden;
-            height: 320px;
+            height: 200px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .senegal-destination-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         }
         
         .senegal-destination-image {
@@ -1252,58 +1281,114 @@ try {
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.8));
             color: white;
-            padding: 24px 20px 20px;
+            padding: 16px 12px 12px;
         }
         
         .senegal-destination-name {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         
         .senegal-destination-description {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.9;
-            line-height: 1.4;
-            margin-bottom: 12px;
+            line-height: 1.3;
+            margin-bottom: 8px;
         }
         
         .senegal-destination-stats {
             display: flex;
-            gap: 16px;
-            font-size: 0.85rem;
+            gap: 12px;
+            font-size: 0.75rem;
         }
         
         .destination-stat {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         
         .destination-stat i {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             opacity: 0.8;
         }
         
-        /* Popular Cities Grid */
+        /* Scroll buttons */
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .scroll-button:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+            box-shadow: 0 4px 12px rgba(0,53,128,0.15);
+        }
+        
+        .scroll-button.prev {
+            left: 12px;
+        }
+        
+        .scroll-button.next {
+            right: 12px;
+        }
+        
+        /* Popular Cities Scrollable */
         .popular-cities-section {
-            padding: 60px 0;
+            padding: 40px 0;
             background: var(--booking-light-gray);
         }
         
-        .cities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+        .cities-container {
+            position: relative;
+            overflow: hidden;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
         }
         
+        .cities-grid {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .cities-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .cities-grid::-webkit-scrollbar-track {
+            background: white;
+            border-radius: 3px;
+        }
+        
+        .cities-grid::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 3px;
+        }
+        
         .city-card {
+            flex: 0 0 160px;
             background: white;
             border-radius: 8px;
-            padding: 20px;
+            padding: 16px 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -1317,20 +1402,20 @@ try {
         }
         
         .city-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: var(--booking-blue);
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
         
         .city-name {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--booking-dark);
             margin-bottom: 4px;
         }
         
         .city-count {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--booking-gray);
         }
         
@@ -2061,175 +2146,183 @@ try {
         <div class="explore-header">
             <h2 class="explore-title">Explorez le Sénégal</h2>
             <p class="explore-subtitle">
-                Découvrez les destinations les plus populaires du Sénégal, des plages paradisiaques aux villes historiques, 
-                en passant par les parcs nationaux et les sites culturels uniques.
+                Découvrez les destinations les plus populaires du Sénégal pour votre prochain séjour.
             </p>
         </div>
         
         <div class="explore-tabs">
-            <button class="explore-tab active" onclick="filterDestinations('all')">Toutes les destinations</button>
+            <button class="explore-tab active" onclick="filterDestinations('all')">Toutes</button>
             <button class="explore-tab" onclick="filterDestinations('beaches')">Plages</button>
             <button class="explore-tab" onclick="filterDestinations('cities')">Villes</button>
             <button class="explore-tab" onclick="filterDestinations('parks')">Parcs</button>
             <button class="explore-tab" onclick="filterDestinations('culture')">Culture</button>
         </div>
         
-        <div class="senegal-destinations">
-            <!-- Dakar -->
-            <div class="senegal-destination-card" data-category="cities">
-                <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Dakar" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Dakar</h3>
-                    <p class="senegal-destination-description">Capitale vibrante, mélange moderne et traditionnel</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>1,234 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.8 (892 avis)</span>
+        <div class="senegal-destinations-container">
+            <button class="scroll-button prev" onclick="scrollDestinations('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="scroll-button next" onclick="scrollDestinations('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="senegal-destinations">
+                <!-- Dakar -->
+                <div class="senegal-destination-card" data-category="cities">
+                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Dakar" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Dakar</h3>
+                        <p class="senegal-destination-description">Capitale vibrante</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>1,234</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Saly -->
-            <div class="senegal-destination-card" data-category="beaches">
-                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Saly" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Saly</h3>
-                    <p class="senegal-destination-description">Station balnéaire prisée, plages de rêve</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>856 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.7 (623 avis)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Saint-Louis -->
-            <div class="senegal-destination-card" data-category="cities culture">
-                <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Saint-Louis" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Saint-Louis</h3>
-                    <p class="senegal-destination-description">Ville historique, patrimoine UNESCO</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>423 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (412 avis)</span>
+                
+                <!-- Saly -->
+                <div class="senegal-destination-card" data-category="beaches">
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Saly" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Saly</h3>
+                        <p class="senegal-destination-description">Plages de rêve</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>856</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Lac Rose -->
-            <div class="senegal-destination-card" data-category="parks nature">
-                <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Lac Rose" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Lac Rose</h3>
-                    <p class="senegal-destination-description">Merveille naturelle aux eaux rosées</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>234 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.6 (289 avis)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Cap Skirring -->
-            <div class="senegal-destination-card" data-category="beaches">
-                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Cap Skirring" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Cap Skirring</h3>
-                    <p class="senegal-destination-description">Paradis tropical, plages idylliques</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>189 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.8 (167 avis)</span>
+                
+                <!-- Saint-Louis -->
+                <div class="senegal-destination-card" data-category="cities culture">
+                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Saint-Louis" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Saint-Louis</h3>
+                        <p class="senegal-destination-description">Ville historique</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>423</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Parc National du Djoudj -->
-            <div class="senegal-destination-card" data-category="parks nature">
-                <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Parc Djoudj" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Parc Djoudj</h3>
-                    <p class="senegal-destination-description">Sanctuaire d'oiseaux, nature préservée</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>67 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (94 avis)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Île de Gorée -->
-            <div class="senegal-destination-card" data-category="culture history">
-                <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Île de Gorée" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Île de Gorée</h3>
-                    <p class="senegal-destination-description">Site mémoire de l'esclavage, histoire poignante</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>45 propriétés</span>
-                        </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.7 (156 avis)</span>
+                
+                <!-- Lac Rose -->
+                <div class="senegal-destination-card" data-category="parks nature">
+                    <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Lac Rose" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Lac Rose</h3>
+                        <p class="senegal-destination-description">Eaux rosées</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>234</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Tambacounda -->
-            <div class="senegal-destination-card" data-category="cities">
-                <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                     alt="Tambacounda" class="senegal-destination-image">
-                <div class="senegal-destination-overlay">
-                    <h3 class="senegal-destination-name">Tambacounda</h3>
-                    <p class="senegal-destination-description">Carrefour commercial, cœur du Sénégal</p>
-                    <div class="senegal-destination-stats">
-                        <div class="destination-stat">
-                            <i class="fas fa-home"></i>
-                            <span>128 propriétés</span>
+                
+                <!-- Cap Skirring -->
+                <div class="senegal-destination-card" data-category="beaches">
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Cap Skirring" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Cap Skirring</h3>
+                        <p class="senegal-destination-description">Paradis tropical</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>189</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
                         </div>
-                        <div class="destination-stat">
-                            <i class="fas fa-star"></i>
-                            <span>4.5 (78 avis)</span>
+                    </div>
+                </div>
+                
+                <!-- Parc Djoudj -->
+                <div class="senegal-destination-card" data-category="parks nature">
+                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Parc Djoudj" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Parc Djoudj</h3>
+                        <p class="senegal-destination-description">Sanctuaire d'oiseaux</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>67</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Île de Gorée -->
+                <div class="senegal-destination-card" data-category="culture history">
+                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Île de Gorée" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Île de Gorée</h3>
+                        <p class="senegal-destination-description">Site mémoire</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>45</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tambacounda -->
+                <div class="senegal-destination-card" data-category="cities">
+                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Tambacounda" class="senegal-destination-image">
+                    <div class="senegal-destination-overlay">
+                        <h3 class="senegal-destination-name">Tambacounda</h3>
+                        <p class="senegal-destination-description">Cœur du Sénégal</p>
+                        <div class="senegal-destination-stats">
+                            <div class="destination-stat">
+                                <i class="fas fa-home"></i>
+                                <span>128</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-star"></i>
+                                <span>4.5</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2242,69 +2335,83 @@ try {
         <div class="explore-header">
             <h2 class="explore-title">Villes populaires</h2>
             <p class="explore-subtitle">
-                Explorez les villes les plus recherchées du Sénégal pour votre prochain séjour.
+                Explorez les villes les plus recherchées du Sénégal.
             </p>
         </div>
         
-        <div class="cities-grid">
-            <div class="city-card" onclick="searchCity('Dakar')">
-                <div class="city-icon">🏙️</div>
-                <div class="city-name">Dakar</div>
-                <div class="city-count">1,234 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Thiès')">
-                <div class="city-icon">🏘️</div>
-                <div class="city-name">Thiès</div>
-                <div class="city-count">456 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Kaolack')">
-                <div class="city-icon">🌴</div>
-                <div class="city-name">Kaolack</div>
-                <div class="city-count">312 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Saint-Louis')">
-                <div class="city-icon">🏛️</div>
-                <div class="city-name">Saint-Louis</div>
-                <div class="city-count">423 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Ziguinchor')">
-                <div class="city-icon">🌊</div>
-                <div class="city-name">Ziguinchor</div>
-                <div class="city-count">287 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Kédougou')">
-                <div class="city-icon">🏔️</div>
-                <div class="city-name">Kédougou</div>
-                <div class="city-count">89 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Sédhiou')">
-                <div class="city-icon">🏖️</div>
-                <div class="city-name">Sédhiou</div>
-                <div class="city-count">156 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Kolda')">
-                <div class="city-icon">🌴</div>
-                <div class="city-name">Kolda</div>
-                <div class="city-count">134 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Linguère')">
-                <div class="city-icon">🏜️</div>
-                <div class="city-name">Linguère</div>
-                <div class="city-count">67 propriétés</div>
-            </div>
-            
-            <div class="city-card" onclick="searchCity('Matam')">
-                <div class="city-icon">🏞️</div>
-                <div class="city-name">Matam</div>
-                <div class="city-count">98 propriétés</div>
+        <div class="cities-container">
+            <div class="cities-grid">
+                <div class="city-card" onclick="searchCity('Dakar')">
+                    <div class="city-icon">🏙️</div>
+                    <div class="city-name">Dakar</div>
+                    <div class="city-count">1,234 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Thiès')">
+                    <div class="city-icon">🏘️</div>
+                    <div class="city-name">Thiès</div>
+                    <div class="city-count">456 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Kaolack')">
+                    <div class="city-icon">🌴</div>
+                    <div class="city-name">Kaolack</div>
+                    <div class="city-count">312 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Saint-Louis')">
+                    <div class="city-icon">🏛️</div>
+                    <div class="city-name">Saint-Louis</div>
+                    <div class="city-count">423 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Ziguinchor')">
+                    <div class="city-icon">🌊</div>
+                    <div class="city-name">Ziguinchor</div>
+                    <div class="city-count">287 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Kédougou')">
+                    <div class="city-icon">🏔️</div>
+                    <div class="city-name">Kédougou</div>
+                    <div class="city-count">89 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Sédhiou')">
+                    <div class="city-icon">🏖️</div>
+                    <div class="city-name">Sédhiou</div>
+                    <div class="city-count">156 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Kolda')">
+                    <div class="city-icon">🌴</div>
+                    <div class="city-name">Kolda</div>
+                    <div class="city-count">134 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Linguère')">
+                    <div class="city-icon">🏜️</div>
+                    <div class="city-name">Linguère</div>
+                    <div class="city-count">67 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Matam')">
+                    <div class="city-icon">🏞️</div>
+                    <div class="city-name">Matam</div>
+                    <div class="city-count">98 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Fatick')">
+                    <div class="city-icon">🏘️</div>
+                    <div class="city-name">Fatick</div>
+                    <div class="city-count">45 propriétés</div>
+                </div>
+                
+                <div class="city-card" onclick="searchCity('Kaffrine')">
+                    <div class="city-icon">🌾</div>
+                    <div class="city-name">Kaffrine</div>
+                    <div class="city-count">38 propriétés</div>
+                </div>
             </div>
         </div>
     </section>
@@ -2956,6 +3063,18 @@ try {
                 }
             }
         });
+    }
+    
+    // Scroll destinations
+    function scrollDestinations(direction) {
+        const container = document.querySelector('.senegal-destinations');
+        const scrollAmount = 300; // Width of one card + gap
+        
+        if (direction === 'prev') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
     }
     
     // Recherche par ville
