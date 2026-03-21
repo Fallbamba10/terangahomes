@@ -1327,7 +1327,7 @@ try {
         
         /* Features Section */
         .features-section {
-            padding: 100px 0;
+            padding: 60px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
@@ -1345,7 +1345,7 @@ try {
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 20px;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
@@ -1355,10 +1355,10 @@ try {
         
         .feature-item {
             text-align: center;
-            padding: 40px 20px;
+            padding: 24px 16px;
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -1374,26 +1374,26 @@ try {
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
+            width: 40px;
+            height: 3px;
             background: var(--booking-blue);
             border-radius: 2px;
             transition: width 0.3s ease;
         }
         
         .feature-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
         
         .feature-item:hover::before {
-            width: 120px;
+            width: 80px;
         }
         
         .feature-icon {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             color: var(--booking-blue);
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             transition: all 0.3s ease;
             background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
             -webkit-background-clip: text;
@@ -1402,23 +1402,23 @@ try {
         }
         
         .feature-item:hover .feature-icon {
-            transform: scale(1.1);
-            filter: drop-shadow(0 4px 8px rgba(0,53,128,0.3));
+            transform: scale(1.05);
+            filter: drop-shadow(0 2px 4px rgba(0,53,128,0.2));
         }
         
         .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
             color: var(--booking-dark);
             line-height: 1.3;
         }
         
         .feature-description {
             color: var(--booking-gray);
-            line-height: 1.6;
-            font-size: 1rem;
-            max-width: 280px;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            max-width: 240px;
             margin: 0 auto;
             flex-grow: 1;
         }
@@ -1427,11 +1427,11 @@ try {
             display: inline-block;
             background: var(--booking-orange);
             color: var(--booking-dark);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
             font-weight: 600;
-            margin-top: 16px;
+            margin-top: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             align-self: center;
@@ -1439,10 +1439,10 @@ try {
         
         /* Feature numbers */
         .feature-number {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 1.8rem;
+            font-weight: 700;
             color: var(--booking-blue);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
         }
         
@@ -2024,7 +2024,7 @@ try {
                 </div>
                 <h3 class="feature-title"><?= $t['24_support'] ?></h3>
                 <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Notre équipe d\'experts est disponible 24h/24 et 7j/7 pour vous assister à chaque étape de votre réservation.' : 'Our expert team is available 24/7 to assist you at every step of your booking.' ?>
+                    <?= $lang === 'fr' ? 'Équipe d\'experts disponible 24/7 pour vous assister.' : 'Expert team available 24/7 to assist you.' ?>
                 </p>
                 <div class="feature-badge"><?= $lang === 'fr' ? 'RAPIDE' : 'FAST' ?></div>
             </div>
@@ -2036,7 +2036,7 @@ try {
                 </div>
                 <h3 class="feature-title"><?= $t['secure_payment'] ?></h3>
                 <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Paiements 100% sécurisés avec cryptage SSL et protection contre la fraude garantissant vos transactions.' : '100% secure payments with SSL encryption and fraud protection guaranteeing your transactions.' ?>
+                    <?= $lang === 'fr' ? 'Paiements 100% sécurisés avec cryptage SSL.' : '100% secure payments with SSL encryption.' ?>
                 </p>
                 <div class="feature-badge"><?= $lang === 'fr' ? 'SÉCURISÉ' : 'SECURE' ?></div>
             </div>
@@ -2048,7 +2048,7 @@ try {
                 </div>
                 <h3 class="feature-title"><?= $t['instant_booking'] ?></h3>
                 <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Réservez instantanément sans attente. Confirmation immédiate et accès direct à votre hébergement.' : 'Book instantly without waiting. Immediate confirmation and direct access to your accommodation.' ?>
+                    <?= $lang === 'fr' ? 'Réservez instantanément sans attente.' : 'Book instantly without waiting.' ?>
                 </p>
                 <div class="feature-badge"><?= $lang === 'fr' ? 'INSTANTANÉ' : 'INSTANT' ?></div>
             </div>
@@ -2060,7 +2060,7 @@ try {
                 </div>
                 <h3 class="feature-title"><?= $t['best_prices'] ?></h3>
                 <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Tarifs compétitifs et transparents. Pas de frais cachés, garantissant le meilleur rapport qualité-prix.' : 'Competitive and transparent prices. No hidden fees, guaranteeing the best value for money.' ?>
+                    <?= $lang === 'fr' ? 'Tarifs compétitifs et transparents.' : 'Competitive and transparent prices.' ?>
                 </p>
                 <div class="feature-badge"><?= $lang === 'fr' ? 'AVANTAGEUX' : 'VALUE' ?></div>
             </div>
