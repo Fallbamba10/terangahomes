@@ -1,5 +1,5 @@
 <?php
-// Page d'accueil inspirée de Booking.com - Version Internationale
+// Page d'accueil Booking International - Version corrigée
 
 session_start();
 
@@ -22,6 +22,26 @@ if (isset($_SESSION['lang']) && in_array($_SESSION['lang'], $supported_langs)) {
     $_SESSION['lang'] = $lang;
 }
 
+// Détecter la devise
+$default_currency = 'XOF';
+$supported_currencies = ['XOF', 'EUR', 'USD', 'GBP', 'CAD', 'AUD', 'JPY', 'CNY'];
+
+if (isset($_SESSION['currency']) && in_array($_SESSION['currency'], $supported_currencies)) {
+    $currency = $_SESSION['currency'];
+} else {
+    // Détecter depuis le pays de l'utilisateur
+    $user_country = $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'SN'; // Cloudflare ou défaut Sénégal
+    $currency = match($user_country) {
+        'FR', 'DE', 'IT', 'ES', 'BE' => 'EUR',
+        'US', 'CA', 'AU' => 'USD',
+        'GB' => 'GBP',
+        'JP' => 'JPY',
+        'CN' => 'CNY',
+        default => 'XOF'
+    };
+    $_SESSION['currency'] = $currency;
+}
+
 // Traitement du changement de langue/devise
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['lang'])) {
@@ -41,28 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Rediriger pour éviter la repost du formulaire
-    header('Location: accueil_booking_international.php');
+    header('Location: accueil_booking_fixed.php');
     exit;
-}
-
-// Détecter la devise
-$default_currency = 'XOF';
-$supported_currencies = ['XOF', 'EUR', 'USD', 'GBP', 'CAD', 'AUD', 'JPY', 'CNY'];
-
-if (isset($_SESSION['currency']) && in_array($_SESSION['currency'], $supported_currencies)) {
-    $currency = $_SESSION['currency'];
-} else {
-    // Détecter depuis le pays de l'utilisateur
-    $user_country = $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'SN'; // Cloudflare ou défaut Sénégal
-    $currency = match($user_country) {
-        'FR', 'DE', 'IT', 'ES', 'BE' => 'EUR',
-        'US', 'CA', 'AU' => 'USD',
-        'GB' => 'GBP',
-        'JP' => 'JPY',
-        'CN' => 'CNY',
-        default => 'XOF'
-    };
-    $_SESSION['currency'] = $currency;
 }
 
 // Traductions
@@ -960,7 +960,7 @@ try {
     <header class="booking-header">
         <div class="header-container">
             <div class="header-main">
-                <a href="accueil_booking_international.php" class="logo-booking">
+                <a href="accueil_booking_fixed.php" class="logo-booking">
                     <i class="fas fa-home"></i>
                     TerangaHomes
                 </a>
