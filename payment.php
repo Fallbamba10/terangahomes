@@ -819,19 +819,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="mobile-form">
                     <div class="mobile-options">
                         <div class="mobile-option" onclick="selectMobile('orange')">
-                            <div class="mobile-icon" style="color: #ff6600;">
+                            <div class="mobile-icon" style="color: #ff6600; font-size: 3rem; margin-bottom: 12px;">
                                 <i class="fas fa-mobile-alt"></i>
                             </div>
-                            <div class="mobile-name"><?= $t['orange_money'] ?></div>
-                            <div class="mobile-number">#144#</div>
+                            <div class="mobile-name" style="font-size: 1.1rem; font-weight: 600; color: var(--booking-dark);"><?= $t['orange_money'] ?></div>
+                            <div class="mobile-number" style="font-size: 0.9rem; color: #ff6600; font-weight: 600;">#144#</div>
                         </div>
                         
                         <div class="mobile-option" onclick="selectMobile('wave')">
-                            <div class="mobile-icon" style="color: #00d4aa;">
-                                <i class="fas fa-wave-square"></i>
+                            <div class="mobile-icon" style="color: #00d4aa; font-size: 3rem; margin-bottom: 12px;">
+                                <i class="fas fa-water"></i>
                             </div>
-                            <div class="mobile-name"><?= $t['wave_money'] ?></div>
-                            <div class="mobile-number">#301#</div>
+                            <div class="mobile-name" style="font-size: 1.1rem; font-weight: 600; color: var(--booking-dark);"><?= $t['wave_money'] ?></div>
+                            <div class="mobile-number" style="font-size: 0.9rem; color: #00d4aa; font-weight: 600;">#301#</div>
                         </div>
                     </div>
                     
@@ -916,6 +916,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Add selected class to clicked option
             event.target.closest('.mobile-option').classList.add('selected');
+            
+            // Set the payment method in the hidden form
+            document.querySelector('input[name="payment_method"]').value = 'mobile_' + provider;
         }
         
         // Format card number
