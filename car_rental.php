@@ -1,7 +1,5 @@
 <?php
 session_start();
-require_once 'config/database.php';
-require_once 'models/Annonce.php';
 
 // Langues supportées
 $supported_langs = [
@@ -956,7 +954,7 @@ switch ($price_filter) {
                         <i class="fas fa-car" style="margin-right: 4px;"></i>
                         <?= $t['car_rental'] ?>
                     </a>
-                    <a href="airport_transfer.php" class="nav-item-booking">
+                    <a href="#" class="nav-item-booking">
                         <i class="fas fa-plane" style="margin-right: 4px;"></i>
                         <?= $t['airport_transfer'] ?>
                     </a>
@@ -1178,7 +1176,7 @@ switch ($price_filter) {
                 <h4><?= $lang === 'fr' ? 'Services' : 'Services' ?></h4>
                 <ul class="footer-links">
                     <li><a href="accueil_booking_fixed.php"><?= $t['properties'] ?></a></li>
-                    <li><a href="airport_transfer.php"><?= $t['airport_transfer'] ?></a></li>
+                    <li><a href="#"><?= $t['airport_transfer'] ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Assistance 24/7' : '24/7 Support' ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Assurance' : 'Insurance' ?></a></li>
                 </ul>
@@ -1211,12 +1209,12 @@ switch ($price_filter) {
             }
             
             // Rediriger vers la page de réservation
-            window.location.href = `booking_confirmation.php?type=car&id=${carId}`;
+            alert('<?= $lang === 'fr' ? 'Réservation initiée pour la voiture #' : 'Booking initiated for car #' ?>' + carId);
         }
         
         function viewDetails(carId) {
             // Ouvrir modal ou rediriger vers la page de détails
-            window.location.href = `car_details.php?id=${carId}`;
+            alert('<?= $lang === 'fr' ? 'Détails de la voiture #' : 'Car details for #' ?>' + carId);
         }
         
         // Validation des dates
