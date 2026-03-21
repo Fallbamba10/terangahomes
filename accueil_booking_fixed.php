@@ -1344,12 +1344,13 @@ try {
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
             text-align: center;
+            align-items: stretch;
         }
         
         .feature-item {
@@ -1361,6 +1362,10 @@ try {
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
         }
         
         .feature-item::before {
@@ -1415,6 +1420,7 @@ try {
             font-size: 1rem;
             max-width: 280px;
             margin: 0 auto;
+            flex-grow: 1;
         }
         
         .feature-badge {
@@ -1428,6 +1434,7 @@ try {
             margin-top: 16px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            align-self: center;
         }
         
         /* Feature numbers */
@@ -1439,7 +1446,37 @@ try {
             display: block;
         }
         
-        /* Alternative layout for features */
+        /* Responsive features */
+        @media (max-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+            
+            .feature-item {
+                padding: 30px 20px;
+            }
+            
+            .feature-icon {
+                font-size: 3rem;
+            }
+            
+            .feature-title {
+                font-size: 1.3rem;
+            }
+            
+            .feature-number {
+                font-size: 2rem;
+            }
+        }
         .features-alternative {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
