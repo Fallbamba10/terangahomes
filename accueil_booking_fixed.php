@@ -1353,7 +1353,7 @@ try {
         
         /* Popular Cities Scrollable */
         .popular-cities-section {
-            padding: 30px 0;
+            padding: 15px 0;
             background: var(--booking-light-gray);
         }
         
@@ -1658,12 +1658,12 @@ try {
             }
         }
         .properties-section {
-            padding: 60px 0;
+            padding: 30px 0;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             padding: 0 32px;
         }
         
@@ -1836,14 +1836,14 @@ try {
         
         /* Features Section */
         .features-section {
-            padding: 40px 0;
+            padding: 20px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
         
         .features-section .section-header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 16px;
             padding: 0 32px;
         }
         
