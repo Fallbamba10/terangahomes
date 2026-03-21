@@ -1419,7 +1419,240 @@ try {
             color: var(--booking-gray);
         }
         
-        /* Properties Section */
+        /* Experiences Section */
+        .experiences-section {
+            padding: 40px 0;
+            background: white;
+        }
+        
+        .experiences-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 0 32px;
+        }
+        
+        .experiences-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--booking-dark);
+        }
+        
+        .experiences-subtitle {
+            font-size: 1rem;
+            color: var(--booking-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .experiences-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            padding: 0 32px;
+            flex-wrap: wrap;
+        }
+        
+        .experience-tab {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 20px;
+            color: var(--booking-gray);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+        
+        .experience-tab:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+        }
+        
+        .experience-tab.active {
+            background: var(--booking-blue);
+            border-color: var(--booking-blue);
+            color: white;
+        }
+        
+        /* Experiences Scrollable Container */
+        .experiences-container {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 0 32px;
+            max-width: 1180px;
+        }
+        
+        .experiences-grid {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .experiences-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .experiences-grid::-webkit-scrollbar-track {
+            background: var(--booking-light-gray);
+            border-radius: 3px;
+        }
+        
+        .experiences-grid::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 3px;
+        }
+        
+        .experience-card {
+            flex: 0 0 280px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .experience-image {
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .experience-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: var(--booking-orange);
+            color: var(--booking-dark);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .experience-content {
+            padding: 16px;
+        }
+        
+        .experience-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--booking-dark);
+            line-height: 1.3;
+        }
+        
+        .experience-description {
+            font-size: 0.8rem;
+            color: var(--booking-gray);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .experience-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--booking-gray);
+        }
+        
+        .experience-duration {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .experience-duration i {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .experience-price {
+            font-weight: 600;
+            color: var(--booking-blue);
+        }
+        
+        .experience-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+        
+        .experience-rating i {
+            color: #ffc107;
+            font-size: 0.8rem;
+        }
+        
+        /* Experience scroll buttons */
+        .experience-scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: 1px solid var(--booking-border);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .experience-scroll-button:hover {
+            border-color: var(--booking-blue);
+            color: var(--booking-blue);
+            box-shadow: 0 4px 12px rgba(0,53,128,0.15);
+        }
+        
+        .experience-scroll-button.prev {
+            left: 12px;
+        }
+        
+        .experience-scroll-button.next {
+            right: 12px;
+        }
+        
+        /* Responsive experiences */
+        @media (max-width: 768px) {
+            .experiences-grid {
+                gap: 12px;
+            }
+            
+            .experience-card {
+                flex: 0 0 240px;
+            }
+            
+            .experience-content {
+                padding: 12px;
+            }
+        }
         .properties-section {
             padding: 60px 0;
         }
@@ -2450,6 +2683,227 @@ try {
         </div>
     </section>
 
+    <!-- Experiences Section -->
+    <section class="experiences-section">
+        <div class="experiences-header">
+            <h2 class="experiences-title">Expériences</h2>
+            <p class="experiences-subtitle">
+                Découvrez les meilleures activités et expériences authentiques du Sénégal.
+            </p>
+        </div>
+        
+        <div class="experiences-tabs">
+            <button class="experience-tab active" onclick="filterExperiences('all')">Toutes</button>
+            <button class="experience-tab" onclick="filterExperiences('tours')">Tours</button>
+            <button class="experience-tab" onclick="filterExperiences('culture')">Culture</button>
+            <button class="experience-tab" onclick="filterExperiences('nature')">Nature</button>
+            <button class="experience-tab" onclick="filterExperiences('adventure')">Aventure</button>
+        </div>
+        
+        <div class="experiences-container">
+            <button class="experience-scroll-button prev" onclick="scrollExperiences('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="experience-scroll-button next" onclick="scrollExperiences('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="experiences-grid">
+                <!-- Tour de Dakar -->
+                <div class="experience-card" data-category="tours culture">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Tour de Dakar">
+                        <span class="experience-badge">Populaire</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Tour complet de Dakar</h3>
+                        <p class="experience-description">Découvrez la capitale vibrante avec ses marchés, musées et monuments.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>4h</span>
+                            </div>
+                            <div class="experience-price">25€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (234 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Île de Gorée -->
+                <div class="experience-card" data-category="tours culture history">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Île de Gorée">
+                        <span class="experience-badge">UNESCO</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Journée à Gorée</h3>
+                        <p class="experience-description">Explorez l'histoire poignante de cette île classée au patrimoine mondial.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Journée</span>
+                            </div>
+                            <div class="experience-price">45€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (189 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lac Rose -->
+                <div class="experience-card" data-category="nature tours">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Lac Rose">
+                        <span class="experience-badge">Unique</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Aventure au Lac Rose</h3>
+                        <p class="experience-description">Découvrez le lac aux eaux roses et ses dunes environnantes.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Demi-journée</span>
+                            </div>
+                            <div class="experience-price">35€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (156 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Parc Djoudj -->
+                <div class="experience-card" data-category="nature wildlife">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Parc Djoudj">
+                        <span class="experience-badge">Nature</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Safari oiseaux Djoudj</h3>
+                        <p class="experience-description">Observez des milliers d'oiseaux migrateurs dans ce parc unique.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Journée</span>
+                            </div>
+                            <div class="experience-price">55€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (98 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saint-Louis -->
+                <div class="experience-card" data-category="culture tours history">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Saint-Louis">
+                        <span class="experience-badge">Historique</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Saint-Louis et ses trésors</h3>
+                        <p class="experience-description">Explorez la ville historique avec son architecture coloniale.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>2 jours</span>
+                            </div>
+                            <div class="experience-price">120€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.8 (145 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pêche artisanale -->
+                <div class="experience-card" data-category="culture adventure">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Pêche artisanale">
+                        <span class="experience-badge">Authentique</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Pêche traditionnelle</h3>
+                        <p class="experience-description">Vivez l'expérience de la pêche artisanale avec les locaux.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>Demi-journée</span>
+                            </div>
+                            <div class="experience-price">30€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.6 (87 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Marché Sandaga -->
+                <div class="experience-card" data-category="culture tours">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Marché Sandaga">
+                        <span class="experience-badge">Local</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Marchés de Dakar</h3>
+                        <p class="experience-description">Immergez-vous dans l'ambiance des marchés locaux colorés.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>3h</span>
+                            </div>
+                            <div class="experience-price">20€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.7 (203 avis)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Désert de Lompoul -->
+                <div class="experience-card" data-category="nature adventure">
+                    <div class="experience-image">
+                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Désert de Lompoul">
+                        <span class="experience-badge">Aventure</span>
+                    </div>
+                    <div class="experience-content">
+                        <h3 class="experience-title">Nuit au désert Lompoul</h3>
+                        <p class="experience-description">Aventure inoubliable dans les dunes du désert sénégalais.</p>
+                        <div class="experience-meta">
+                            <div class="experience-duration">
+                                <i class="fas fa-clock"></i>
+                                <span>2 jours</span>
+                            </div>
+                            <div class="experience-price">95€</div>
+                        </div>
+                        <div class="experience-rating">
+                            <i class="fas fa-star"></i>
+                            <span>4.9 (112 avis)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Properties Section -->
     <section class="properties-section">
         <div class="section-header">
@@ -3075,6 +3529,42 @@ try {
         });
     });
     
+    // Animation des expériences
+    function filterExperiences(category) {
+        const tabs = document.querySelectorAll('.experience-tab');
+        const cards = document.querySelectorAll('.experience-card');
+        
+        // Update active tab
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Filter cards
+        cards.forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+            } else {
+                const cardCategories = card.getAttribute('data-category');
+                if (cardCategories && cardCategories.includes(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            }
+        });
+    }
+    
+    // Scroll expériences
+    function scrollExperiences(direction) {
+        const container = document.querySelector('.experiences-grid');
+        const scrollAmount = 300; // Width of one card + gap
+        
+        if (direction === 'prev') {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+    
     // Animation des destinations
     function filterDestinations(category) {
         const tabs = document.querySelectorAll('.explore-tab');
@@ -3148,12 +3638,45 @@ try {
                 card.style.transform = 'scale(1)';
             }, 800 + (index * 50));
         });
+        
+        const experienceCards = document.querySelectorAll('.experience-card');
+        experienceCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 1200 + (index * 100));
+        });
     });
     
-    // Clean up intervals when page unloads
-    window.addEventListener('beforeunload', function() {
-        Object.keys(sliderIntervals).forEach(propertyId => {
-            stopSlider(propertyId);
+    function changeSlide(propertyId, direction) {
+        const slider = document.getElementById(`slider-${propertyId}`);
+        const slides = slider.querySelectorAll('.slide');
+        const currentActive = slider.querySelector('.slide.active');
+        const currentIndex = Array.from(slides).indexOf(currentActive);
+        
+        currentActive.classList.remove('active');
+        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        slides[prevIndex].classList.add('active');
+        
+        // Reset auto-play
+        stopSlider(propertyId);
+        startSlider(propertyId);
+    }
+    
+    // Initialize sliders when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const sliders = document.querySelectorAll('.property-slider');
+        sliders.forEach(slider => {
+            const propertyId = slider.dataset.propertyId;
+            startSlider(propertyId);
+            
+            // Pause on hover, resume on mouse leave
+            slider.addEventListener('mouseenter', () => stopSlider(propertyId));
+            slider.addEventListener('mouseleave', () => startSlider(propertyId));
         });
     });
     </script>
