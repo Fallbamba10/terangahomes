@@ -109,6 +109,11 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             border-bottom: 1px solid var(--seloger-border);
             padding: 15px 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
         
         .header-container {
@@ -158,7 +163,9 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 120px 20px 40px; /* Ajout de padding-top pour le header fixe */
+            min-height: 100vh;
+            position: relative;
         }
         
         .login-container {
@@ -171,6 +178,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             grid-template-columns: 1fr 1fr;
             overflow: hidden;
             min-height: 600px;
+            position: sticky;
+            top: 80px; /* Position sticky sous le header */
         }
         
         /* Left panel - Form */
@@ -556,6 +565,8 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             .login-container {
                 grid-template-columns: 1fr;
                 max-width: 500px;
+                position: relative; /* Retour à relative sur mobile */
+                top: auto;
             }
             
             .login-visual-panel {
@@ -564,6 +575,10 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             
             .login-form-panel {
                 padding: 40px 30px;
+            }
+            
+            .login-main {
+                padding: 120px 20px 40px; /* Maintien du padding pour header fixe */
             }
         }
         
@@ -587,6 +602,74 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             .social-login {
                 flex-direction: column;
             }
+            
+            .login-main {
+                padding: 120px 15px 40px; /* Padding réduit sur mobile */
+            }
+        }
+        
+        /* Contenu additionnel pour le défilement */
+        .scroll-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+        
+        .scroll-section {
+            margin-bottom: 60px;
+        }
+        
+        .scroll-section h2 {
+            color: var(--seloger-blue);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .scroll-section p {
+            color: var(--seloger-gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .features-grid-scroll {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: var(--seloger-light-blue);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--seloger-blue);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--seloger-gray);
+            line-height: 1.5;
         }
         
         /* Animations */
@@ -752,6 +835,83 @@ if (isset($_GET['logout']) && $_GET['logout'] == '1') {
             </div>
         </div>
     </main>
+    
+    <!-- Contenu additionnel pour le défilement -->
+    <section class="scroll-content">
+        <div class="scroll-section">
+            <h2><i class="fas fa-shield-alt me-3"></i>Pourquoi choisir TerangaHomes ?</h2>
+            <p>
+                TerangaHomes est la plateforme immobilière de référence au Sénégal, offrant des solutions innovantes 
+                pour les propriétaires et les locataires. Notre engagement est de fournir une expérience 
+                exceptionnelle avec des outils modernes et un support dédié.
+            </p>
+            
+            <div class="features-grid-scroll">
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Sécurité Maximale</h3>
+                    <p>Vos données et transactions sont protégées par un cryptage de pointe et une surveillance 24/7.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Rapidité Extrême</h3>
+                    <p>Publiez vos annonces en quelques clics et trouvez des locataires qualifiés rapidement.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Support 24/7</h3>
+                    <p>Notre équipe d'experts est disponible à tout moment pour vous assister dans vos démarches.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics Avancés</h3>
+                    <p>Suivez les performances de vos annonces avec des statistiques détaillées et des insights précieux.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-section">
+            <h2><i class="fas fa-users me-3"></i>Rejoignez notre communauté</h2>
+            <p>
+                Des milliers de propriétaires et locataires nous font déjà confiance pour leurs transactions 
+                immobilières au Sénégal. Rejoignez une communauté dynamique et bénéficiez d'un réseau 
+                professionnel pour optimiser vos investissements.
+            </p>
+            <p>
+                Que vous soyez propriétaire souhaitant louer votre bien, ou locataire à la recherche 
+                du logement idéal, TerangaHomes vous accompagne à chaque étape avec des outils 
+                adaptés et des conseils d'experts.
+            </p>
+        </div>
+        
+        <div class="scroll-section">
+            <h2><i class="fas fa-mobile-alt me-3"></i>Application Mobile</h2>
+            <p>
+                Gérez vos annonces partout et à tout moment avec notre application mobile disponible 
+                sur iOS et Android. Recevez des notifications en temps réel, communiquez directement 
+                avec les locataires, et accédez à toutes les fonctionnalités de la plateforme.
+            </p>
+            <p>
+                L'application TerangaHomes offre une expérience utilisateur optimisée pour les mobiles, 
+                avec une interface intuitive et des fonctionnalités exclusives pour une gestion 
+                simplifiée de vos biens immobiliers.
+            </p>
+        </div>
+        
+        <div class="scroll-section">
+            <h2><i class="fas fa-award me-3"></i>Garantie de Satisfaction</h2>
+            <p>
+                Nous garantissons une qualité de service exceptionnelle. Si vous n'êtes pas 
+                entièrement satisfait de notre plateforme, nous nous engageons à améliorer 
+                continuellement nos services pour répondre à vos attentes.
+            </p>
+            <p>
+                Notre programme de fidélité récompense nos membres les plus actifs avec des 
+                avantages exclusifs, des réductions sur nos services premium, et un accès 
+                prioritaire à nos nouvelles fonctionnalités.
+            </p>
+        </div>
+    </section>
     
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
