@@ -2264,8 +2264,8 @@ try {
                 </a>
                 
                 <nav class="nav-center">
-                    <a href="#" class="nav-item-booking active"><?= $t['properties'] ?></a>
-                    <a href="#" class="nav-item-booking">
+                    <a href="annonces_direct_fixed.php" class="nav-item-booking"><?= $t['properties'] ?></a>
+                    <a href="car_rental.php" class="nav-item-booking">
                         <i class="fas fa-car" style="margin-right: 4px;"></i>
                         <?= $t['car_rental'] ?>
                     </a>
