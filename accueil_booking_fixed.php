@@ -744,128 +744,158 @@ try {
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
         }
         
         .header-container {
-            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 64px;
+            padding: 0 32px;
         }
         
         .header-main {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 40px;
+            padding: 12px 0;
+            max-width: 1180px;
+            margin: 0 auto;
         }
         
         .logo-booking {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--booking-blue);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--booking-blue);
-            font-size: 1.4rem;
-            font-weight: 700;
-            white-space: nowrap;
+            transition: color 0.2s ease;
+        }
+        
+        .logo-booking:hover {
+            color: var(--booking-light-blue);
         }
         
         .logo-booking i {
-            font-size: 1.6rem;
+            margin-right: 8px;
+            font-size: 1.5rem;
         }
         
         .nav-center {
             display: flex;
+            gap: 24px;
             align-items: center;
-            gap: 32px;
         }
         
         .nav-item-booking {
+            color: var(--booking-dark);
             text-decoration: none;
-            color: var(--booking-gray);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 14px;
             padding: 8px 12px;
             border-radius: 8px;
             transition: all 0.2s ease;
-            white-space: nowrap;
+            position: relative;
         }
         
         .nav-item-booking:hover {
-            color: var(--booking-blue);
             background: var(--booking-light-gray);
+            color: var(--booking-blue);
         }
         
         .nav-item-booking.active {
-            color: var(--booking-blue);
-            background: var(--booking-light-gray);
+            background: var(--booking-light-blue);
+            color: white;
+        }
+        
+        .nav-item-booking.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 2px;
         }
         
         .header-right {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
         
         .language-currency-selector {
             display: flex;
+            gap: 8px;
             align-items: center;
-            gap: 12px;
+            padding: 0 8px;
+            border-right: 1px solid var(--booking-border);
         }
         
         .selector-dropdown {
-            padding: 6px 12px;
+            padding: 6px 10px;
             border: 1px solid var(--booking-border);
-            border-radius: 8px;
+            border-radius: 6px;
             background: white;
             color: var(--booking-dark);
-            font-size: 0.85rem;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
+            min-width: 80px;
         }
         
         .selector-dropdown:hover {
             border-color: var(--booking-blue);
+            box-shadow: 0 2px 4px rgba(0,53,128,0.1);
         }
         
-        .header-buttons {
+        .selector-dropdown:focus {
+            outline: none;
+            border-color: var(--booking-blue);
+            box-shadow: 0 0 0 2px rgba(0,53,128,0.1);
+        }
+        
+        .btn-booking {
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         
-        .header-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--booking-border);
-            border-radius: 8px;
+        .btn-outline-booking {
             background: white;
-            color: var(--booking-dark);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        
-        .header-btn:hover {
-            border-color: var(--booking-blue);
             color: var(--booking-blue);
+            border: 1px solid var(--booking-blue);
         }
         
-        .header-btn-primary {
+        .btn-outline-booking:hover {
+            background: var(--booking-light-gray);
+            border-color: var(--booking-light-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,53,128,0.15);
+        }
+        
+        .btn-primary-booking {
             background: var(--booking-blue);
             color: white;
-            border-color: var(--booking-blue);
         }
         
-        .header-btn-primary:hover {
-            background: #003d82;
-            border-color: #003d82;
+        .btn-primary-booking:hover {
+            background: var(--booking-light-blue);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,53,128,0.15);
+        }
+        
+        .btn-booking i {
+            font-size: 12px;
         }
         
         /* Mobile menu toggle */
@@ -873,161 +903,66 @@ try {
             display: none;
             background: none;
             border: none;
-            color: var(--booking-dark);
             font-size: 1.5rem;
+            color: var(--booking-dark);
             cursor: pointer;
-            padding: 4px;
+            padding: 8px;
         }
         
-        /* Responsive header */
-        @media (max-width: 1024px) {
-            .header-container {
-                padding: 0 16px;
-            }
-            
-            .nav-center {
-                gap: 24px;
-            }
-            
-            .header-main {
-                gap: 32px;
-            }
-        }
-        
+        /* Responsive navbar */
         @media (max-width: 768px) {
+            .nav-center {
+                display: none;
+            }
+            
+            .header-right {
+                gap: 8px;
+            }
+            
+            .language-currency-selector {
+                padding: 0 4px;
+            }
+            
+            .selector-dropdown {
+                min-width: 60px;
+                padding: 4px 6px;
+                font-size: 12px;
+            }
+            
+            .btn-booking {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .btn-booking i {
+                font-size: 11px;
+            }
+            
             .mobile-menu-toggle {
                 display: block;
             }
             
-            .nav-center {
-                display: none;
-            }
-            
-            .language-currency-selector {
-                display: none;
-            }
-            
-            .header-buttons {
-                gap: 6px;
-            }
-            
-            .header-btn {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-            
             .logo-booking {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
             
             .logo-booking i {
-                font-size: 1.4rem;
+                font-size: 1.2rem;
             }
         }
         
-        /* Compact Transport Section */
-        .compact-transport-section {
-            padding: 24px 0;
-            background: var(--booking-light-gray);
-        }
-        
-        .compact-transport-container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-        
-        .compact-transport-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--booking-dark);
-            text-align: center;
-        }
-        
-        .compact-transport-options {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 8px;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .compact-transport-options::-webkit-scrollbar {
-            height: 4px;
-        }
-        
-        .compact-transport-options::-webkit-scrollbar-track {
-            background: var(--booking-border);
-            border-radius: 2px;
-        }
-        
-        .compact-transport-options::-webkit-scrollbar-thumb {
-            background: var(--booking-blue);
-            border-radius: 2px;
-        }
-        
-        .compact-transport-card {
-            flex: 0 0 200px;
-            background: white;
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .compact-transport-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        
-        .compact-transport-icon {
-            font-size: 2rem;
-            color: var(--booking-blue);
-            margin-bottom: 8px;
-        }
-        
-        .compact-transport-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: var(--booking-dark);
-        }
-        
-        .compact-transport-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--booking-blue);
-            margin-bottom: 4px;
-        }
-        
-        .compact-transport-desc {
-            font-size: 0.75rem;
-            color: var(--booking-gray);
-            line-height: 1.3;
-        }
-        
-        @media (max-width: 768px) {
-            .compact-transport-card {
-                flex: 0 0 160px;
-                padding: 12px;
+        @media (max-width: 1024px) {
+            .nav-center {
+                gap: 16px;
             }
             
-            .compact-transport-icon {
-                font-size: 1.6rem;
+            .header-right {
+                gap: 8px;
             }
             
-            .compact-transport-name {
-                font-size: 0.85rem;
+            .language-currency-selector {
+                padding: 0 4px;
             }
-            
-            .compact-transport-price {
-                font-size: 1rem;
-            }
-        }
             
             .btn-booking {
                 padding: 6px 12px;
@@ -1484,320 +1419,7 @@ try {
             color: var(--booking-gray);
         }
         
-        /* Car Rental Section */
-        .car-rental-section {
-            padding: 40px 0;
-            background: white;
-        }
-        
-        .car-rental-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 0 32px;
-        }
-        
-        .car-rental-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--booking-dark);
-        }
-        
-        .car-rental-subtitle {
-            font-size: 1rem;
-            color: var(--booking-gray);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .car-rental-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 24px;
-            padding: 0 32px;
-            flex-wrap: wrap;
-        }
-        
-        .car-tab {
-            padding: 8px 16px;
-            background: white;
-            border: 1px solid var(--booking-border);
-            border-radius: 20px;
-            color: var(--booking-gray);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            font-size: 0.85rem;
-        }
-        
-        .car-tab:hover {
-            border-color: var(--booking-blue);
-            color: var(--booking-blue);
-        }
-        
-        .car-tab.active {
-            background: var(--booking-blue);
-            border-color: var(--booking-blue);
-            color: white;
-        }
-        
-        /* Car Rental Grid */
-        .car-rental-container {
-            position: relative;
-            overflow: hidden;
-            margin: 0 auto;
-            padding: 0 32px;
-            max-width: 1180px;
-        }
-        
-        .car-rental-grid {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 16px;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .car-rental-grid::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        .car-rental-grid::-webkit-scrollbar-track {
-            background: var(--booking-light-gray);
-            border-radius: 3px;
-        }
-        
-        .car-rental-grid::-webkit-scrollbar-thumb {
-            background: var(--booking-blue);
-            border-radius: 3px;
-        }
-        
-        .car-card {
-            flex: 0 0 280px;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .car-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        
-        .car-image {
-            height: 160px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .car-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .car-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: var(--booking-orange);
-            color: var(--booking-dark);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        
-        .car-content {
-            padding: 16px;
-        }
-        
-        .car-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--booking-dark);
-            line-height: 1.3;
-        }
-        
-        .car-description {
-            font-size: 0.8rem;
-            color: var(--booking-gray);
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-        
-        .car-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: var(--booking-gray);
-        }
-        
-        .car-specs {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .car-spec {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-        
-        .car-spec i {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
-        .car-price {
-            font-weight: 600;
-            color: var(--booking-blue);
-        }
-        
-        .car-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            margin-top: 8px;
-        }
-        
-        .car-rating i {
-            color: #ffc107;
-            font-size: 0.8rem;
-        }
-        
-        /* Airport Transfer Section */
-        .airport-transfer-section {
-            padding: 40px 0;
-            background: var(--booking-light-gray);
-        }
-        
-        .airport-transfer-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 0 32px;
-        }
-        
-        .airport-transfer-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--booking-dark);
-        }
-        
-        .airport-transfer-subtitle {
-            font-size: 1rem;
-            color: var(--booking-gray);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .transfer-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 0 auto;
-            padding: 0 32px;
-            max-width: 1180px;
-        }
-        
-        .transfer-option {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .transfer-option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        
-        .transfer-icon {
-            font-size: 2.5rem;
-            color: var(--booking-blue);
-            margin-bottom: 16px;
-        }
-        
-        .transfer-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--booking-dark);
-        }
-        
-        .transfer-description {
-            font-size: 0.9rem;
-            color: var(--booking-gray);
-            line-height: 1.4;
-            margin-bottom: 16px;
-        }
-        
-        .transfer-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--booking-blue);
-            margin-bottom: 8px;
-        }
-        
-        .transfer-features {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .transfer-features li {
-            font-size: 0.8rem;
-            color: var(--booking-gray);
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .transfer-features i {
-            color: var(--booking-blue);
-            font-size: 0.7rem;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .car-rental-grid {
-                gap: 12px;
-            }
-            
-            .car-card {
-                flex: 0 0 240px;
-            }
-            
-            .car-content {
-                padding: 12px;
-            }
-            
-            .transfer-options {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            
-            .transfer-option {
-                padding: 20px;
-            }
-        }
+        /* Experiences Section */
         .experiences-section {
             padding: 40px 0;
             background: white;
@@ -1984,240 +1606,7 @@ try {
             font-size: 0.8rem;
         }
         
-        /* Restaurant scroll buttons */
-        .restaurant-scroll-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: white;
-            border: 1px solid var(--booking-border);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .restaurant-scroll-button:hover {
-            border-color: var(--booking-blue);
-            color: var(--booking-blue);
-            box-shadow: 0 4px 12px rgba(0,53,128,0.15);
-        }
-        
-        .restaurant-scroll-button.prev {
-            left: 12px;
-        }
-        
-        .restaurant-scroll-button.next {
-            right: 12px;
-        }
-        
-        /* Restaurants Section */
-        .restaurants-section {
-            padding: 40px 0;
-            background: var(--booking-light-gray);
-        }
-        
-        .restaurants-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 0 32px;
-        }
-        
-        .restaurants-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--booking-dark);
-        }
-        
-        .restaurants-subtitle {
-            font-size: 1rem;
-            color: var(--booking-gray);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
-        
-        .restaurants-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 24px;
-            padding: 0 32px;
-            flex-wrap: wrap;
-        }
-        
-        .restaurant-tab {
-            padding: 8px 16px;
-            background: white;
-            border: 1px solid var(--booking-border);
-            border-radius: 20px;
-            color: var(--booking-gray);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-            font-size: 0.85rem;
-        }
-        
-        .restaurant-tab:hover {
-            border-color: var(--booking-blue);
-            color: var(--booking-blue);
-        }
-        
-        .restaurant-tab.active {
-            background: var(--booking-blue);
-            border-color: var(--booking-blue);
-            color: white;
-        }
-        
-        /* Restaurants Scrollable Container */
-        .restaurants-container {
-            position: relative;
-            overflow: hidden;
-            margin: 0 auto;
-            padding: 0 32px;
-            max-width: 1180px;
-        }
-        
-        .restaurants-grid {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding-bottom: 16px;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .restaurants-grid::-webkit-scrollbar {
-            height: 6px;
-        }
-        
-        .restaurants-grid::-webkit-scrollbar-track {
-            background: white;
-            border-radius: 3px;
-        }
-        
-        .restaurants-grid::-webkit-scrollbar-thumb {
-            background: var(--booking-blue);
-            border-radius: 3px;
-        }
-        
-        .restaurant-card {
-            flex: 0 0 280px;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .restaurant-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-        
-        .restaurant-image {
-            height: 160px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .restaurant-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .restaurant-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: var(--booking-orange);
-            color: var(--booking-dark);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-        
-        .restaurant-content {
-            padding: 16px;
-        }
-        
-        .restaurant-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--booking-dark);
-            line-height: 1.3;
-        }
-        
-        .restaurant-description {
-            font-size: 0.8rem;
-            color: var(--booking-gray);
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-        
-        .restaurant-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: var(--booking-gray);
-        }
-        
-        .restaurant-cuisine {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .restaurant-cuisine i {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
-        .restaurant-price {
-            font-weight: 600;
-            color: var(--booking-blue);
-        }
-        
-        .restaurant-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 0.75rem;
-            margin-top: 8px;
-        }
-        
-        .restaurant-rating i {
-            color: #ffc107;
-            font-size: 0.8rem;
-        }
-        
-        /* Responsive restaurants */
-        @media (max-width: 768px) {
-            .restaurants-grid {
-                gap: 12px;
-            }
-            
-            .restaurant-card {
-                flex: 0 0 240px;
-            }
-            
-            .restaurant-content {
-                padding: 12px;
-            }
-        }
+        /* Experience scroll buttons */
         .experience-scroll-button {
             position: absolute;
             top: 50%;
@@ -3515,178 +2904,6 @@ try {
         </div>
     </section>
     
-    <!-- Restaurants Section -->
-    <section class="restaurants-section">
-        <div class="restaurants-header">
-            <h2 class="restaurants-title">Restaurants</h2>
-            <p class="restaurants-subtitle">
-                Dégustez les meilleures saveurs de la cuisine sénégalaise et internationale.
-            </p>
-        </div>
-        
-        <div class="restaurants-tabs">
-            <button class="restaurant-tab active" onclick="filterRestaurants('all')">Tous</button>
-            <button class="restaurant-tab" onclick="filterRestaurants('senegalese')">Sénégalais</button>
-            <button class="restaurant-tab" onclick="filterRestaurants('international')">International</button>
-            <button class="restaurant-tab" onclick="filterRestaurants('seafood')">Fruits de mer</button>
-        </div>
-        
-        <div class="restaurants-container">
-            <button class="restaurant-scroll-button prev" onclick="scrollRestaurants('prev')">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="restaurant-scroll-button next" onclick="scrollRestaurants('next')">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <div class="restaurants-grid">
-                <!-- Restaurant La Terrasse -->
-                <div class="restaurant-card" data-category="senegalese">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Restaurant La Terrasse">
-                        <span class="restaurant-badge">Traditionnel</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">La Terrasse</h3>
-                        <p class="restaurant-description">Spécialités sénégalaises authentiques avec vue sur l'océan.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-utensils"></i>
-                                <span>Sénégalais</span>
-                            </div>
-                            <div class="restaurant-price">€€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.7 (312 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Le Ngor -->
-                <div class="restaurant-card" data-category="seafood international">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Le Ngor">
-                        <span class="restaurant-badge">Fruits de mer</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">Le Ngor</h3>
-                        <p class="restaurant-description">Fruits de mer frais et cuisine méditerranéenne en bord de mer.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-fish"></i>
-                                <span>Fruits de mer</span>
-                            </div>
-                            <div class="restaurant-price">€€€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.8 (198 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Chez Lamine -->
-                <div class="restaurant-card" data-category="senegalese">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Chez Lamine">
-                        <span class="restaurant-badge">Populaire</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">Chez Lamine</h3>
-                        <p class="restaurant-description">Thieboudienne et yassa faits maison dans une ambiance chaleureuse.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-utensils"></i>
-                                <span>Sénégalais</span>
-                            </div>
-                            <div class="restaurant-price">€€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.6 (267 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Le Bougainville -->
-                <div class="restaurant-card" data-category="international">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Le Bougainville">
-                        <span class="restaurant-badge">Gastronomique</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">Le Bougainville</h3>
-                        <p class="restaurant-description">Cuisine française raffinée avec produits locaux et vins sélectionnés.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-wine-glass"></i>
-                                <span>Français</span>
-                            </div>
-                            <div class="restaurant-price">€€€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (145 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Le Phare -->
-                <div class="restaurant-card" data-category="seafood senegalese">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Le Phare">
-                        <span class="restaurant-badge">Vue mer</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">Le Phare</h3>
-                        <p class="restaurant-description">Spécialités côtières et cocktails face au coucher de soleil.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-cocktail"></i>
-                                <span>Mixte</span>
-                            </div>
-                            <div class="restaurant-price">€€€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.8 (189 avis)</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Le Petit Dakar -->
-                <div class="restaurant-card" data-category="senegalese">
-                    <div class="restaurant-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Le Petit Dakar">
-                        <span class="restaurant-badge">Authentique</span>
-                    </div>
-                    <div class="restaurant-content">
-                        <h3 class="restaurant-title">Le Petit Dakar</h3>
-                        <p class="restaurant-description">Street food sénégalais gourmet dans un cadre moderne et branché.</p>
-                        <div class="restaurant-meta">
-                            <div class="restaurant-cuisine">
-                                <i class="fas fa-utensils"></i>
-                                <span>Street food</span>
-                            </div>
-                            <div class="restaurant-price">€</div>
-                        </div>
-                        <div class="restaurant-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.5 (234 avis)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Properties Section -->
     <section class="properties-section">
         <div class="section-header">
@@ -3861,6 +3078,33 @@ try {
                     <li><a href="annonces_direct_fixed.php"><?= $lang === 'fr' ? 'Toutes les annonces' : 'All listings' ?></a></li>
                     <li><a href="search_with_map.php"><?= $t['search_btn'] ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Dernières annonces' : 'Latest listings' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Annonces populaires' : 'Popular listings' ?></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-title"><?= $t['experiences'] ?></h4>
+                <ul class="footer-links">
+                    <li><a href="#"><?= $lang === 'fr' ? 'Tours guidés' : 'Guided tours' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Activités locales' : 'Local activities' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Événements' : 'Events' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Guide de voyage' : 'Travel guide' ?></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-title"><?= $t['help'] ?></h4>
+                <ul class="footer-links">
+                    <li><a href="connexion_simple.php"><?= $t['login'] ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Centre d\'aide' : 'Help center' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'FAQ' : 'FAQ' ?></a></li>
+                    <li><a href="#"><?= $lang === 'fr' ? 'Contact' : 'Contact' ?></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-title"><?= $t['contact_host'] ?></h4>
+                <ul class="footer-links">
                     <li><i class="fas fa-phone me-2"></i>+221 78 600 00 28</li>
                     <li><i class="fas fa-envelope me-2"></i>contact@terangahomes.com</li>
                     <li><i class="fas fa-map-marker-alt me-2"></i>Dakar, Sénégal</li>
@@ -4285,50 +3529,6 @@ try {
         });
     });
     
-    // Animation des voitures
-    function filterCars(category) {
-        const tabs = document.querySelectorAll('.car-tab');
-        const cards = document.querySelectorAll('.car-card');
-        
-        // Update active tab
-        tabs.forEach(tab => tab.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        // Filter cards
-        cards.forEach(card => {
-            if (category === 'all') {
-                card.style.display = 'block';
-            } else {
-                const cardCategories = card.getAttribute('data-category');
-                if (cardCategories && cardCategories.includes(category)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            }
-        });
-    }
-    
-    // Scroll voitures
-    function scrollCars(direction) {
-        const container = document.querySelector('.car-rental-grid');
-        const scrollAmount = 300; // Width of one card + gap
-        
-        if (direction === 'prev') {
-            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-        } else {
-            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
-    }
-    
-    // Réservation transfert
-    function bookTransfer(type) {
-        // Simuler la réservation
-        alert(`Réservation du service ${type} - Redirection vers la page de réservation...`);
-        // En production, rediriger vers la page de réservation
-        // window.location.href = `booking_transfer.php?type=${type}`;
-    }
-    
     // Animation des expériences
     function filterExperiences(category) {
         const tabs = document.querySelectorAll('.experience-tab');
@@ -4439,8 +3639,8 @@ try {
             }, 800 + (index * 50));
         });
         
-        const carCards = document.querySelectorAll('.car-card');
-        carCards.forEach((card, index) => {
+        const experienceCards = document.querySelectorAll('.experience-card');
+        experienceCards.forEach((card, index) => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             
@@ -4449,18 +3649,6 @@ try {
                 card.style.opacity = '1';
                 card.style.transform = 'translateY(0)';
             }, 1200 + (index * 100));
-        });
-        
-        const transferOptions = document.querySelectorAll('.transfer-option');
-        transferOptions.forEach((option, index) => {
-            option.style.opacity = '0';
-            option.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                option.style.transition = 'all 0.6s ease';
-                option.style.opacity = '1';
-                option.style.transform = 'translateY(0)';
-            }, 1600 + (index * 100));
         });
     });
     
