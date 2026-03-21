@@ -1,6 +1,10 @@
 <?php
 // Page de connexion ultra-simple
 
+// Inclure les fichiers nécessaires
+require_once 'config/config.php';
+require_once 'core/Database.php';
+
 session_start();
 
 // Traitement du formulaire de connexion
