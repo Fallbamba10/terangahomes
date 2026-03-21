@@ -2265,8 +2265,14 @@ try {
                 
                 <nav class="nav-center">
                     <a href="#" class="nav-item-booking active"><?= $t['properties'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['car_rental'] ?></a>
-                    <a href="#" class="nav-item-booking"><?= $t['airport_transfer'] ?></a>
+                    <a href="#" class="nav-item-booking">
+                        <i class="fas fa-car" style="margin-right: 4px;"></i>
+                        <?= $t['car_rental'] ?>
+                    </a>
+                    <a href="#" class="nav-item-booking">
+                        <i class="fas fa-plane" style="margin-right: 4px;"></i>
+                        <?= $t['airport_transfer'] ?>
+                    </a>
                 </nav>
                 
                 <div class="header-right">
@@ -2276,18 +2282,17 @@ try {
                                 <?php foreach ($supported_langs as $code => $name): ?>
                                     <option value="<?= $code ?>" <?= $lang === $code ? 'selected' : '' ?>>
                                         <?= match($code) {
-                                            'fr' => '🇫🇷',
+                                            'fr' => '🇸🇳',
                                             'en' => '🇬🇧',
                                             'es' => '🇪🇸',
                                             'ar' => '🇸🇦',
                                             'zh' => '🇨🇳',
                                             'pt' => '🇵🇹',
-                                            'de' => '��',
                                             'it' => '🇮🇹',
                                             'nl' => '🇳🇱',
                                             'ru' => '🇷🇺',
                                             'ja' => '🇯🇵',
-                                            'ko' => '��',
+                                            'ko' => '🇰🇷',
                                             'hi' => '🇮🇳',
                                             'tr' => '🇹🇷',
                                             'pl' => '🇵🇱',
@@ -2298,10 +2303,9 @@ try {
                                             'el' => '🇬🇷',
                                             'he' => '🇮🇱',
                                             'th' => '🇹🇭',
-                                            'vi' => '��',
+                                            'vi' => '🇻🇳',
                                             'id' => '🇮🇩',
                                             'ms' => '🇲🇾',
-                                            'cs' => '🇨🇿',
                                             'hu' => '🇭🇺',
                                             'ro' => '🇷🇴',
                                             'bg' => '🇧🇬',
