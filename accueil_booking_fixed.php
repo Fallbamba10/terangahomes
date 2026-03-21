@@ -977,7 +977,7 @@ try {
         /* Hero Section */
         .hero-booking {
             background: linear-gradient(135deg, var(--booking-blue) 0%, var(--booking-light-blue) 50%, #004a99 100%);
-            padding: 80px 0;
+            padding: 40px 0;
             position: relative;
             overflow: hidden;
         }
@@ -1021,15 +1021,15 @@ try {
         }
         
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             line-height: 1.2;
         }
         
         .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
+            font-size: 1.1rem;
+            margin-bottom: 24px;
             opacity: 0.95;
         }
         
@@ -1037,7 +1037,7 @@ try {
         .search-box-booking {
             background: white;
             border-radius: 16px;
-            padding: 32px;
+            padding: 24px;
             box-shadow: 0 8px 32px rgba(0,53,128,0.15);
             max-width: 1000px;
             margin: 0 auto;
@@ -1162,13 +1162,13 @@ try {
         
         /* Explore Senegal Section - Booking.com Style */
         .explore-senegal-section {
-            padding: 40px 0;
+            padding: 20px 0;
             background: white;
         }
         
         .explore-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             padding: 0 32px;
         }
         
