@@ -1272,7 +1272,124 @@ try {
             font-size: 14px;
         }
         
-        /* Responsive */
+        /* Property Slider */
+        .property-slider {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .slider-container {
+            position: relative;
+            height: 100%;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .slider-prev,
+        .slider-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            font-size: 14px;
+        }
+        
+        .slider-prev {
+            left: 12px;
+        }
+        
+        .slider-next {
+            right: 12px;
+        }
+        
+        .slider-prev:hover,
+        .slider-next:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .photo-counter {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 10;
+        }
+        
+        .photo-counter i {
+            font-size: 10px;
+        }
+        
+        /* Auto-play indicator */
+        .slider-container::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            z-index: 5;
+        }
+        
+        .slider-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--booking-orange);
+            width: 0;
+            z-index: 6;
+            animation: progress 5s linear infinite;
+        }
+        
+        @keyframes progress {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        /* Pause auto-play on hover */
+        .property-slider:hover .slider-container::after {
+            animation-play-state: paused;
+        }
         @media (max-width: 768px) {
             .nav-center {
                 display: none;
@@ -1502,8 +1619,38 @@ try {
                     <?php 
                     $images = json_decode($annonce['images'] ?? '[]', true);
                     $firstImage = !empty($images) ? $images[0] : 'default.jpg';
+                    $imageCount = count($images);
                     ?>
-                    <img src="uploads/images/<?= $firstImage ?>" alt="<?= htmlspecialchars($annonce['titre']) ?>">
+                    
+                    <!-- Image Slider -->
+                    <div class="property-slider" data-property-id="<?= $annonce['id'] ?>">
+                        <div class="slider-container">
+                            <?php foreach ($images as $index => $image): ?>
+                                <div class="slide <?= $index === 0 ? 'active' : '' ?>">
+                                    <img src="uploads/images/<?= $image ?>" alt="<?= htmlspecialchars($annonce['titre']) ?> - Photo <?= $index + 1 ?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        
+                        <!-- Navigation buttons -->
+                        <?php if ($imageCount > 1): ?>
+                            <button class="slider-prev" onclick="event.stopPropagation(); previousSlide(<?= $annonce['id'] ?>)">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="slider-next" onclick="event.stopPropagation(); nextSlide(<?= $annonce['id'] ?>)">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        <?php endif; ?>
+                        
+                        <!-- Photo counter -->
+                        <?php if ($imageCount > 1): ?>
+                            <div class="photo-counter">
+                                <i class="fas fa-camera"></i>
+                                <span><?= $imageCount ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
                     <div class="property-badge"><?= ucfirst($annonce['type']) ?></div>
                     <div class="property-favorite" onclick="event.stopPropagation(); toggleFavorite(this)">
                         <i class="far fa-heart"></i>
@@ -1983,6 +2130,92 @@ try {
         const random = Math.random().toString(36).substring(2, 6).toUpperCase();
         return `${prefix}${timestamp}${random}`;
     }
+    
+    // Image Slider Functions
+    const sliderIntervals = {};
+    
+    function startSlider(propertyId) {
+        const slider = document.querySelector(`[data-property-id="${propertyId}"]`);
+        if (!slider) return;
+        
+        const slides = slider.querySelectorAll('.slide');
+        if (slides.length <= 1) return;
+        
+        let currentSlide = 0;
+        
+        // Clear existing interval
+        if (sliderIntervals[propertyId]) {
+            clearInterval(sliderIntervals[propertyId]);
+        }
+        
+        // Auto-play every 5 seconds
+        sliderIntervals[propertyId] = setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+    }
+    
+    function stopSlider(propertyId) {
+        if (sliderIntervals[propertyId]) {
+            clearInterval(sliderIntervals[propertyId]);
+            delete sliderIntervals[propertyId];
+        }
+    }
+    
+    function nextSlide(propertyId) {
+        const slider = document.querySelector(`[data-property-id="${propertyId}"]`);
+        if (!slider) return;
+        
+        const slides = slider.querySelectorAll('.slide');
+        const currentActive = slider.querySelector('.slide.active');
+        const currentIndex = Array.from(slides).indexOf(currentActive);
+        
+        currentActive.classList.remove('active');
+        const nextIndex = (currentIndex + 1) % slides.length;
+        slides[nextIndex].classList.add('active');
+        
+        // Reset auto-play
+        stopSlider(propertyId);
+        startSlider(propertyId);
+    }
+    
+    function previousSlide(propertyId) {
+        const slider = document.querySelector(`[data-property-id="${propertyId}"]`);
+        if (!slider) return;
+        
+        const slides = slider.querySelectorAll('.slide');
+        const currentActive = slider.querySelector('.slide.active');
+        const currentIndex = Array.from(slides).indexOf(currentActive);
+        
+        currentActive.classList.remove('active');
+        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        slides[prevIndex].classList.add('active');
+        
+        // Reset auto-play
+        stopSlider(propertyId);
+        startSlider(propertyId);
+    }
+    
+    // Initialize sliders when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        const sliders = document.querySelectorAll('.property-slider');
+        sliders.forEach(slider => {
+            const propertyId = slider.dataset.propertyId;
+            startSlider(propertyId);
+            
+            // Pause on hover, resume on mouse leave
+            slider.addEventListener('mouseenter', () => stopSlider(propertyId));
+            slider.addEventListener('mouseleave', () => startSlider(propertyId));
+        });
+    });
+    
+    // Clean up intervals when page unloads
+    window.addEventListener('beforeunload', function() {
+        Object.keys(sliderIntervals).forEach(propertyId => {
+            stopSlider(propertyId);
+        });
+    });
     </script>
 </body>
 </html>
