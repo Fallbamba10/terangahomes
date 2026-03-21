@@ -3861,7 +3861,6 @@ try {
                     <li><a href="annonces_direct_fixed.php"><?= $lang === 'fr' ? 'Toutes les annonces' : 'All listings' ?></a></li>
                     <li><a href="search_with_map.php"><?= $t['search_btn'] ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Dernières annonces' : 'Latest listings' ?></a></li>
-                <ul class="footer-links">
                     <li><i class="fas fa-phone me-2"></i>+221 78 600 00 28</li>
                     <li><i class="fas fa-envelope me-2"></i>contact@terangahomes.com</li>
                     <li><i class="fas fa-map-marker-alt me-2"></i>Dakar, Sénégal</li>
