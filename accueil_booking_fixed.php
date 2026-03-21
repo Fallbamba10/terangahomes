@@ -750,158 +750,128 @@ try {
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .header-container {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
         }
         
         .header-main {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            max-width: 1180px;
-            margin: 0 auto;
+            gap: 40px;
         }
         
         .logo-booking {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--booking-blue);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            transition: color 0.2s ease;
-        }
-        
-        .logo-booking:hover {
-            color: var(--booking-light-blue);
+            gap: 8px;
+            text-decoration: none;
+            color: var(--booking-blue);
+            font-size: 1.4rem;
+            font-weight: 700;
+            white-space: nowrap;
         }
         
         .logo-booking i {
-            margin-right: 8px;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
         
         .nav-center {
             display: flex;
-            gap: 24px;
             align-items: center;
+            gap: 32px;
         }
         
         .nav-item-booking {
-            color: var(--booking-dark);
             text-decoration: none;
+            color: var(--booking-gray);
             font-weight: 500;
-            font-size: 14px;
+            font-size: 0.95rem;
             padding: 8px 12px;
             border-radius: 8px;
             transition: all 0.2s ease;
-            position: relative;
+            white-space: nowrap;
         }
         
         .nav-item-booking:hover {
-            background: var(--booking-light-gray);
             color: var(--booking-blue);
+            background: var(--booking-light-gray);
         }
         
         .nav-item-booking.active {
-            background: var(--booking-light-blue);
-            color: white;
-        }
-        
-        .nav-item-booking.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 3px;
-            background: white;
-            border-radius: 2px;
+            color: var(--booking-blue);
+            background: var(--booking-light-gray);
         }
         
         .header-right {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
         
         .language-currency-selector {
             display: flex;
-            gap: 8px;
             align-items: center;
-            padding: 0 8px;
-            border-right: 1px solid var(--booking-border);
+            gap: 12px;
         }
         
         .selector-dropdown {
-            padding: 6px 10px;
+            padding: 6px 12px;
             border: 1px solid var(--booking-border);
-            border-radius: 6px;
+            border-radius: 8px;
             background: white;
             color: var(--booking-dark);
-            font-size: 13px;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-width: 80px;
         }
         
         .selector-dropdown:hover {
             border-color: var(--booking-blue);
-            box-shadow: 0 2px 4px rgba(0,53,128,0.1);
         }
         
-        .selector-dropdown:focus {
-            outline: none;
-            border-color: var(--booking-blue);
-            box-shadow: 0 0 0 2px rgba(0,53,128,0.1);
-        }
-        
-        .btn-booking {
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-weight: 500;
-            font-size: 13px;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
+        .header-buttons {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         
-        .btn-outline-booking {
+        .header-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--booking-border);
+            border-radius: 8px;
             background: white;
+            color: var(--booking-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        
+        .header-btn:hover {
+            border-color: var(--booking-blue);
             color: var(--booking-blue);
-            border: 1px solid var(--booking-blue);
         }
         
-        .btn-outline-booking:hover {
-            background: var(--booking-light-gray);
-            border-color: var(--booking-light-blue);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,53,128,0.15);
-        }
-        
-        .btn-primary-booking {
+        .header-btn-primary {
             background: var(--booking-blue);
             color: white;
+            border-color: var(--booking-blue);
         }
         
-        .btn-primary-booking:hover {
-            background: var(--booking-light-blue);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0,53,128,0.15);
-        }
-        
-        .btn-booking i {
-            font-size: 12px;
+        .header-btn-primary:hover {
+            background: #003d82;
+            border-color: #003d82;
         }
         
         /* Mobile menu toggle */
@@ -909,66 +879,161 @@ try {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5rem;
             color: var(--booking-dark);
+            font-size: 1.5rem;
             cursor: pointer;
-            padding: 8px;
+            padding: 4px;
         }
         
-        /* Responsive navbar */
-        @media (max-width: 768px) {
+        /* Responsive header */
+        @media (max-width: 1024px) {
+            .header-container {
+                padding: 0 16px;
+            }
+            
             .nav-center {
-                display: none;
+                gap: 24px;
             }
             
-            .header-right {
-                gap: 8px;
+            .header-main {
+                gap: 32px;
             }
-            
-            .language-currency-selector {
-                padding: 0 4px;
-            }
-            
-            .selector-dropdown {
-                min-width: 60px;
-                padding: 4px 6px;
-                font-size: 12px;
-            }
-            
-            .btn-booking {
-                padding: 6px 10px;
-                font-size: 12px;
-            }
-            
-            .btn-booking i {
-                font-size: 11px;
-            }
-            
+        }
+        
+        @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: block;
             }
             
-            .logo-booking {
-                font-size: 1.5rem;
-            }
-            
-            .logo-booking i {
-                font-size: 1.2rem;
-            }
-        }
-        
-        @media (max-width: 1024px) {
             .nav-center {
-                gap: 16px;
-            }
-            
-            .header-right {
-                gap: 8px;
+                display: none;
             }
             
             .language-currency-selector {
-                padding: 0 4px;
+                display: none;
             }
+            
+            .header-buttons {
+                gap: 6px;
+            }
+            
+            .header-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .logo-booking {
+                font-size: 1.2rem;
+            }
+            
+            .logo-booking i {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Compact Transport Section */
+        .compact-transport-section {
+            padding: 24px 0;
+            background: var(--booking-light-gray);
+        }
+        
+        .compact-transport-container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        
+        .compact-transport-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--booking-dark);
+            text-align: center;
+        }
+        
+        .compact-transport-options {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .compact-transport-options::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .compact-transport-options::-webkit-scrollbar-track {
+            background: var(--booking-border);
+            border-radius: 2px;
+        }
+        
+        .compact-transport-options::-webkit-scrollbar-thumb {
+            background: var(--booking-blue);
+            border-radius: 2px;
+        }
+        
+        .compact-transport-card {
+            flex: 0 0 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .compact-transport-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .compact-transport-icon {
+            font-size: 2rem;
+            color: var(--booking-blue);
+            margin-bottom: 8px;
+        }
+        
+        .compact-transport-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--booking-dark);
+        }
+        
+        .compact-transport-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--booking-blue);
+            margin-bottom: 4px;
+        }
+        
+        .compact-transport-desc {
+            font-size: 0.75rem;
+            color: var(--booking-gray);
+            line-height: 1.3;
+        }
+        
+        @media (max-width: 768px) {
+            .compact-transport-card {
+                flex: 0 0 160px;
+                padding: 12px;
+            }
+            
+            .compact-transport-icon {
+                font-size: 1.6rem;
+            }
+            
+            .compact-transport-name {
+                font-size: 0.85rem;
+            }
+            
+            .compact-transport-price {
+                font-size: 1rem;
+            }
+        }
             
             .btn-booking {
                 padding: 6px 12px;
@@ -3002,391 +3067,90 @@ try {
         </div>
     </section>
 
-    <!-- Car Rental Section -->
-    <section class="car-rental-section">
-        <div class="car-rental-header">
-            <h2 class="car-rental-title">Location de voiture</h2>
-            <p class="car-rental-subtitle">
-                Explorez le Sénégal en toute liberté avec notre flotte de véhicules modernes.
-            </p>
-        </div>
-        
-        <div class="car-rental-tabs">
-            <button class="car-tab active" onclick="filterCars('all')">Toutes</button>
-            <button class="car-tab" onclick="filterCars('economy')">Économique</button>
-            <button class="car-tab" onclick="filterCars('comfort')">Confort</button>
-            <button class="car-tab" onclick="filterCars('suv')">SUV</button>
-            <button class="car-tab" onclick="filterCars('luxury')">Luxe</button>
-        </div>
-        
-        <div class="car-rental-container">
-            <button class="experience-scroll-button prev" onclick="scrollCars('prev')">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="experience-scroll-button next" onclick="scrollCars('next')">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <div class="car-rental-grid">
-                <!-- Renault Clio -->
-                <div class="car-card" data-category="economy">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Renault Clio">
-                        <span class="car-badge">Économique</span>
+    <!-- Compact Transport Section -->
+    <section class="compact-transport-section">
+        <div class="compact-transport-container">
+            <h3 class="compact-transport-title">Services de Transport</h3>
+            <div class="compact-transport-options">
+                <!-- VTC Standard -->
+                <div class="compact-transport-card" onclick="bookTransfer('vtc_standard')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-car"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Renault Clio</h3>
-                        <p class="car-description">Idéal pour la ville, économique et facile à garer.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>4</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Manuel</span>
-                                </div>
-                            </div>
-                            <div class="car-price">25€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.6 (156 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">VTC Standard</div>
+                    <div class="compact-transport-price">25€</div>
+                    <div class="compact-transport-desc">1-4 passagers, climatisation</div>
                 </div>
                 
-                <!-- Dacia Logan -->
-                <div class="car-card" data-category="economy comfort">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Dacia Logan">
-                        <span class="car-badge">Confort</span>
+                <!-- Location Voiture -->
+                <div class="compact-transport-card" onclick="bookTransfer('car_rental')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-key"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Dacia Logan</h3>
-                        <p class="car-description">Spacieux et confortable, parfait pour les longs trajets.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Manuel</span>
-                                </div>
-                            </div>
-                            <div class="car-price">30€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.5 (203 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">Location Voiture</div>
+                    <div class="compact-transport-price">25€/jour</div>
+                    <div class="compact-transport-desc">Voitures économiques à luxe</div>
                 </div>
                 
-                <!-- Peugeot 3008 -->
-                <div class="car-card" data-category="comfort">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Peugeot 3008">
-                        <span class="car-badge">Familial</span>
+                <!-- VTC Premium -->
+                <div class="compact-transport-card" onclick="bookTransfer('vtc_premium')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-car-side"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Peugeot 3008</h3>
-                        <p class="car-description">Compact familial avec grand coffre et technologie moderne.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">45€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.7 (189 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">VTC Premium</div>
+                    <div class="compact-transport-price">45€</div>
+                    <div class="compact-transport-desc">Service VIP, véhicule premium</div>
                 </div>
                 
-                <!-- Toyota RAV4 -->
-                <div class="car-card" data-category="suv">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Toyota RAV4">
-                        <span class="car-badge">SUV</span>
+                <!-- Taxi Collectif -->
+                <div class="compact-transport-card" onclick="bookTransfer('taxi_shared')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Toyota RAV4</h3>
-                        <p class="car-description">4x4 parfait pour les routes sénégalaises et aventures.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">65€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.8 (145 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">Taxi Collectif</div>
+                    <div class="compact-transport-price">12€</div>
+                    <div class="compact-transport-desc">Économique, trajets partagés</div>
                 </div>
                 
-                <!-- Mercedes E-Class -->
-                <div class="car-card" data-category="luxury">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Mercedes E-Class">
-                        <span class="car-badge">Luxe</span>
+                <!-- Minibus -->
+                <div class="compact-transport-card" onclick="bookTransfer('minibus')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-bus"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Mercedes E-Class</h3>
-                        <p class="car-description">Élégance et performance pour voyager avec prestige.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">120€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (87 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">Minibus</div>
+                    <div class="compact-transport-price">65€</div>
+                    <div class="compact-transport-desc">Jusqu'à 15 passagers</div>
                 </div>
                 
-                <!-- Hyundai Tucson -->
-                <div class="car-card" data-category="suv comfort">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Hyundai Tucson">
-                        <span class="car-badge">SUV</span>
+                <!-- Moto-Taxi -->
+                <div class="compact-transport-card" onclick="bookTransfer('moto_taxi')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-motorcycle"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Hyundai Tucson</h3>
-                        <p class="car-description">SUV moderne avec sécurité et technologie avancée.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">55€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.7 (167 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">Moto-Taxi</div>
+                    <div class="compact-transport-price">8€</div>
+                    <div class="compact-transport-desc">Rapide, centre-ville</div>
                 </div>
                 
-                <!-- BMW X5 -->
-                <div class="car-card" data-category="suv luxury">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="BMW X5">
-                        <span class="car-badge">Premium</span>
+                <!-- VIP Service -->
+                <div class="compact-transport-card" onclick="bookTransfer('vip_service')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-crown"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">BMW X5</h3>
-                        <p class="car-description">Sportif et luxueux, idéal pour voyager avec style.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>7</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">95€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.9 (98 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">Service VIP</div>
+                    <div class="compact-transport-price">120€</div>
+                    <div class="compact-transport-desc">Luxe exclusif, assistance</div>
                 </div>
                 
-                <!-- Volkswagen Golf -->
-                <div class="car-card" data-category="economy comfort">
-                    <div class="car-image">
-                        <img src="https://images.unsplash.com/photo-1550355243-1bf6cf7a5c7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="Volkswagen Golf">
-                        <span class="car-badge">Polyvalent</span>
+                <!-- SUV Location -->
+                <div class="compact-transport-card" onclick="bookTransfer('suv_rental')">
+                    <div class="compact-transport-icon">
+                        <i class="fas fa-truck"></i>
                     </div>
-                    <div class="car-content">
-                        <h3 class="car-title">Volkswagen Golf</h3>
-                        <p class="car-description">Compact fiable et confortable pour tous vos déplacements.</p>
-                        <div class="car-meta">
-                            <div class="car-specs">
-                                <div class="car-spec">
-                                    <i class="fas fa-users"></i>
-                                    <span>5</span>
-                                </div>
-                                <div class="car-spec">
-                                    <i class="fas fa-cog"></i>
-                                    <span>Auto</span>
-                                </div>
-                            </div>
-                            <div class="car-price">35€/jour</div>
-                        </div>
-                        <div class="car-rating">
-                            <i class="fas fa-star"></i>
-                            <span>4.6 (234 avis)</span>
-                        </div>
-                    </div>
+                    <div class="compact-transport-name">SUV Location</div>
+                    <div class="compact-transport-price">65€/jour</div>
+                    <div class="compact-transport-desc">4x4 pour routes sénégalaises</div>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Airport Transfer Section -->
-    <section class="airport-transfer-section">
-        <div class="airport-transfer-header">
-            <h2 class="airport-transfer-title">Transfert Aéroport</h2>
-            <p class="airport-transfer-subtitle">
-                Services de transport fiables et confortables depuis/vers tous les aéroports du Sénégal.
-            </p>
-        </div>
-        
-        <div class="transfer-options">
-            <!-- VTC Standard -->
-            <div class="transfer-option" onclick="bookTransfer('vtc_standard')">
-                <div class="transfer-icon">
-                    <i class="fas fa-car"></i>
-                </div>
-                <h3 class="transfer-title">VTC Standard</h3>
-                <p class="transfer-description">
-                    Véhicule confortable avec chauffeur professionnel, idéal pour 1-4 passagers.
-                </p>
-                <div class="transfer-price">25€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Climatisation</li>
-                    <li><i class="fas fa-check"></i> WiFi gratuit</li>
-                    <li><i class="fas fa-check"></i> Bagages inclus</li>
-                    <li><i class="fas fa-check"></i> 24/7 disponible</li>
-                </ul>
-            </div>
-            
-            <!-- VTC Premium -->
-            <div class="transfer-option" onclick="bookTransfer('vtc_premium')">
-                <div class="transfer-icon">
-                    <i class="fas fa-car-side"></i>
-                </div>
-                <h3 class="transfer-title">VTC Premium</h3>
-                <p class="transfer-description">
-                    Véhicule haut de gamme avec chauffeur en tenue, service VIP inclus.
-                </p>
-                <div class="transfer-price">45€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Véhicule premium</li>
-                    <li><i class="fas fa-check"></i> Chauffeur professionnel</li>
-                    <li><i class="fas fa-check"></i> Boissons gratuites</li>
-                    <li><i class="fas fa-check"></i> Priorité aéroport</li>
-                </ul>
-            </div>
-            
-            <!-- Taxi Collectif -->
-            <div class="transfer-option" onclick="bookTransfer('taxi_shared')">
-                <div class="transfer-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3 class="transfer-title">Taxi Collectif</h3>
-                <p class="transfer-description">
-                    Partagez votre trajet avec d'autres passagers, économique et écologique.
-                </p>
-                <div class="transfer-price">12€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Prix avantageux</li>
-                    <li><i class="fas fa-check"></i> Trajets partagés</li>
-                    <li><i class="fas fa-check"></i> Réservation facile</li>
-                    <li><i class="fas fa-check"></i> Service rapide</li>
-                </ul>
-            </div>
-            
-            <!-- Minibus -->
-            <div class="transfer-option" onclick="bookTransfer('minibus')">
-                <div class="transfer-icon">
-                    <i class="fas fa-bus"></i>
-                </div>
-                <h3 class="transfer-title">Minibus</h3>
-                <p class="transfer-description">
-                    Transport pour groupes jusqu'à 15 personnes, idéal pour familles et équipes.
-                </p>
-                <div class="transfer-price">65€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Jusqu'à 15 passagers</li>
-                    <li><i class="fas fa-check"></i> Grand espace bagages</li>
-                    <li><i class="fas fa-check"></i> Chauffeur expérimenté</li>
-                    <li><i class="fas fa-check"></i> Flexibilité horaire</li>
-                </ul>
-            </div>
-            
-            <!-- Moto-Taxi -->
-            <div class="transfer-option" onclick="bookTransfer('moto_taxi')">
-                <div class="transfer-icon">
-                    <i class="fas fa-motorcycle"></i>
-                </div>
-                <h3 class="transfer-title">Moto-Taxi</h3>
-                <p class="transfer-description">
-                    Rapide et agile pour les déplacements urbains, évite les embouteillages.
-                </p>
-                <div class="transfer-price">8€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Casque fourni</li>
-                    <li><i class="fas fa-check"></i> Très rapide</li>
-                    <li><i class="fas fa-check"></i> Idéal centre-ville</li>
-                    <li><i class="fas fa-check"></i> 24/7 disponible</li>
-                </ul>
-            </div>
-            
-            <!-- VIP Service -->
-            <div class="transfer-option" onclick="bookTransfer('vip_service')">
-                <div class="transfer-icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <h3 class="transfer-title">Service VIP</h3>
-                <p class="transfer-description">
-                    Service exclusif avec véhicule de luxe, chauffeur personnel et assistance complète.
-                </p>
-                <div class="transfer-price">120€</div>
-                <ul class="transfer-features">
-                    <li><i class="fas fa-check"></i> Véhicule de luxe</li>
-                    <li><i class="fas fa-check"></i> Chauffeur dédicacé</li>
-                    <li><i class="fas fa-check"></i> Service d'assistance</li>
-                    <li><i class="fas fa-check"></i> Priorité absolue</li>
-                </ul>
             </div>
         </div>
     </section>
