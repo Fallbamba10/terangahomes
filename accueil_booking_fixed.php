@@ -697,30 +697,14 @@ try {
     
     <style>
         :root {
-            /* Palette Teranga Moderne */
-            --teranga-gold: #D4AF37;
-            --teranga-blue: #1B263B;
-            --teranga-terracotta: #BC6C25;
-            --teranga-sand: #F8F7F4;
-            --teranga-cream: #FAF9F6;
-            --teranga-earth: #8B7355;
-            --teranga-coral: #E67E50;
-            --teranga-sage: #87A96B;
-            
-            /* Mapping pour compatibilité */
-            --booking-blue: var(--teranga-blue);
-            --booking-light-blue: var(--teranga-coral);
-            --booking-dark: var(--teranga-blue);
-            --booking-gray: var(--teranga-earth);
-            --booking-light-gray: var(--teranga-sand);
-            --booking-border: rgba(212, 175, 55, 0.2);
-            --booking-orange: var(--teranga-terracotta);
-            --booking-shadow: rgba(212, 175, 55, 0.15);
-            
-            /* Dégradés */
-            --gradient-primary: linear-gradient(135deg, var(--teranga-gold) 0%, var(--teranga-terracotta) 100%);
-            --gradient-secondary: linear-gradient(135deg, var(--teranga-blue) 0%, #2C3E50 100%);
-            --gradient-hero: linear-gradient(135deg, var(--teranga-blue) 0%, var(--teranga-gold) 100%);
+            --booking-blue: #003580;
+            --booking-light-blue: #0071c2;
+            --booking-dark: #2d3748;
+            --booking-gray: #4a5568;
+            --booking-light-gray: #f7fafc;
+            --booking-border: #e2e8f0;
+            --booking-orange: #febb02;
+            --booking-shadow: rgba(0,0,0,0.1);
         }
         
         * {
@@ -731,8 +715,8 @@ try {
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--teranga-sand);
-            color: var(--teranga-blue);
+            background: var(--booking-light-gray);
+            color: var(--booking-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -783,17 +767,16 @@ try {
         .logo-booking {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--teranga-gold);
+            color: var(--booking-blue);
             text-decoration: none;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: color 0.2s ease;
             white-space: nowrap;
         }
         
         .logo-booking:hover {
-            color: var(--teranga-terracotta);
-            transform: scale(1.05);
+            color: var(--booking-light-blue);
         }
         
         .logo-booking i {
@@ -809,24 +792,24 @@ try {
         }
         
         .nav-item-booking {
-            color: var(--teranga-cream);
+            color: var(--booking-dark);
             text-decoration: none;
             font-weight: 500;
             font-size: 13px;
             padding: 6px 10px;
             border-radius: 6px;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             white-space: nowrap;
         }
         
         .nav-item-booking:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--teranga-gold);
+            background: var(--booking-light-gray);
+            color: var(--booking-blue);
         }
         
         .nav-item-booking.active {
-            background: var(--teranga-gold);
-            color: var(--teranga-blue);
+            background: var(--booking-blue);
+            color: white;
         }
         
         .nav-item-booking.active::after {
@@ -994,7 +977,7 @@ try {
         
         /* Hero Section */
         .hero-booking {
-            background: var(--gradient-hero);
+            background: linear-gradient(135deg, var(--booking-blue) 0%, var(--booking-light-blue) 100%);
             padding: 60px 0;
             position: relative;
             overflow: hidden;
@@ -1053,14 +1036,10 @@ try {
         
         /* Search Box - Booking Style */
         .search-box-booking {
-            background: var(--teranga-cream);
+            background: white;
             border-radius: 16px;
             padding: 32px;
             box-shadow: var(--booking-shadow);
-            border: 2px solid var(--teranga-gold);
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
         }
         
         .search-box-booking::before {
@@ -1837,15 +1816,15 @@ try {
         }
         
         .btn-search-booking {
-            background: var(--gradient-primary);
-            color: var(--teranga-blue);
+            background: var(--booking-blue);
+            color: white;
             border: none;
             padding: 14px 32px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1853,14 +1832,15 @@ try {
         }
         
         .btn-search-booking:hover {
+            background: var(--booking-light-blue);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 25px rgba(0,53,128,0.3);
         }
         
         /* Features Section */
         .features-section {
             padding: 20px 0;
-            background: var(--teranga-sand);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
         
@@ -1945,10 +1925,10 @@ try {
         
         .feature-icon {
             font-size: 2.5rem;
-            color: var(--teranga-gold);
+            color: var(--booking-blue);
             margin-bottom: 16px;
             transition: all 0.3s ease;
-            background: var(--gradient-primary);
+            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1956,19 +1936,19 @@ try {
         
         .feature-item:hover .feature-icon {
             transform: scale(1.05);
-            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+            filter: drop-shadow(0 2px 4px rgba(0,53,128,0.2));
         }
         
         .feature-title {
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 6px;
-            color: var(--teranga-blue);
+            color: var(--booking-dark);
             line-height: 1.3;
         }
         
         .feature-description {
-            color: var(--teranga-earth);
+            color: var(--booking-gray);
             line-height: 1.5;
             font-size: 0.9rem;
             max-width: 240px;
@@ -1978,8 +1958,8 @@ try {
         
         .feature-badge {
             display: inline-block;
-            background: var(--teranga-terracotta);
-            color: var(--teranga-blue);
+            background: var(--booking-orange);
+            color: var(--booking-dark);
             padding: 2px 6px;
             border-radius: 10px;
             font-size: 0.65rem;
@@ -1994,7 +1974,7 @@ try {
         .feature-number {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--teranga-gold);
+            color: var(--booking-blue);
             margin-bottom: 6px;
             display: block;
         }
