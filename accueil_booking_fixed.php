@@ -1047,27 +1047,11 @@ try {
         }
         
         .search-box-booking::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
-            border-radius: 12px;
-            z-index: -1;
+            display: none;
         }
         
         .search-box-booking::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            background: white;
-            border-radius: 10px;
-            z-index: -1;
+            display: none;
         }
         
         .search-tabs {
@@ -1835,6 +1819,8 @@ try {
             align-items: center;
             gap: 8px;
             white-space: nowrap;
+            align-self: flex-end;
+            height: fit-content;
         }
         
         .btn-search-booking:hover {
@@ -1847,10 +1833,10 @@ try {
             background: var(--booking-blue);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: inline-flex;
@@ -1858,8 +1844,9 @@ try {
             gap: 6px;
             white-space: nowrap;
             text-decoration: none;
-            width: 100%;
+            width: auto;
             justify-content: center;
+            align-self: flex-end;
         }
         
         .btn-book-booking:hover {
