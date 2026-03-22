@@ -1042,6 +1042,8 @@ try {
             box-shadow: var(--booking-shadow);
             max-width: 900px;
             margin: 0 auto;
+            border: 2px solid var(--booking-blue);
+            position: relative;
         }
         
         .search-box-booking::before {
@@ -1842,8 +1844,8 @@ try {
         }
         
         .btn-book-booking {
-            background: var(--booking-orange);
-            color: var(--booking-dark);
+            background: var(--booking-blue);
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 6px;
@@ -1861,14 +1863,14 @@ try {
         }
         
         .btn-book-booking:hover {
-            background: linear-gradient(135deg, #f3c432 0%, var(--booking-orange) 100%);
+            background: var(--booking-light-blue);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(254,187,2,0.4);
+            box-shadow: 0 6px 20px rgba(0,53,128,0.3);
         }
         
         .btn-book-booking:active {
             transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(254,187,2,0.3);
+            box-shadow: 0 2px 8px rgba(0,53,128,0.2);
         }
         
         /* Features Section */
