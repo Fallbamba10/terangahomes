@@ -1029,16 +1029,16 @@ try {
         }
         
         .hero-subtitle {
-            font-size: 1rem;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
             opacity: 0.95;
         }
         
         /* Search Box - Booking Style */
         .search-box-booking {
             background: white;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 12px;
             box-shadow: var(--booking-shadow);
             max-width: 900px;
             margin: 0 auto;
@@ -1056,13 +1056,13 @@ try {
         
         .search-tabs {
             display: flex;
-            gap: 20px;
-            margin-bottom: 16px;
-            border-bottom: 2px solid var(--booking-light-gray);
+            gap: 16px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--booking-light-gray);
         }
         
         .search-tab {
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: transparent;
             border: none;
             color: var(--booking-gray);
@@ -1070,7 +1070,7 @@ try {
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .search-tab.active {
@@ -1091,7 +1091,7 @@ try {
         .search-form-booking {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
-            gap: 12px;
+            gap: 8px;
             align-items: end;
         }
         
@@ -1101,17 +1101,17 @@ try {
         }
         
         .form-label-booking {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: var(--booking-dark);
         }
         
         .form-control-booking {
-            padding: 10px 14px;
+            padding: 8px 12px;
             border: 1px solid var(--booking-border);
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
             transition: all 0.2s ease;
         }
         
@@ -1809,15 +1809,15 @@ try {
             background: var(--booking-blue);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             white-space: nowrap;
             align-self: flex-end;
             height: fit-content;
@@ -1833,15 +1833,15 @@ try {
             background: var(--booking-blue);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             white-space: nowrap;
             text-decoration: none;
             width: auto;
