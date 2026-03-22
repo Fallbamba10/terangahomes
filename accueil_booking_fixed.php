@@ -1029,17 +1029,19 @@ try {
         }
         
         .hero-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 24px;
+            font-size: 1rem;
+            margin-bottom: 20px;
             opacity: 0.95;
         }
         
         /* Search Box - Booking Style */
         .search-box-booking {
             background: white;
-            border-radius: 16px;
-            padding: 32px;
+            border-radius: 12px;
+            padding: 20px;
             box-shadow: var(--booking-shadow);
+            max-width: 900px;
+            margin: 0 auto;
         }
         
         .search-box-booking::before {
@@ -1050,7 +1052,7 @@ try {
             right: -1px;
             bottom: -1px;
             background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
-            border-radius: 16px;
+            border-radius: 12px;
             z-index: -1;
         }
         
@@ -1062,19 +1064,19 @@ try {
             right: 2px;
             bottom: 2px;
             background: white;
-            border-radius: 14px;
+            border-radius: 10px;
             z-index: -1;
         }
         
         .search-tabs {
             display: flex;
-            gap: 24px;
-            margin-bottom: 24px;
+            gap: 20px;
+            margin-bottom: 16px;
             border-bottom: 2px solid var(--booking-light-gray);
         }
         
         .search-tab {
-            padding: 12px 16px;
+            padding: 10px 14px;
             background: transparent;
             border: none;
             color: var(--booking-gray);
@@ -1082,6 +1084,7 @@ try {
             cursor: pointer;
             position: relative;
             transition: all 0.2s ease;
+            font-size: 14px;
         }
         
         .search-tab.active {
@@ -1102,7 +1105,7 @@ try {
         .search-form-booking {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
-            gap: 16px;
+            gap: 12px;
             align-items: end;
         }
         
@@ -1112,16 +1115,16 @@ try {
         }
         
         .form-label-booking {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--booking-dark);
         }
         
         .form-control-booking {
-            padding: 12px 16px;
+            padding: 10px 14px;
             border: 1px solid var(--booking-border);
-            border-radius: 8px;
+            border-radius: 6px;
             font-size: 14px;
             transition: all 0.2s ease;
         }
@@ -1820,10 +1823,10 @@ try {
             background: var(--booking-blue);
             color: white;
             border: none;
-            padding: 14px 32px;
-            border-radius: 8px;
+            padding: 12px 24px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
