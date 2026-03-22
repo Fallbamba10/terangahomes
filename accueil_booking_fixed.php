@@ -697,14 +697,30 @@ try {
     
     <style>
         :root {
-            --booking-blue: #003580;
-            --booking-light-blue: #0071c2;
-            --booking-dark: #2d3748;
-            --booking-gray: #4a5568;
-            --booking-light-gray: #f7fafc;
-            --booking-border: #e2e8f0;
-            --booking-orange: #febb02;
-            --booking-shadow: rgba(0,0,0,0.1);
+            /* Palette Teranga Moderne */
+            --teranga-gold: #D4AF37;
+            --teranga-blue: #1B263B;
+            --teranga-terracotta: #BC6C25;
+            --teranga-sand: #F8F7F4;
+            --teranga-cream: #FAF9F6;
+            --teranga-earth: #8B7355;
+            --teranga-coral: #E67E50;
+            --teranga-sage: #87A96B;
+            
+            /* Mapping pour compatibilité */
+            --booking-blue: var(--teranga-blue);
+            --booking-light-blue: var(--teranga-coral);
+            --booking-dark: var(--teranga-blue);
+            --booking-gray: var(--teranga-earth);
+            --booking-light-gray: var(--teranga-sand);
+            --booking-border: rgba(212, 175, 55, 0.2);
+            --booking-orange: var(--teranga-terracotta);
+            --booking-shadow: rgba(212, 175, 55, 0.15);
+            
+            /* Dégradés */
+            --gradient-primary: linear-gradient(135deg, var(--teranga-gold) 0%, var(--teranga-terracotta) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--teranga-blue) 0%, #2C3E50 100%);
+            --gradient-hero: linear-gradient(135deg, var(--teranga-blue) 0%, var(--teranga-gold) 100%);
         }
         
         * {
@@ -715,8 +731,10 @@ try {
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--booking-dark);
-            background: white;
+            background: var(--teranga-sand);
+            color: var(--teranga-blue);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
         /* Container widths - Booking.com style */
@@ -765,16 +783,17 @@ try {
         .logo-booking {
             font-size: 1.4rem;
             font-weight: 700;
-            color: var(--booking-blue);
+            color: var(--teranga-gold);
             text-decoration: none;
             display: flex;
             align-items: center;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
             white-space: nowrap;
         }
         
         .logo-booking:hover {
-            color: var(--booking-light-blue);
+            color: var(--teranga-terracotta);
+            transform: scale(1.05);
         }
         
         .logo-booking i {
@@ -790,25 +809,24 @@ try {
         }
         
         .nav-item-booking {
-            color: var(--booking-dark);
+            color: var(--teranga-cream);
             text-decoration: none;
             font-weight: 500;
             font-size: 13px;
             padding: 6px 10px;
             border-radius: 6px;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             white-space: nowrap;
-            position: relative;
         }
         
         .nav-item-booking:hover {
-            background: var(--booking-light-gray);
-            color: var(--booking-blue);
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--teranga-gold);
         }
         
         .nav-item-booking.active {
-            background: var(--booking-light-blue);
-            color: white;
+            background: var(--teranga-gold);
+            color: var(--teranga-blue);
         }
         
         .nav-item-booking.active::after {
@@ -976,8 +994,8 @@ try {
         
         /* Hero Section */
         .hero-booking {
-            background: linear-gradient(135deg, var(--booking-blue) 0%, var(--booking-light-blue) 50%, #004a99 100%);
-            padding: 40px 0;
+            background: var(--gradient-hero);
+            padding: 60px 0;
             position: relative;
             overflow: hidden;
         }
@@ -1035,13 +1053,13 @@ try {
         
         /* Search Box - Booking Style */
         .search-box-booking {
-            background: white;
+            background: var(--teranga-cream);
             border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,53,128,0.15);
+            padding: 32px;
+            box-shadow: var(--booking-shadow);
+            border: 2px solid var(--teranga-gold);
             max-width: 1000px;
             margin: 0 auto;
-            border: 2px solid var(--booking-blue);
             position: relative;
         }
         
@@ -1818,26 +1836,31 @@ try {
             font-size: 12px;
         }
         
-        .btn-book-booking {
-            background: var(--booking-blue);
-            color: white;
+        .btn-search-booking {
+            background: var(--gradient-primary);
+            color: var(--teranga-blue);
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 500;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
         }
         
-        .btn-book-booking:hover {
-            background: var(--booking-light-blue);
+        .btn-search-booking:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
         }
         
         /* Features Section */
         .features-section {
             padding: 20px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: var(--teranga-sand);
             position: relative;
         }
         
@@ -1921,11 +1944,11 @@ try {
         }
         
         .feature-icon {
-            font-size: 2rem;
-            color: var(--booking-blue);
-            margin-bottom: 12px;
+            font-size: 2.5rem;
+            color: var(--teranga-gold);
+            margin-bottom: 16px;
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1933,35 +1956,35 @@ try {
         
         .feature-item:hover .feature-icon {
             transform: scale(1.05);
-            filter: drop-shadow(0 2px 4px rgba(0,53,128,0.2));
+            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
         }
         
         .feature-title {
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 6px;
-            color: var(--booking-dark);
+            color: var(--teranga-blue);
             line-height: 1.3;
         }
         
         .feature-description {
-            color: var(--booking-gray);
-            line-height: 1.4;
-            font-size: 0.85rem;
-            max-width: 220px;
+            color: var(--teranga-earth);
+            line-height: 1.5;
+            font-size: 0.9rem;
+            max-width: 240px;
             margin: 0 auto;
             flex-grow: 1;
         }
         
         .feature-badge {
             display: inline-block;
-            background: var(--booking-orange);
-            color: var(--booking-dark);
+            background: var(--teranga-terracotta);
+            color: var(--teranga-blue);
             padding: 2px 6px;
             border-radius: 10px;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            margin-top: 8px;
+            margin-top: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             align-self: center;
@@ -1971,8 +1994,8 @@ try {
         .feature-number {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--booking-blue);
-            margin-bottom: 4px;
+            color: var(--teranga-gold);
+            margin-bottom: 6px;
             display: block;
         }
         
