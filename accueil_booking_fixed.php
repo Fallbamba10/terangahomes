@@ -1751,6 +1751,7 @@ try {
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             /* Fallback for other browsers */
@@ -1835,6 +1836,36 @@ try {
             background: var(--booking-light-blue);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,53,128,0.3);
+        }
+        
+        .btn-book-booking {
+            background: var(--booking-orange);
+            color: var(--booking-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            text-decoration: none;
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .btn-book-booking:hover {
+            background: linear-gradient(135deg, #f3c432 0%, var(--booking-orange) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(254,187,2,0.4);
+        }
+        
+        .btn-book-booking:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(254,187,2,0.3);
         }
         
         /* Features Section */
