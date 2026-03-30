@@ -963,7 +963,8 @@ switch ($price_filter) {
             <p class="hero-subtitle"><?= count($available_services) ?>+ <?= $t['available_services'] ?> • <?= $t['best_price_guaranteed'] ?></p>
             
             <!-- Search Box -->
-            <div class="search-box-booking">
+            <div style="margin: -40px auto 80px; position: relative; z-index: 10;">
+                <div class="search-box-booking">
                 <form class="search-form-booking" method="GET">
                     <div class="form-group-booking">
                         <label class="form-label-booking"><?= $t['pickup_location'] ?></label>
@@ -1003,6 +1004,7 @@ switch ($price_filter) {
                         <i class="fas fa-search"></i> <?= $t['search_btn'] ?>
                     </button>
                 </form>
+                </div>
             </div>
         </div>
     </section>
