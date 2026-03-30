@@ -268,25 +268,6 @@ class AnnonceController extends Controller {
         }
     }
     
-    public function delete($id) {
-        $this->requireAuth();
-        
-        $annonce = $this->annonceModel->findById($id);
-        
-        if (!$annonce || $annonce['user_id'] != $_SESSION['user_id']) {
-            echo json_encode(['success' => false, 'message' => 'Annonce non trouvée ou accès non autorisé']);
-            exit;
-        }
-        
-        $result = $this->annonceModel->delete($id);
-        
-        if ($result) {
-            echo json_encode(['success' => true, 'message' => 'Annonce supprimée avec succès']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
-        }
-    }
-    
     public function toggleStatus($id) {
         $this->requireAuth();
         
