@@ -1147,7 +1147,7 @@ try {
         
         /* Explore Senegal Section - Booking.com Style */
         .explore-senegal-section {
-            padding: 20px 0;
+            padding: 10px 0;
             background: white;
         }
         
@@ -1338,7 +1338,7 @@ try {
         
         /* Popular Cities Scrollable */
         .popular-cities-section {
-            padding: 15px 0;
+            padding: 10px 0;
             background: var(--booking-light-gray);
         }
         
@@ -1410,7 +1410,7 @@ try {
         
         /* Experiences Section */
         .experiences-section {
-            padding: 40px 0;
+            padding: 20px 0;
             background: white;
         }
         
@@ -1643,7 +1643,7 @@ try {
             }
         }
         .properties-section {
-            padding: 30px 0;
+            padding: 15px 0;
         }
         
         .section-header {
@@ -1861,7 +1861,7 @@ try {
         
         /* Features Section */
         .features-section {
-            padding: 20px 0;
+            padding: 10px 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             position: relative;
         }
@@ -2392,7 +2392,7 @@ try {
     </section>
 
     <!-- Search Box -->
-    <section style="margin: -40px auto 80px; position: relative; z-index: 10;">
+    <section style="margin: -40px auto 40px; position: relative; z-index: 10;">
         <div class="search-box-booking">
             <div class="search-tabs">
                 <button class="search-tab active" data-type="all"><?= $t['properties'] ?></button>
@@ -2469,7 +2469,7 @@ try {
             <div class="senegal-destinations">
                 <!-- Dakar -->
                 <div class="senegal-destination-card" data-category="cities">
-                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2EyWt9Hb_E3yeASAly30k78eDxpe4hY2oog&s" 
                          alt="Dakar" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Dakar</h3>
