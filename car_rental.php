@@ -488,46 +488,30 @@ switch ($price_filter) {
             opacity: 0.95;
         }
         
-        /* Search Box */
+        /* Search Box - Booking Style */
         .search-box-booking {
             background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 8px 32px rgba(0,53,128,0.15);
-            max-width: 1000px;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: var(--booking-shadow);
+            max-width: 900px;
             margin: 0 auto;
             border: 2px solid var(--booking-blue);
             position: relative;
         }
         
         .search-box-booking::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
-            border-radius: 16px;
-            z-index: -1;
+            display: none;
         }
         
         .search-box-booking::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            right: 2px;
-            bottom: 2px;
-            background: white;
-            border-radius: 14px;
-            z-index: -1;
+            display: none;
         }
         
         .search-form-booking {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr auto;
+            gap: 8px;
             align-items: end;
         }
         
@@ -537,19 +521,18 @@ switch ($price_filter) {
         }
         
         .form-label-booking {
+            font-size: 10px;
             font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 14px;
+            margin-bottom: 4px;
             color: var(--booking-dark);
         }
         
         .form-control-booking {
-            padding: 10px 12px;
+            padding: 8px 12px;
             border: 1px solid var(--booking-border);
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 4px;
+            font-size: 13px;
             transition: all 0.2s ease;
-            background: white;
         }
         
         .form-control-booking:focus {
@@ -559,22 +542,27 @@ switch ($price_filter) {
         }
         
         .btn-search-booking {
-            background: var(--booking-orange);
-            color: var(--booking-dark);
+            background: var(--booking-blue);
+            color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(254,187,2,0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            align-self: flex-end;
+            height: fit-content;
         }
         
         .btn-search-booking:hover {
-            background: #e6a800;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(254,187,2,0.4);
+            background: var(--booking-light-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,53,128,0.3);
         }
         
         .btn-search-booking:active {
