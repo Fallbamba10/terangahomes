@@ -2489,7 +2489,7 @@ try {
                 
                 <!-- Saly -->
                 <div class="senegal-destination-card" data-category="beaches">
-                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://images.trvl-media.com/place/6145555/d672cba1-2a47-4d40-a82b-642f84e19a25.jpg?impolicy=fcrop&w=550&h=363&p=1&q=high" 
                          alt="Saly" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Saly</h3>
@@ -2509,7 +2509,7 @@ try {
                 
                 <!-- Saint-Louis -->
                 <div class="senegal-destination-card" data-category="cities culture">
-                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://tourisme.gouv.sn/wp-content/uploads/2023/04/saint-louis_0.jpg" 
                          alt="Saint-Louis" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Saint-Louis</h3>
@@ -2529,7 +2529,7 @@ try {
                 
                 <!-- Lac Rose -->
                 <div class="senegal-destination-card" data-category="parks nature">
-                    <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://ecotour-voyage-nature.com/images/ecotour/blog/2-0-lac-rose-une-curiosite-naturelle-du-senegal.jpg" 
                          alt="Lac Rose" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Lac Rose</h3>
@@ -2549,7 +2549,7 @@ try {
                 
                 <!-- Cap Skirring -->
                 <div class="senegal-destination-card" data-category="beaches">
-                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf03hmXiRC8vlxsqzproyZh3DxF8qpHqXc6A&s" 
                          alt="Cap Skirring" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Cap Skirring</h3>
@@ -2569,7 +2569,7 @@ try {
                 
                 <!-- Parc Djoudj -->
                 <div class="senegal-destination-card" data-category="parks nature">
-                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://www.au-senegal.com/local/cache-vignettes/L600xH315/a7da1bb5a178ab65083f231aa60a07-cf378.jpg" 
                          alt="Parc Djoudj" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Parc Djoudj</h3>
@@ -2589,7 +2589,7 @@ try {
                 
                 <!-- Île de Gorée -->
                 <div class="senegal-destination-card" data-category="culture history">
-                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                    <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTlEnNA_e9YtWypv3EpdezFrtgzlqY49vwcnNB8l2_YSO3D6c2CKnrBKSMZSXPsZl29Gu1Xf-guMhEOD7GhGRn4dY4&s=19"
                          alt="Île de Gorée" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
                         <h3 class="senegal-destination-name">Île de Gorée</h3>
@@ -2609,10 +2609,10 @@ try {
                 
                 <!-- Tambacounda -->
                 <div class="senegal-destination-card" data-category="cities">
-                    <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="Tambacounda" class="senegal-destination-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7t0Yqp3MsqvVxBbo9_vyZbZwzEgA52VPeUw&s" 
+                         alt="Kedougou" class="senegal-destination-image">
                     <div class="senegal-destination-overlay">
-                        <h3 class="senegal-destination-name">Tambacounda</h3>
+                        <h3 class="senegal-destination-name">Kedougou</h3>
                         <p class="senegal-destination-description">Cœur du Sénégal</p>
                         <div class="senegal-destination-stats">
                             <div class="destination-stat">
@@ -2745,7 +2745,7 @@ try {
                 <!-- Tour de Dakar -->
                 <div class="experience-card" data-category="tours culture">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://lequotidien.sn/wp-content/uploads/2025/04/CELEBRATION-15-ans-du-Monument-de-la-Renaissance-africaine.jpg" 
                              alt="Tour de Dakar">
                         <span class="experience-badge">Populaire</span>
                     </div>
@@ -2769,7 +2769,7 @@ try {
                 <!-- Île de Gorée -->
                 <div class="experience-card" data-category="tours culture history">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/a2/78/a8.jpg" 
                              alt="Île de Gorée">
                         <span class="experience-badge">UNESCO</span>
                     </div>
@@ -2793,7 +2793,7 @@ try {
                 <!-- Lac Rose -->
                 <div class="experience-card" data-category="nature tours">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1540206395-6880857c32f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://cdn.tripinafrica.com/844x415/places/-GYjl0VM3Lx.jpeg" 
                              alt="Lac Rose">
                         <span class="experience-badge">Unique</span>
                     </div>
@@ -2817,7 +2817,7 @@ try {
                 <!-- Parc Djoudj -->
                 <div class="experience-card" data-category="nature wildlife">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://media.routard.com/image/15/2/pt17131.1229152.jpg" 
                              alt="Parc Djoudj">
                         <span class="experience-badge">Nature</span>
                     </div>
@@ -2841,7 +2841,7 @@ try {
                 <!-- Saint-Louis -->
                 <div class="experience-card" data-category="culture tours history">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNk15nwVI1yUk0o7kmhCUNRET5Nc3xv7gbvg&s" 
                              alt="Saint-Louis">
                         <span class="experience-badge">Historique</span>
                     </div>
@@ -2865,7 +2865,7 @@ try {
                 <!-- Pêche artisanale -->
                 <div class="experience-card" data-category="culture adventure">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://teranga-decouvertes.com/wp-content/uploads/2023/04/shutterstock_2142125241_0.jpg.webp" 
                              alt="Pêche artisanale">
                         <span class="experience-badge">Authentique</span>
                     </div>
@@ -2889,7 +2889,7 @@ try {
                 <!-- Marché Sandaga -->
                 <div class="experience-card" data-category="culture tours">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz7DpNMPuNVrbny2YA6qWdNwVIsWgNvQ4omA&s" 
                              alt="Marché Sandaga">
                         <span class="experience-badge">Local</span>
                     </div>
@@ -2913,7 +2913,7 @@ try {
                 <!-- Désert de Lompoul -->
                 <div class="experience-card" data-category="nature adventure">
                     <div class="experience-image">
-                        <img src="https://images.unsplash.com/photo-1559826264-dc66ee52bee2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrNc4_MzdybfJhHSspoLQmRQ23t6ag7D8obQ&s" 
                              alt="Désert de Lompoul">
                         <span class="experience-badge">Aventure</span>
                     </div>

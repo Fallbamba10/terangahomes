@@ -184,23 +184,30 @@ class Annonce {
             $params[':images'] = json_encode($data['images']);
         }
         
-        $sql .= " WHERE id = :id";
+        $sql .= " WHERE id = :id AND user_id = :user_id";
         $params[':id'] = $id;
+        $params[':user_id'] = $_SESSION['user_id'] ?? null;
         
         return $this->db->query($sql, $params);
     }
     
     public function delete($id) {
-        $sql = "DELETE FROM annonces WHERE id = :id";
-        return $this->db->query($sql, [':id' => $id]);
+        $sql = "DELETE FROM annonces WHERE id = :id AND user_id = :user_id";
+        return $this->db->query($sql, [
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id'] ?? null
+        ]);
     }
     
     public function toggleStatus($id) {
         $sql = "UPDATE annonces SET statut = CASE 
                 WHEN statut = 'active' THEN 'inactive' 
                 ELSE 'active' 
-                END WHERE id = :id";
-        return $this->db->query($sql, [':id' => $id]);
+                END WHERE id = :id AND user_id = :user_id";
+        return $this->db->query($sql, [
+            ':id' => $id,
+            ':user_id' => $_SESSION['user_id'] ?? null
+        ]);
     }
     
     public function incrementViews($id) {
