@@ -140,7 +140,7 @@
 <script>
 function toggleStatus(annonceId) {
     if (confirm('Êtes-vous sûr de vouloir changer le statut de cette annonce ?')) {
-        // TODO: Appel AJAX pour changer le statut
+        // Appel AJAX pour changer le statut
         fetch(`<?= APP_URL ?>/annonces/${annonceId}/toggle-status`, {
             method: 'POST',
             headers: {
@@ -150,21 +150,22 @@ function toggleStatus(annonceId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload();
+                // Recharger la page pour voir les changements
+                window.location.reload();
             } else {
-                alert('Erreur lors du changement de statut');
+                alert('Erreur lors du changement de statut: ' + (data.message || 'Erreur inconnue'));
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('Erreur lors du changement de statut');
+            console.error('Erreur:', error);
+            alert('Erreur de connexion. Veuillez réessayer.');
         });
     }
 }
 
 function deleteAnnonce(annonceId) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette annonce ? Cette action est irréversible.')) {
-        // TODO: Appel AJAX pour supprimer
+        // Appel AJAX pour supprimer l'annonce
         fetch(`<?= APP_URL ?>/annonces/${annonceId}/delete`, {
             method: 'POST',
             headers: {

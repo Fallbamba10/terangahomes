@@ -274,17 +274,57 @@ class AnnonceController extends Controller {
         $annonce = $this->annonceModel->findById($id);
         
         if (!$annonce || $annonce['user_id'] != $_SESSION['user_id']) {
-            $this->redirect('/my-annonces');
+            echo json_encode(['success' => false, 'message' => 'Annonce non trouvée ou accès non autorisé']);
+            exit;
         }
         
-        try {
-            $this->annonceModel->delete($id);
-            $_SESSION['flash_success'] = 'Annonce supprimée avec succès !';
-        } catch (Exception $e) {
-            $_SESSION['flash_error'] = 'Erreur lors de la suppression de l\'annonce.';
+        $result = $this->annonceModel->delete($id);
+        
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Annonce supprimée avec succès']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
+        }
+    }
+    
+    public function toggleStatus($id) {
+        $this->requireAuth();
+        
+        $annonce = $this->annonceModel->findById($id);
+        
+        if (!$annonce || $annonce['user_id'] != $_SESSION['user_id']) {
+            echo json_encode(['success' => false, 'message' => 'Annonce non trouvée ou accès non autorisé']);
+            exit;
         }
         
-        $this->redirect('/my-annonces');
+        $newStatus = $annonce['statut'] === 'active' ? 'inactive' : 'active';
+        
+        $result = $this->annonceModel->updateStatus($id, $newStatus);
+        
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Statut mis à jour avec succès']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour du statut']);
+        }
+    }
+    
+    public function delete($id) {
+        $this->requireAuth();
+        
+        $annonce = $this->annonceModel->findById($id);
+        
+        if (!$annonce || $annonce['user_id'] != $_SESSION['user_id']) {
+            echo json_encode(['success' => false, 'message' => 'Annonce non trouvée ou accès non autorisé']);
+            exit;
+        }
+        
+        $result = $this->annonceModel->delete($id);
+        
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Annonce supprimée avec succès']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
+        }
     }
     
     public function myAnnonces() {

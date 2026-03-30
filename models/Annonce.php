@@ -210,9 +210,13 @@ class Annonce {
         ]);
     }
     
-    public function incrementViews($id) {
-        $sql = "UPDATE annonces SET views_count = views_count + 1 WHERE id = :id";
-        return $this->db->query($sql, [':id' => $id]);
+    public function updateStatus($id, $status) {
+        $sql = "UPDATE annonces SET statut = :status WHERE id = :id AND user_id = :user_id";
+        return $this->db->query($sql, [
+            ':id' => $id,
+            ':status' => $status,
+            ':user_id' => $_SESSION['user_id'] ?? null
+        ]);
     }
     
     public function getFeatured($limit = 6) {
