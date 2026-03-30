@@ -490,12 +490,13 @@ switch ($price_filter) {
         
         /* Search Box - Booking Style */
         .search-box-booking {
-            background: var(--booking-blue);
+            background: white;
             border-radius: 8px;
             padding: 12px;
             box-shadow: var(--booking-shadow);
             max-width: 900px;
             margin: 0 auto;
+            border: 2px solid var(--booking-blue);
             position: relative;
         }
         
@@ -523,27 +524,26 @@ switch ($price_filter) {
             font-size: 10px;
             font-weight: 600;
             margin-bottom: 4px;
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--booking-dark);
         }
         
         .form-control-booking {
             padding: 8px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid var(--booking-border);
             border-radius: 4px;
             font-size: 13px;
             transition: all 0.2s ease;
-            background: white;
         }
         
         .form-control-booking:focus {
             outline: none;
-            border-color: white;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
+            border-color: var(--booking-blue);
+            box-shadow: 0 0 0 2px rgba(0,53,128,0.1);
         }
         
         .btn-search-booking {
-            background: white;
-            color: var(--booking-blue);
+            background: var(--booking-blue);
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 4px;
@@ -560,14 +560,14 @@ switch ($price_filter) {
         }
         
         .btn-search-booking:hover {
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--booking-light-blue);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,53,128,0.3);
         }
         
         .btn-search-booking:active {
             transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,53,128,0.2);
         }
         
         /* Filters Section */
