@@ -1036,13 +1036,12 @@ try {
         
         /* Search Box - Booking Style */
         .search-box-booking {
-            background: white;
+            background: var(--booking-blue);
             border-radius: 8px;
             padding: 12px;
             box-shadow: var(--booking-shadow);
             max-width: 900px;
             margin: 0 auto;
-            border: 2px solid var(--booking-blue);
             position: relative;
         }
         
@@ -1058,14 +1057,14 @@ try {
             display: flex;
             gap: 16px;
             margin-bottom: 12px;
-            border-bottom: 1px solid var(--booking-light-gray);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .search-tab {
             padding: 8px 12px;
             background: transparent;
             border: none;
-            color: var(--booking-gray);
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
             cursor: pointer;
             position: relative;
@@ -1074,7 +1073,7 @@ try {
         }
         
         .search-tab.active {
-            color: var(--booking-blue);
+            color: white;
             font-weight: 600;
         }
         
@@ -1085,7 +1084,7 @@ try {
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--booking-blue);
+            background: white;
         }
         
         .search-form-booking {
@@ -1104,46 +1103,46 @@ try {
             font-size: 10px;
             font-weight: 600;
             margin-bottom: 4px;
-            color: var(--booking-dark);
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .form-control-booking {
             padding: 8px 12px;
-            border: 1px solid var(--booking-border);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 4px;
             font-size: 13px;
             transition: all 0.2s ease;
+            background: white;
         }
         
         .form-control-booking:focus {
             outline: none;
-            border-color: var(--booking-blue);
-            box-shadow: 0 0 0 2px rgba(0,53,128,0.1);
+            border-color: white;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
         }
         
         .btn-search-booking {
-            background: linear-gradient(135deg, var(--booking-orange) 0%, #f3c432 100%);
-            color: var(--booking-dark);
+            background: white;
+            color: var(--booking-blue);
             border: none;
-            border-radius: 8px;
-            padding: 14px 24px;
+            padding: 10px 20px;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(254,187,2,0.3);
+            align-self: flex-end;
+            height: fit-content;
         }
         
         .btn-search-booking:hover {
-            background: linear-gradient(135deg, #f3c432 0%, var(--booking-orange) 100%);
+            background: rgba(255, 255, 255, 0.9);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(254,187,2,0.4);
-        }
-        
-        .btn-search-booking:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(254,187,2,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
         
         /* Explore Senegal Section - Booking.com Style */
