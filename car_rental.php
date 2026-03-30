@@ -942,7 +942,7 @@ switch ($price_filter) {
                         <i class="fas fa-car" style="margin-right: 4px;"></i>
                         <?= $t['car_rental'] ?>
                     </a>
-                    <a href="#" class="nav-item-booking">
+                    <a href="airport_transfer.php" class="nav-item-booking">
                         <i class="fas fa-plane" style="margin-right: 4px;"></i>
                         <?= $t['airport_transfer'] ?>
                     </a>
