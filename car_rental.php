@@ -993,9 +993,12 @@ switch ($price_filter) {
             <h1 class="hero-title"><?= $t['tagline'] ?></h1>
             <p class="hero-subtitle"><?= count($available_cars) ?>+ <?= $t['available_cars'] ?> • <?= $t['best_price_guaranteed'] ?></p>
             
-            <!-- Search Box -->
-            <div style="margin: -40px auto 80px; position: relative; z-index: 10;">
-                <div class="search-box-booking">
+            </div>
+    </section>
+
+    <!-- Search Box -->
+    <section style="margin: -40px auto 80px; position: relative; z-index: 10;">
+        <div class="search-box-booking">
                 <form class="search-form-booking" method="GET">
                     <div class="form-group-booking">
                         <label class="form-label-booking"><?= $t['pickup_location'] ?></label>
@@ -1026,8 +1029,6 @@ switch ($price_filter) {
                         <i class="fas fa-search"></i> <?= $t['search_btn'] ?>
                     </button>
                 </form>
-                </div>
-            </div>
         </div>
     </section>
 
