@@ -3048,7 +3048,183 @@ try {
         </div>
     </section>
 
-    
+    <!-- Popular Cities Section -->
+    <section class="popular-cities-section">
+        <div class="cities-header">
+            <h2 class="cities-title">Villes Populaires</h2>
+            <p class="cities-subtitle">Trouvez votre prochain bien dans nos villes les plus recherchées</p>
+        </div>
+        
+        <div class="cities-grid">
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Dakar</h3>
+                    <p class="city-count">245 biens</p>
+                    <span class="city-rating">4.8⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Dakar" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Saly</h3>
+                    <p class="city-count">189 biens</p>
+                    <span class="city-rating">4.7⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Saly" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Saint-Louis</h3>
+                    <p class="city-count">87 biens</p>
+                    <span class="city-rating">4.9⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Saint-Louis" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Mbour</h3>
+                    <p class="city-count">156 biens</p>
+                    <span class="city-rating">4.6⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Mbour" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-mosque"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Touba</h3>
+                    <p class="city-count">45 biens</p>
+                    <span class="city-rating">4.5⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Touba" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="city-item">
+                <div class="city-icon">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <div class="city-info">
+                    <h3 class="city-name">Kaolack</h3>
+                    <p class="city-count">38 biens</p>
+                    <span class="city-rating">4.4⭐</span>
+                </div>
+                <a href="annonces_direct_fixed.php?ville=Kaolack" class="city-link">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Properties -->
+    <section class="recent-properties-section">
+        <div class="section-header">
+            <h2 class="section-title"><?= $t['recent_properties'] ?></h2>
+            <p class="section-subtitle">Découvrez les dernières annonces ajoutées sur notre plateforme</p>
+        </div>
+        
+        <div class="properties-grid">
+            <?php
+            $recent_properties = [
+                [
+                    'id' => 1,
+                    'titre' => 'Appartement moderne à Dakar',
+                    'prix' => 150000,
+                    'type' => 'location',
+                    'ville' => 'Dakar',
+                    'proprietaire_prenom' => 'Alioune',
+                    'image' => 'apartment1.jpg'
+                ],
+                [
+                    'id' => 2,
+                    'titre' => 'Villa de luxe à Saly',
+                    'prix' => 350000,
+                    'type' => 'location',
+                    'ville' => 'Saly',
+                    'proprietaire_prenom' => 'Fatou',
+                    'image' => 'villa1.jpg'
+                ],
+                [
+                    'id' => 3,
+                    'titre' => 'Studio meublé à Mbour',
+                    'prix' => 75000,
+                    'type' => 'location',
+                    'ville' => 'Mbour',
+                    'proprietaire_prenom' => 'Omar',
+                    'image' => 'studio1.jpg'
+                ]
+            ];
+            
+            foreach ($recent_properties as $annonce):
+            ?>
+            <div class="property-card-booking" onclick="window.location.href='annonces_direct_fixed.php?id=<?= $annonce['id'] ?>'">
+                <div class="property-image">
+                    <img src="https://via.placeholder.com/300x200/003580/ffffff?text=<?= urlencode($annonce['titre']) ?>" alt="<?= htmlspecialchars($annonce['titre']) ?>">
+                    <span class="property-badge"><?= $annonce['type'] === 'location' ? 'Location' : 'Vente' ?></span>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title"><?= htmlspecialchars($annonce['titre']) ?></h3>
+                    <p class="property-location">
+                        <i class="fas fa-map-marker-alt"></i><?= htmlspecialchars($annonce['ville']) ?>
+                    </p>
+                    <div class="property-price">
+                        <?= number_format($annonce['prix'], 0, ' ', ' ') ?> FCFA
+                        <?php if ($annonce['type'] === 'location'): ?>
+                            <small style="font-weight: 400; color: var(--booking-gray);">/ <?= $t['per_night'] ?></small>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="property-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-number">4.8 (24 <?= $t['reviews'] ?>)</span>
+                    </div>
+                    
+                    <div class="property-footer-booking">
+                        <span class="property-host">
+                            <?= htmlspecialchars($annonce['proprietaire_prenom']) ?>
+                        </span>
+                        <button class="btn-book-booking" onclick="event.stopPropagation(); showBookingModal(<?= $annonce['id'] ?>, '<?= htmlspecialchars($annonce['titre']) ?>', <?= convert_price($annonce['prix'], $currency, $exchange_rates) ?>, '<?= $currency ?>', '<?= $currency_symbols[$currency] ?>')">
+                            <?= $t['book_now'] ?>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer-booking">
         <div class="footer-content">
