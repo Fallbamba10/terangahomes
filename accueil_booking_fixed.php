@@ -1859,146 +1859,165 @@ try {
             box-shadow: 0 2px 8px rgba(0,53,128,0.2);
         }
         
-        /* Features Section */
-        .features-section {
-            padding: 10px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            position: relative;
+        /* Destinations Section */
+        .destinations-section {
+            padding: 40px 0;
+            background: white;
         }
         
-        .features-section .section-header {
+        .destinations-section .section-header {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 40px;
             padding: 0 32px;
         }
         
-        .features-section .section-title {
-            font-size: 1.8rem;
+        .destinations-section .section-title {
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             color: var(--booking-dark);
         }
         
-        .features-section .section-header p {
-            font-size: 1rem;
+        .destinations-section .section-header p {
+            font-size: 1.1rem;
             color: var(--booking-gray);
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.5;
         }
         
-        .features-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--booking-blue), transparent);
-        }
-        
-        .features-grid {
+        .destinations-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
             margin: 0 auto;
             padding: 0 32px;
             max-width: 1180px;
-            text-align: center;
-            align-items: stretch;
         }
         
-        .feature-item {
-            text-align: center;
-            padding: 20px 12px;
+        .destination-card {
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            position: relative;
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            height: 100%;
-        }
-        
-        .feature-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            background: var(--booking-blue);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-        }
-        
-        .feature-item:hover::before {
-            width: 80px;
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--booking-blue);
-            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            background: linear-gradient(135deg, var(--booking-blue), var(--booking-light-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            cursor: pointer;
+            position: relative;
         }
         
-        .feature-item:hover .feature-icon {
+        .destination-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .destination-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .destination-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .destination-card:hover .destination-image img {
             transform: scale(1.05);
-            filter: drop-shadow(0 2px 4px rgba(0,53,128,0.2));
         }
         
-        .feature-title {
-            font-size: 1rem;
+        .destination-overlay {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+        }
+        
+        .destination-badge {
+            background: var(--booking-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--booking-dark);
-            line-height: 1.3;
-        }
-        
-        .feature-description {
-            color: var(--booking-gray);
-            line-height: 1.5;
-            font-size: 0.9rem;
-            max-width: 240px;
-            margin: 0 auto;
-            flex-grow: 1;
-        }
-        
-        .feature-badge {
-            display: inline-block;
-            background: var(--booking-orange);
-            color: var(--booking-dark);
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.65rem;
-            font-weight: 600;
-            margin-top: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            align-self: center;
         }
         
-        /* Feature numbers */
-        .feature-number {
+        .destination-content {
+            padding: 24px;
+        }
+        
+        .destination-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--booking-blue);
-            margin-bottom: 6px;
+            color: var(--booking-dark);
+            margin-bottom: 8px;
+        }
+        
+        .destination-description {
+            color: var(--booking-gray);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .destination-stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
             display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--booking-blue);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--booking-gray);
+            font-weight: 500;
+        }
+        
+        .destination-link {
+            display: inline-block;
+            background: var(--booking-blue);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        
+        .destination-link:hover {
+            background: var(--booking-light-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,53,128,0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .destinations-grid {
+                grid-template-columns: 1fr;
+                padding: 0 16px;
+            }
+            
+            .destination-stats {
+                gap: 16px;
+            }
+            
+            .destination-card:hover {
+                transform: translateY(-4px);
+            }
         }
         
         /* Responsive features */
@@ -3029,62 +3048,110 @@ try {
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features-section">
+    <!-- Destinations Populaires Section -->
+    <section class="destinations-section">
         <div class="section-header">
-            <h2 class="section-title"><?= $t['why_choose_us'] ?></h2>
+            <h2 class="section-title">Destinations Populaires</h2>
             <p style="font-size: 1.2rem; color: var(--booking-gray); max-width: 600px; margin: 0 auto;">
-                <?= $lang === 'fr' ? 'Découvrez pourquoi des milliers de voyageurs nous font confiance pour leurs séjours au Sénégal' : 'Discover why thousands of travelers trust us for their stays in Senegal' ?>
+                <?= $lang === 'fr' ? 'Découvrez les plus belles villes du Sénégal pour votre prochain séjour' : 'Discover the most beautiful cities of Senegal for your next stay' ?>
             </p>
         </div>
         
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-number">24/7</div>
-                <div class="feature-icon">
-                    <i class="fas fa-headset"></i>
+        <div class="destinations-grid">
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1559827260-d5534ebbf6c0?w=400&h=300&fit=crop" alt="Dakar">
+                    <div class="destination-overlay">
+                        <span class="destination-badge">Capitale</span>
+                    </div>
                 </div>
-                <h3 class="feature-title"><?= $t['24_support'] ?></h3>
-                <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Équipe d\'experts disponible 24/7 pour vous assister.' : 'Expert team available 24/7 to assist you.' ?>
-                </p>
-                <div class="feature-badge"><?= $lang === 'fr' ? 'RAPIDE' : 'FAST' ?></div>
+                <div class="destination-content">
+                    <h3 class="destination-name">Dakar</h3>
+                    <p class="destination-description">Capitale vibrante avec ses marchés, plages et vie nocturne</p>
+                    <div class="destination-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">245</span>
+                            <span class="stat-label">Biens</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.8</span>
+                            <span class="stat-label">⭐ Note</span>
+                        </div>
+                    </div>
+                    <a href="annonces_direct_fixed.php?ville=Dakar" class="destination-link">Explorer</a>
+                </div>
             </div>
             
-            <div class="feature-item">
-                <div class="feature-number">100%</div>
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1540202404-1b6271e6c001?w=400&h=300&fit=crop" alt="Saly">
+                    <div class="destination-overlay">
+                        <span class="destination-badge">Station Balnéaire</span>
+                    </div>
                 </div>
-                <h3 class="feature-title"><?= $t['secure_payment'] ?></h3>
-                <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Paiements 100% sécurisés avec cryptage SSL.' : '100% secure payments with SSL encryption.' ?>
-                </p>
-                <div class="feature-badge"><?= $lang === 'fr' ? 'SÉCURISÉ' : 'SECURE' ?></div>
+                <div class="destination-content">
+                    <h3 class="destination-name">Saly</h3>
+                    <p class="destination-description">Station balnéaire réputée pour ses hôtels de luxe et plages paradisiaques</p>
+                    <div class="destination-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">189</span>
+                            <span class="stat-label">Biens</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.7</span>
+                            <span class="stat-label">⭐ Note</span>
+                        </div>
+                    </div>
+                    <a href="annonces_direct_fixed.php?ville=Saly" class="destination-link">Explorer</a>
+                </div>
             </div>
             
-            <div class="feature-item">
-                <div class="feature-number">⚡</div>
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Saint-Louis">
+                    <div class="destination-overlay">
+                        <span class="destination-badge">Ville Historique</span>
+                    </div>
                 </div>
-                <h3 class="feature-title"><?= $t['instant_booking'] ?></h3>
-                <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Réservez instantanément sans attente.' : 'Book instantly without waiting.' ?>
-                </p>
-                <div class="feature-badge"><?= $lang === 'fr' ? 'INSTANTANÉ' : 'INSTANT' ?></div>
+                <div class="destination-content">
+                    <h3 class="destination-name">Saint-Louis</h3>
+                    <p class="destination-description">Ancienne capitale coloniale avec son architecture unique et pêcheurs</p>
+                    <div class="destination-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">87</span>
+                            <span class="stat-label">Biens</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">⭐ Note</span>
+                        </div>
+                    </div>
+                    <a href="annonces_direct_fixed.php?ville=Saint-Louis" class="destination-link">Explorer</a>
+                </div>
             </div>
             
-            <div class="feature-item">
-                <div class="feature-number">💰</div>
-                <div class="feature-icon">
-                    <i class="fas fa-tag"></i>
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" alt="Mbour">
+                    <div class="destination-overlay">
+                        <span class="destination-badge">Ville Côtière</span>
+                    </div>
                 </div>
-                <h3 class="feature-title"><?= $t['best_prices'] ?></h3>
-                <p class="feature-description">
-                    <?= $lang === 'fr' ? 'Tarifs compétitifs et transparents.' : 'Competitive and transparent prices.' ?>
-                </p>
-                <div class="feature-badge"><?= $lang === 'fr' ? 'AVANTAGEUX' : 'VALUE' ?></div>
+                <div class="destination-content">
+                    <h3 class="destination-name">Mbour</h3>
+                    <p class="destination-description">Ville de pêcheurs dynamique avec son grand marché et ses plages</p>
+                    <div class="destination-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">156</span>
+                            <span class="stat-label">Biens</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.6</span>
+                            <span class="stat-label">⭐ Note</span>
+                        </div>
+                    </div>
+                    <a href="annonces_direct_fixed.php?ville=Mbour" class="destination-link">Explorer</a>
+                </div>
             </div>
         </div>
     </section>
