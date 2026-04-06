@@ -2391,10 +2391,10 @@ try {
                         </form>
                     </div>
                     
-                    <a href="connexion_simple.php" class="btn-booking btn-outline-booking">
+                    <a href="login.php" class="btn-booking btn-outline-booking">
                         <i class="fas fa-user me-2"></i><?= $t['login'] ?>
                     </a>
-                    <a href="connexion_simple.php" class="btn-booking btn-primary-booking">
+                    <a href="annonces_direct_fixed.php" class="btn-booking btn-primary-booking">
                         <i class="fas fa-plus me-2"></i><?= $t['list_property'] ?>
                     </a>
                 </div>
@@ -3087,7 +3087,7 @@ try {
             <div class="footer-section">
                 <h4 class="footer-title"><?= $t['help'] ?></h4>
                 <ul class="footer-links">
-                    <li><a href="connexion_simple.php"><?= $t['login'] ?></a></li>
+                    <li><a href="login.php"><?= $t['login'] ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Centre d\'aide' : 'Help center' ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'FAQ' : 'FAQ' ?></a></li>
                     <li><a href="#"><?= $lang === 'fr' ? 'Contact' : 'Contact' ?></a></li>
