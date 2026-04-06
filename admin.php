@@ -8,7 +8,7 @@ require_once 'core/Database.php';
 // Vérifier si l'utilisateur est connecté et est admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     // Rediriger vers la page de connexion
-    header('Location: connexion_simple.php');
+    header('Location: login.php');
     exit;
 }
 
