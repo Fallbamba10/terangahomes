@@ -15,6 +15,10 @@ RewriteRule ^(.*)$ index.php [QSA,L]
     Require all denied
 </Files>
 
+<Files "bootstrap.php">
+    Require all denied
+</Files>
+
 # Cache
 <IfModule mod_expires.c>
     ExpiresActive On

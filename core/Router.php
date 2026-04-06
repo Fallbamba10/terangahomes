@@ -10,18 +10,18 @@ class Router {
     }
     
     private function defineRoutes() {
-        // Routes publiques - revenir à la version simple qui fonctionnait
-        $this->get('/', 'HomeController_seloger@index');
-        $this->get('/seloger', 'HomeController_seloger@index');
+        // Routes principales
+        $this->get('/', 'HomeController@index');
         
-        // Routes des favoris
-        $this->get('/favorites', 'FavoriteController@index');
-        $this->post('/favorites/toggle', 'FavoriteController@toggle');
-        
-        // Routes MVC restantes
+        // Routes des annonces
         $this->get('/annonces', 'AnnonceController@index');
         $this->get('/annonces/{id}', 'AnnonceController@show');
         $this->get('/search', 'AnnonceController@search');
+        $this->get('/annonces/create', 'AnnonceController@create');
+        $this->post('/annonces', 'AnnonceController@store');
+        $this->get('/annonces/{id}/edit', 'AnnonceController@edit');
+        $this->post('/annonces/{id}/update', 'AnnonceController@update');
+        $this->post('/annonces/{id}/delete', 'AnnonceController@delete');
         
         // Routes d'authentification
         $this->get('/login', 'AuthController@showLogin');
@@ -30,20 +30,22 @@ class Router {
         $this->post('/register', 'AuthController@register');
         $this->post('/logout', 'AuthController@logout');
         
-        // Routes utilisateur (connecté)
+        // Routes utilisateur
         $this->get('/dashboard', 'UserController@dashboard');
         $this->get('/profile', 'UserController@profile');
         $this->post('/profile', 'UserController@updateProfile');
-        
-        // Routes propriétaire
         $this->get('/my-annonces', 'AnnonceController@myAnnonces');
+        
+        // Routes favoris
+        $this->get('/favorites', 'FavoriteController@index');
+        $this->post('/favorites/toggle', 'FavoriteController@toggle');
         
         // Routes interactions
         $this->post('/favorites/add/{id}', 'InteractionController@addFavorite');
         $this->post('/favorites/remove/{id}', 'InteractionController@removeFavorite');
         $this->post('/comments/add/{id}', 'InteractionController@addComment');
         
-        // Routes chat
+        // Routes messages
         $this->get('/messages', 'MessageController@index');
         $this->get('/messages/{id}', 'MessageController@show');
         $this->post('/messages/send', 'MessageController@send');
@@ -55,6 +57,14 @@ class Router {
         $this->get('/admin/annonces', 'AdminController@annonces');
         $this->post('/admin/users/{id}/toggle', 'AdminController@toggleUser');
         $this->post('/admin/annonces/{id}/toggle', 'AdminController@toggleAnnonce');
+        
+        // Routes pages spéciales (compatibilité avec fichiers existants)
+        $this->get('/accueil', 'HomeController@accueil');
+        $this->get('/car-rental', 'HomeController@carRental');
+        $this->get('/airport-transfer', 'HomeController@airportTransfer');
+        $this->get('/booking-confirmation', 'HomeController@bookingConfirmation');
+        $this->get('/payment', 'HomeController@payment');
+        $this->get('/favorites-page', 'HomeController@favorites');
     }
     
     public function get($path, $handler) {

@@ -1,7 +1,7 @@
 <?php
 define('APP_NAME', 'TerangaHomes');
 define('APP_URL', 'http://localhost/terangaHomes');
-define('ROOT_PATH', dirname(__DIR__, 2) . '/terangaHomes');
+define('ROOT_PATH', __DIR__ . '/..');
 
 // Configuration base de données
 define('DB_HOST', 'localhost');
