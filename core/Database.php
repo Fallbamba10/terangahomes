@@ -52,4 +52,8 @@ class Database {
     public function lastInsertId() {
         return $this->pdo->lastInsertId();
     }
+    
+    public function execute($sql, $params = []) {
+        return $this->query($sql, $params);
+    }
 }

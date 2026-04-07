@@ -1,5 +1,9 @@
 <?php
 // Page pour déposer une annonce
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+try {
 session_start();
 
 // Rediriger si non connecté
@@ -295,15 +299,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
                 
-                <!-- Debug information (à enlever en production) -->
+                <!-- Debug information (à enlever en production)
                 <?php if (isset($_GET['debug']) && $_GET['debug'] === '1'): ?>
                     <div class="alert alert-info mb-4">
                         <h6>Debug Information:</h6>
+                        <p><strong>Session Status:</strong> <?= session_status() === PHP_SESSION_ACTIVE ? 'Active' : 'Inactive' ?></p>
+                        <p><strong>User ID:</strong> <?= $_SESSION['user_id'] ?? 'Not set' ?></p>
+                        <p><strong>Request Method:</strong> <?= $_SERVER['REQUEST_METHOD'] ?></p>
+                        <h6>POST Data:</h6>
                         <pre><?= print_r($_POST, true) ?></pre>
+                        <h6>FILES Data:</h6>
                         <pre><?= print_r($_FILES, true) ?></pre>
-                        <?php if (isset($_SESSION['user_id'])): ?>
-                            <p>User ID: <?= $_SESSION['user_id'] ?></p>
-                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
                 
@@ -456,3 +462,13 @@ document.getElementById('images').addEventListener('change', function(e) {
 </script>
 </body>
 </html>
+
+<?php
+} catch (Exception $e) {
+    echo "<h1>Erreur détectée</h1>";
+    echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
+    echo "<p><strong>Fichier:</strong> " . $e->getFile() . "</p>";
+    echo "<p><strong>Ligne:</strong> " . $e->getLine() . "</p>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+}
+?>
