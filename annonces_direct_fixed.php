@@ -62,55 +62,78 @@ $t = $translations[$lang];
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'config/config.php';
-    require_once 'core/Database.php';
-    
-    $title = $_POST['title'] ?? '';
-    $description = $_POST['description'] ?? '';
-    $type = $_POST['type'] ?? '';
-    $price = $_POST['price'] ?? '';
-    $city = $_POST['city'] ?? '';
-    $category = $_POST['category'] ?? '';
-    
-    // Gestion des images
-    $images = [];
-    if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
-        $uploadDir = 'uploads/annonces/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
+    // Vérifier si l'utilisateur est connecté
+    if (!isset($_SESSION['user_id'])) {
+        $error = "Vous devez être connecté pour déposer une annonce";
+    } else {
+        require_once 'config/config.php';
+        require_once 'core/Database.php';
         
-        foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
-            if ($_FILES['images']['error'][$key] === 0) {
-                $fileName = 'annonce_' . time() . '_' . $key . '.' . pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
-                $filePath = $uploadDir . $fileName;
-                
-                if (move_uploaded_file($tmp_name, $filePath)) {
-                    $images[] = $filePath;
+        $title = $_POST['title'] ?? '';
+        $description = $_POST['description'] ?? '';
+        $type = $_POST['type'] ?? '';
+        $price = $_POST['price'] ?? '';
+        $city = $_POST['city'] ?? '';
+        $category = $_POST['category'] ?? '';
+        
+        // Debug: Afficher les données reçues
+        error_log("POST data: " . print_r($_POST, true));
+        error_log("FILES data: " . print_r($_FILES, true));
+        
+        // Gestion des images
+        $images = [];
+        if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+            $uploadDir = 'uploads/annonces/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
+            foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['images']['error'][$key] === 0) {
+                    $fileName = 'annonce_' . time() . '_' . $key . '.' . pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
+                    $filePath = $uploadDir . $fileName;
+                    
+                    if (move_uploaded_file($tmp_name, $filePath)) {
+                        $images[] = $filePath;
+                        error_log("Image uploaded: " . $filePath);
+                    } else {
+                        error_log("Failed to upload image: " . $tmp_name);
+                    }
                 }
             }
         }
-    }
-    
-    if (empty($title) || empty($description) || empty($type) || empty($price) || empty($city)) {
-        $error = $t['required_fields'];
-    } else {
+        
+        if (empty($title) || empty($description) || empty($type) || empty($price) || empty($city)) {
+            $error = $t['required_fields'];
+        } else {
         $db = Database::getInstance();
         
         try {
-            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, category, images, user_id, statut, created_at) 
+            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW())";
             
-            $db->execute($sql, [$title, $description, $type, $price, $city, $category, json_encode($images), $_SESSION['user_id']]);
+            $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $_SESSION['user_id']];
             
-            $success = $t['success'];
+            // Debug: Afficher les paramètres
+            error_log("Annonce params: " . print_r($params, true));
+            error_log("Images uploaded: " . count($images));
             
-            // Rediriger après succès
-            header('Location: user_dashboard.php?success=1');
-            exit;
+            $result = $db->execute($sql, $params);
+            
+            if ($result) {
+                $success = $t['success'] . " (Images: " . count($images) . " uploadées)";
+                
+                // Rediriger après succès
+                header('Location: user_dashboard.php?success=' . urlencode($success));
+                exit;
+            } else {
+                $error = $t['error'] . ': Erreur lors de l\'insertion';
+            }
             
         } catch (Exception $e) {
+            error_log("Database error: " . $e->getMessage());
             $error = $t['error'] . ': ' . $e->getMessage();
+        }
         }
     }
 }
@@ -269,6 +292,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if (isset($success)): ?>
                     <div class="alert alert-success mb-4">
                         <i class="fas fa-check-circle me-2"></i><?= $success ?>
+                    </div>
+                <?php endif; ?>
+                
+                <!-- Debug information (à enlever en production) -->
+                <?php if (isset($_GET['debug']) && $_GET['debug'] === '1'): ?>
+                    <div class="alert alert-info mb-4">
+                        <h6>Debug Information:</h6>
+                        <pre><?= print_r($_POST, true) ?></pre>
+                        <pre><?= print_r($_FILES, true) ?></pre>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <p>User ID: <?= $_SESSION['user_id'] ?></p>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
                 
