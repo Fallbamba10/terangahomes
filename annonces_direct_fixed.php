@@ -190,8 +190,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 error_log("SUCCÈS: " . $success);
                 
                 // Rediriger après succès
-                error_log("Redirection vers user_dashboard.php");
-                header('Location: user_dashboard.php?success=' . urlencode($success));
+                if (isset($_GET['debug'])) {
+                    error_log("Redirection vers user_dashboard.php?debug=1");
+                    header('Location: user_dashboard.php?debug=1&success=' . urlencode($success));
+                } else {
+                    error_log("Redirection vers user_dashboard.php");
+                    header('Location: user_dashboard.php?success=' . urlencode($success));
+                }
                 exit;
             } else {
                 $error = $t['error'] . ': Erreur lors de l\'insertion';
