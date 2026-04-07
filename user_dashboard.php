@@ -7,6 +7,87 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Charger les dépendances
+require_once 'config/config.php';
+require_once 'core/Database.php';
+
+$db = Database::getInstance();
+$userId = $_SESSION['user_id'];
+
+// Récupérer les statistiques de l'utilisateur
+try {
+    // Annonces de l'utilisateur
+    $userStats = [
+        'total_annonces' => $db->fetch("SELECT COUNT(*) as total FROM annonces WHERE user_id = ?", [$userId])['total'] ?? 0,
+        'annonces_actives' => $db->fetch("SELECT COUNT(*) as total FROM annonces WHERE user_id = ? AND statut = 'active'", [$userId])['total'] ?? 0,
+        'annonces_pending' => $db->fetch("SELECT COUNT(*) as total FROM annonces WHERE user_id = ? AND statut = 'pending'", [$userId])['total'] ?? 0,
+        'total_favorites' => $db->fetch("SELECT COUNT(*) as total FROM favorites WHERE user_id = ?", [$userId])['total'] ?? 0,
+        'total_messages' => $db->fetch("SELECT COUNT(*) as total FROM messages WHERE receiver_id = ? AND is_read = 0", [$userId])['total'] ?? 0,
+    ];
+    
+    // Annonces récentes de l'utilisateur
+    $recentAnnonces = $db->fetchAll("SELECT a.*, 
+        (SELECT COUNT(*) FROM favorites f WHERE f.annonce_id = a.id) as favorite_count,
+        (SELECT COUNT(*) FROM messages m WHERE m.annonce_id = a.id) as message_count
+        FROM annonces a 
+        WHERE a.user_id = ? 
+        ORDER BY a.created_at DESC LIMIT 5", [$userId]);
+    
+    // Messages récents
+    $recentMessages = $db->fetchAll("SELECT m.*, u.prenom as sender_prenom, u.nom as sender_nom, a.titre as annonce_titre
+        FROM messages m 
+        LEFT JOIN users u ON m.sender_id = u.id 
+        LEFT JOIN annonces a ON m.annonce_id = a.id 
+        WHERE m.receiver_id = ? OR m.sender_id = ?
+        ORDER BY m.created_at DESC LIMIT 5", [$userId, $userId]);
+    
+    // Favoris de l'utilisateur
+    $userFavorites = $db->fetchAll("SELECT f.*, a.titre, a.prix, a.ville, a.image_principal
+        FROM favorites f 
+        LEFT JOIN annonces a ON f.annonce_id = a.id 
+        WHERE f.user_id = ? 
+        ORDER BY f.created_at DESC LIMIT 5", [$userId]);
+    
+} catch (Exception $e) {
+    $error = "Erreur de chargement des données: " . $e->getMessage();
+}
+
+// Traitement des actions
+$action = $_GET['action'] ?? '';
+if ($action === 'delete_annonce' && isset($_GET['id'])) {
+    $annonceId = $_GET['id'];
+    
+    // Vérifier que l'annonce appartient à l'utilisateur
+    $annonce = $db->fetch("SELECT * FROM annonces WHERE id = ? AND user_id = ?", [$annonceId, $userId]);
+    
+    if ($annonce) {
+        $db->execute("DELETE FROM annonces WHERE id = ?", [$annonceId]);
+        $success = "Annonce supprimée avec succès";
+        header("Location: user_dashboard.php?success=" . urlencode($success));
+        exit;
+    } else {
+        $error = "Annonce non trouvée ou accès non autorisé";
+    }
+}
+
+if ($action === 'toggle_favorite' && isset($_GET['annonce_id'])) {
+    $annonceId = $_GET['annonce_id'];
+    
+    // Vérifier si déjà en favori
+    $favorite = $db->fetch("SELECT * FROM favorites WHERE user_id = ? AND annonce_id = ?", [$userId, $annonceId]);
+    
+    if ($favorite) {
+        $db->execute("DELETE FROM favorites WHERE id = ?", [$favorite['id']]);
+        $message = "Retiré des favoris";
+    } else {
+        $db->execute("INSERT INTO favorites (user_id, annonce_id, created_at) VALUES (?, ?, NOW())", [$userId, $annonceId]);
+        $message = "Ajouté aux favoris";
+    }
+    
+    header("Location: user_dashboard.php?message=" . urlencode($message));
+    exit;
+}
+
 // Langues supportées
 $supported_langs = [
     'fr' => 'Français',
@@ -938,6 +1019,20 @@ $cancelled_bookings = count(array_filter($user_bookings, function($booking) {
                                     
                                     <div class="booking-info">
                                         <div class="info-item">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4><i class="fas fa-tachometer-alt me-2"></i>Tableau de Bord</h4>
+                    <div class="d-flex gap-2">
+                        <a href="manage_annonces.php" class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus me-1"></i>Nouvelle annonce
+                        </a>
+                        <a href="messaging_system.php" class="btn btn-info btn-sm">
+                            <i class="fas fa-comments me-1"></i>Messagerie
+                        </a>
+                        <a href="user_profile.php" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-user me-1"></i>Profil
+                        </a>
+                    </div>
+                </div>
                                             <i class="fas fa-map-marker-alt"></i>
                                             <span><?= $t['pickup_location'] ?>: <?= $booking['pickup'] ?></span>
                                         </div>

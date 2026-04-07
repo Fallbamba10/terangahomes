@@ -14,6 +14,67 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
 
 $db = Database::getInstance();
 
+// Traitement des actions administratives
+$action = $_GET['action'] ?? '';
+
+if ($action === 'toggle_user' && isset($_GET['user_id'])) {
+    $userId = $_GET['user_id'];
+    $user = $db->fetch("SELECT * FROM users WHERE id = ?", [$userId]);
+    
+    if ($user) {
+        $newStatus = $user['is_active'] ? 0 : 1;
+        $db->execute("UPDATE users SET is_active = ? WHERE id = ?", [$newStatus, $userId]);
+        $message = $newStatus ? "Utilisateur activé" : "Utilisateur désactivé";
+        header("Location: admin.php?message=" . urlencode($message));
+        exit;
+    }
+}
+
+if ($action === 'toggle_annonce' && isset($_GET['annonce_id'])) {
+    $annonceId = $_GET['annonce_id'];
+    $annonce = $db->fetch("SELECT * FROM annonces WHERE id = ?", [$annonceId]);
+    
+    if ($annonce) {
+        $newStatus = $annonce['statut'] === 'active' ? 'inactive' : 'active';
+        $db->execute("UPDATE annonces SET statut = ? WHERE id = ?", [$newStatus, $annonceId]);
+        $message = $newStatus === 'active' ? "Annonce activée" : "Annonce désactivée";
+        header("Location: admin.php?message=" . urlencode($message));
+        exit;
+    }
+}
+
+if ($action === 'delete_user' && isset($_GET['user_id'])) {
+    $userId = $_GET['user_id'];
+    
+    // Empêcher la suppression du compte admin actuel
+    if ($userId != $_SESSION['user_id']) {
+        // Supprimer l'utilisateur et ses données associées
+        $db->execute("DELETE FROM favorites WHERE user_id = ?", [$userId]);
+        $db->execute("DELETE FROM messages WHERE sender_id = ? OR receiver_id = ?", [$userId, $userId]);
+        $db->execute("DELETE FROM annonces WHERE user_id = ?", [$userId]);
+        $db->execute("DELETE FROM users WHERE id = ?", [$userId]);
+        
+        $message = "Utilisateur supprimé avec succès";
+        header("Location: admin.php?message=" . urlencode($message));
+        exit;
+    } else {
+        $error = "Vous ne pouvez pas supprimer votre propre compte";
+    }
+}
+
+if ($action === 'delete_annonce' && isset($_GET['annonce_id'])) {
+    $annonceId = $_GET['annonce_id'];
+    $db->execute("DELETE FROM favorites WHERE annonce_id = ?", [$annonceId]);
+    $db->execute("DELETE FROM messages WHERE annonce_id = ?", [$annonceId]);
+    $db->execute("DELETE FROM annonces WHERE id = ?", [$annonceId]);
+    
+    $message = "Annonce supprimée avec succès";
+    header("Location: admin.php?message=" . urlencode($message));
+    exit;
+}
+
+$db = Database::getInstance();
+
 try {
     // Statistiques globales
     $stats = [
