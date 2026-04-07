@@ -75,6 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// Afficher le message de succès si venant de l'inscription
+$success = '';
+if (isset($_GET['success'])) {
+    $success = urldecode($_GET['success']);
+}
+
 // Langues supportées
 $supported_langs = [
     'fr' => 'Français',
@@ -333,6 +339,12 @@ $t = $translations[$lang];
                     </div>
                 <?php endif; ?>
                 
+                <?php if (!empty($success)): ?>
+                    <div class="alert alert-success" role="alert">
+                        <i class="fas fa-check-circle me-2"></i><?= $success ?>
+                    </div>
+                <?php endif; ?>
+                
                 <form method="post" action="login.php">
                     <div class="form-floating">
                         <input type="email" class="form-control" id="email" name="email" placeholder="<?= $t['email'] ?>" required>
@@ -377,7 +389,7 @@ $t = $translations[$lang];
                 
                 <div class="text-center">
                     <span><?= $t['no_account'] ?> </span>
-                    <a href="#" class="text-decoration-none fw-bold"><?= $t['register'] ?></a>
+                    <a href="register.php" class="text-decoration-none fw-bold"><?= $t['register'] ?></a>
                 </div>
                 
                 <div class="back-link">
