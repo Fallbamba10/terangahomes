@@ -6,8 +6,18 @@ ini_set('display_errors', 1);
 try {
 session_start();
 
+// S'assurer que la session est configurée correctement
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+
 // Rediriger si non connecté
+error_log("Page load - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
+error_log("Page load - Session status: " . session_status());
+error_log("Page load - Session ID: " . session_id());
+
 if (!isset($_SESSION['user_id'])) {
+    error_log("User not connected, redirecting to login");
     header('Location: login.php');
     exit;
 }
@@ -66,9 +76,14 @@ $t = $translations[$lang];
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Debug: Vérifier la session avant traitement
+    error_log("POST request - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
+    error_log("POST request - Session status: " . session_status());
+    
     // Vérifier si l'utilisateur est connecté
     if (!isset($_SESSION['user_id'])) {
         $error = "Vous devez être connecté pour déposer une annonce";
+        error_log("Session perdue - Redirection vers login");
     } else {
         require_once 'config/config.php';
         require_once 'core/Database.php';
