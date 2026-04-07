@@ -173,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         try {
             $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW())";
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', NOW())";
             
             $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $userId];
             
