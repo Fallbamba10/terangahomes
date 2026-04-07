@@ -5,7 +5,7 @@ require_once 'config/config.php';
 require_once 'core/Database.php';
 
 session_start();
-if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? 'user') !== 'admin') {
+if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? 'utilisateur') !== 'admin') {
     // Auto-création et connexion admin comme dans admin.php
     if (!isset($_SESSION['user_id'])) {
         $db = Database::getInstance();
@@ -271,8 +271,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-label">Rôle</label>
                     <select class="form-select" name="role">
                         <option value="">Tous</option>
-                        <option value="user" <?= $role === 'user' ? 'selected' : '' ?>>Utilisateur</option>
-                        <option value="owner" <?= $role === 'owner' ? 'selected' : '' ?>>Propriétaire</option>
+                        <option value="utilisateur" <?= $role === 'utilisateur' ? 'selected' : '' ?>>Utilisateur</option>
+                        <option value="proprietaire" <?= $role === 'proprietaire' ? 'selected' : '' ?>>Propriétaire</option>
                         <option value="admin" <?= $role === 'admin' ? 'selected' : '' ?>>Admin</option>
                     </select>
                 </div>
@@ -344,18 +344,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <div>
                                                     <strong><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></strong>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td><?= htmlspecialchars($user['email']) ?></td>
-                                        <td><?= htmlspecialchars($user['telephone'] ?? 'Non renseigné') ?></td>
-                                        <td>
-                                            <span class="badge badge-status bg-<?= $user['role'] === 'admin' ? 'danger' : ($user['role'] === 'owner' ? 'warning' : 'primary') ?>">
-                                                <?= ucfirst($user['role'] ?? 'user') ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-status bg-<?= $user['is_active'] ? 'success' : 'secondary' ?>">
-                                                <?= $user['is_active'] ? 'Actif' : 'Inactif' ?>
                                             </span>
                                         </td>
                                         <td><?= date('d/m/Y', strtotime($user['created_at'])) ?></td>
@@ -365,8 +353,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     <form method="POST" style="display: inline;">
                                                         <input type="hidden" name="action" value="toggle_status">
                                                         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                                                        <button type="submit" class="btn btn-action btn-<?= $user['is_active'] ? 'warning' : 'success' ?>" 
-                                                                title="<?= $user['is_active'] ? 'Désactiver' : 'Activer' ?>">
+                                                        <button type="submit" class="btn btn-action btn-<?= $user['is_active'] ? 'warning' : 'success' ?>" title="<?= $user['is_active'] ? 'Désactiver' : 'Activer' ?>">
                                                             <i class="fas fa-<?= $user['is_active'] ? 'pause' : 'play' ?>"></i>
                                                         </button>
                                                     </form>

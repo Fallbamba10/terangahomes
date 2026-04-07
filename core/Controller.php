@@ -38,7 +38,7 @@ abstract class Controller {
     }
     
     protected function isOwner() {
-        return $this->isLoggedIn() && $_SESSION['user_role'] === 'owner';
+        return $this->isLoggedIn() && ($_SESSION['user_role'] ?? 'utilisateur') === 'proprietaire';
     }
     
     protected function requireAuth() {

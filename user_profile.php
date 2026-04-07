@@ -300,7 +300,7 @@ $stats = [
                 </div>
                 <h2 class="mt-3"><?= htmlspecialchars($user['prenom'] . ' ' . $user['nom']) ?></h2>
                 <p class="mb-0"><?= htmlspecialchars($user['email']) ?></p>
-                <p class="mb-0"><small><?= $user['role'] === 'admin' ? 'Administrateur' : 'Utilisateur' ?></small></p>
+                <p class="mb-0"><small><?= $user['role'] === 'admin' ? 'Administrateur' : ($user['role'] === 'proprietaire' ? 'Propriétaire' : 'Utilisateur') ?></small></p>
             </div>
         </div>
         

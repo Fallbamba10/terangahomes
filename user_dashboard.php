@@ -47,7 +47,7 @@ try {
         ORDER BY m.created_at DESC LIMIT 5", [$userId, $userId]);
     
     // Favoris récents
-    $recentFavorites = $db->fetchAll("SELECT f.*, a.titre, a.prix, a.ville, a.image_principal
+    $recentFavorites = $db->fetchAll("SELECT f.*, a.titre, a.prix, a.ville, a.images
         FROM favorites f 
         LEFT JOIN annonces a ON f.annonce_id = a.id 
         WHERE f.user_id = ? 

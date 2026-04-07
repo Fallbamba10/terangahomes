@@ -23,7 +23,7 @@ if ($action === 'send_message' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $_POST['message'] ?? '';
     
     if (!empty($receiverId) && !empty($message)) {
-        $db->execute("INSERT INTO messages (sender_id, receiver_id, annonce_id, message, created_at) VALUES (?, ?, ?, ?, NOW())", 
+        $db->execute("INSERT INTO messages (sender_id, receiver_id, annonce_id, contenu, created_at) VALUES (?, ?, ?, ?, NOW())", 
                    [$userId, $receiverId, $annonceId, $message]);
         
         $success = "Message envoyé avec succès";
@@ -59,7 +59,7 @@ $conversations = $db->fetchAll("
         (SELECT COUNT(*) FROM messages WHERE is_read = 0 AND receiver_id = ? AND 
          ((sender_id = CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END) AND 
           receiver_id = ?)) as unread_count,
-        (SELECT message FROM messages ORDER BY created_at DESC LIMIT 1) as last_message
+        (SELECT contenu FROM messages ORDER BY created_at DESC LIMIT 1) as last_message
     FROM messages m
     JOIN users u ON (CASE WHEN m.sender_id = ? THEN m.receiver_id ELSE m.sender_id END) = u.id
     WHERE (m.sender_id = ? OR m.receiver_id = ?)
@@ -255,7 +255,7 @@ if ($selectedConversation) {
                     <div class="messages-list">
                         <?php foreach ($messages as $msg): ?>
                             <div class="message-bubble <?= $msg['sender_id'] == $userId ? 'message-sent' : 'message-received' ?>">
-                                <div><?= htmlspecialchars($msg['message']) ?></div>
+                                <div><?= htmlspecialchars($msg['contenu']) ?></div>
                                 <div class="message-time"><?= date('H:i', strtotime($msg['created_at'])) ?></div>
                             </div>
                         <?php endforeach; ?>

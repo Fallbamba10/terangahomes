@@ -79,7 +79,7 @@ class Message {
         $sql = "SELECT DISTINCT u.id, u.nom, u.prenom,
                 (SELECT COUNT(*) FROM messages m2 
                  WHERE m2.sender_id = u.id AND m2.receiver_id = ? AND m2.annonce_id = ? AND m2.is_read = 0) as unread_count,
-                (SELECT m3.content FROM messages m3 
+                (SELECT m3.contenu FROM messages m3 
                  WHERE m3.sender_id = u.id AND m3.annonce_id = ? 
                  ORDER BY m3.created_at DESC LIMIT 1) as last_message,
                 (SELECT m3.created_at FROM messages m3 

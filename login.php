@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['prenom'] . ' ' . $user['nom'];
-            $_SESSION['user_role'] = $user['role'] ?? 'user';
+            $_SESSION['user_role'] = $user['role'] ?? 'utilisateur';
             
             // Rediriger vers le dashboard approprié
             if ($_SESSION['user_role'] === 'admin') {
