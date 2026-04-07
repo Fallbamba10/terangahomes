@@ -183,23 +183,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $result = $db->execute($sql, $params);
             
+            error_log("Résultat execute: " . ($result ? 'SUCCESS' : 'FAILURE'));
+            
             if ($result) {
                 $success = $t['success'] . " (Images: " . count($images) . " uploadées)";
+                error_log("SUCCÈS: " . $success);
                 
                 // Rediriger après succès
+                error_log("Redirection vers user_dashboard.php");
                 header('Location: user_dashboard.php?success=' . urlencode($success));
                 exit;
             } else {
                 $error = $t['error'] . ': Erreur lors de l\'insertion';
+                error_log("ERREUR: " . $error);
             }
             
         } catch (Exception $e) {
             error_log("Database error: " . $e->getMessage());
             $error = $t['error'] . ': ' . $e->getMessage();
+            error_log("EXCEPTION: " . $error);
         }
         }
     }
 }
+
+error_log("=== FIN TRAITEMENT POST ===");
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
