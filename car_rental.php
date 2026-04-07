@@ -1258,13 +1258,13 @@ switch ($price_filter) {
         function bookCar(carId) {
             if (!<?= isset($_SESSION['user_id']) ? 'true' : 'false' ?>) {
                 if (confirm('<?= $lang === 'fr' ? 'Vous devez être connecté pour réserver. Voulez-vous vous connecter maintenant ?' : 'You must be logged in to book. Do you want to login now?' ?>')) {
-                    window.location.href = 'connexion_simple.php';
+                    window.location.href = 'login.php?redirect=book_car&car_id=' + carId;
                 }
                 return;
             }
             
             // Rediriger vers la page de réservation
-            alert('<?= $lang === 'fr' ? 'Réservation initiée pour la voiture #' : 'Booking initiated for car #' ?>' + carId);
+            window.location.href = 'book_car.php?id=' + carId;
         }
         
         function viewDetails(carId) {
