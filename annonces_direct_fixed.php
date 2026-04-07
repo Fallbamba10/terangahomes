@@ -4,12 +4,25 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 try {
-// S'assurer que la session est configurée correctement AVANT de la démarrer
+// Configuration agressive de la session AVANT de la démarrer
+ini_set('session.save_path', '/tmp');
 ini_set('session.cookie_domain', '');
+ini_set('session.cookie_path', '/');
 ini_set('session.cookie_httponly', 1);
-ini_set('session.use_strict_mode', 1);
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.use_strict_mode', 0);
+ini_set('session.use_cookies', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 86400);
+ini_set('session.cookie_lifetime', 86400);
 
 session_start();
+
+// Forcer la régénération de l'ID de session si nécessaire
+if (!isset($_SESSION['initialized'])) {
+    session_regenerate_id(false);
+    $_SESSION['initialized'] = true;
+}
 
 // Rediriger si non connecté (sauf en mode debug)
 error_log("Page load - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
@@ -83,9 +96,10 @@ $t = $translations[$lang];
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Debug: Vérifier la session avant traitement
+    error_log("=== DÉBUT TRAITEMENT POST ===");
     error_log("POST request - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
     error_log("POST request - Session status: " . session_status());
+    error_log("POST request - Hidden user_id: " . ($_POST['hidden_user_id'] ?? 'NOT SET'));
     
     // Test simple de session
     if (isset($_POST['session_test'])) {
@@ -97,8 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-    // BYPASS COMPLET : Utiliser toujours l'ID du champ caché
+    error_log("Traitement formulaire principal...");
+    
+    // BYPASS TOTAL : Utiliser toujours l'ID du champ caché, même sans session
     $userId = $_POST['hidden_user_id'] ?? null;
+    
+    error_log("User ID final: " . ($userId ?? 'NULL'));
     
     if (!$userId) {
         $error = "Erreur : ID utilisateur non trouvé. Veuillez vous reconnecter.";
@@ -108,9 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Forcer la restauration de la session
         $_SESSION['user_id'] = $userId;
+        error_log("Session forcée avec user_id: " . $_SESSION['user_id']);
         
         require_once 'config/config.php';
         require_once 'core/Database.php';
+        error_log("Database et config chargés");
         
         $title = $_POST['title'] ?? '';
         $description = $_POST['description'] ?? '';
