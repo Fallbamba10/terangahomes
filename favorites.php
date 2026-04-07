@@ -1,12 +1,31 @@
 <?php
 // Page directe des favoris pour éviter les problèmes de routing
 
+// Configuration agressive de la session AVANT de la démarrer
+ini_set('session.save_path', '/tmp');
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.use_strict_mode', 0);
+ini_set('session.use_cookies', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 86400);
+ini_set('session.cookie_lifetime', 86400);
+
+session_start();
+
+// Forcer la régénération de l'ID de session si nécessaire
+if (!isset($_SESSION['initialized'])) {
+    session_regenerate_id(false);
+    $_SESSION['initialized'] = true;
+}
+
 require_once 'config/config.php';
 require_once 'core/Database.php';
 require_once 'models/Favorite.php';
 
 // Vérifier si l'utilisateur est connecté
-session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;

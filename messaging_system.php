@@ -1,6 +1,25 @@
 <?php
 // Système de messagerie complet
+
+// Configuration agressive de la session AVANT de la démarrer
+ini_set('session.save_path', '/tmp');
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.use_strict_mode', 0);
+ini_set('session.use_cookies', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 86400);
+ini_set('session.cookie_lifetime', 86400);
+
 session_start();
+
+// Forcer la régénération de l'ID de session si nécessaire
+if (!isset($_SESSION['initialized'])) {
+    session_regenerate_id(false);
+    $_SESSION['initialized'] = true;
+}
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
