@@ -273,7 +273,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-floating">
                         <select class="form-control" id="role" name="role" required>
                             <option value="">Choisissez votre profil</option>
-                            <option value="client">Client (je cherche un logement/voiture)</option>
+                            <option value="utilisateur">Client (je cherche un logement/voiture)</option>
                             <option value="proprietaire">Propriétaire (je veux déposer des annonces)</option>
                         </select>
                         <label for="role">Je suis un *</label>

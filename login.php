@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: user_dashboard.php');
                 }
             } else {
-                // client ou utilisateur normal
+                // utilisateur ou visiteur (client)
                 if ($redirect === 'book_car' && isset($_GET['car_id'])) {
                     header('Location: book_car.php?id=' . $_GET['car_id']);
                 } else {
