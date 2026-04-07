@@ -3,7 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-try {
 // Configuration agressive de la session AVANT de la démarrer
 ini_set('session.save_path', '/tmp');
 ini_set('session.cookie_domain', '');
@@ -24,22 +23,10 @@ if (!isset($_SESSION['initialized'])) {
     $_SESSION['initialized'] = true;
 }
 
-// Rediriger si non connecté (sauf en mode debug)
-error_log("Page load - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
-error_log("Page load - Session status: " . session_status());
-error_log("Page load - Session ID: " . session_id());
-
-// Bypass de la vérification de session en mode debug pour tester
-if (!isset($_GET['debug']) && !isset($_SESSION['user_id'])) {
-    error_log("User not connected, redirecting to login");
+// Rediriger si non connecté
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
-}
-
-// Pour le debug, utiliser un ID par défaut si pas de session
-if (isset($_GET['debug']) && !isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 2; // ID de Jean Dupont pour le test
-    error_log("Debug mode: Setting default user_id to 2");
 }
 
 // Langues supportées
@@ -96,41 +83,17 @@ $t = $translations[$lang];
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    error_log("=== DÉBUT TRAITEMENT POST ===");
-    error_log("POST request - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
-    error_log("POST request - Session status: " . session_status());
-    error_log("POST request - Hidden user_id: " . ($_POST['hidden_user_id'] ?? 'NOT SET'));
-    
-    // Test simple de session
-    if (isset($_POST['session_test'])) {
-        echo "<h1>Test Session POST</h1>";
-        echo "<p>Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET') . "</p>";
-        echo "<p>Session status: " . session_status() . "</p>";
-        echo "<p>POST hidden user_id: " . ($_POST['hidden_user_id'] ?? 'NOT SET') . "</p>";
-        echo "<p><a href='annonces_direct_fixed.php?debug=1'>Retour</a></p>";
-        exit;
-    }
-    
-    error_log("Traitement formulaire principal...");
-    
     // BYPASS TOTAL : Utiliser toujours l'ID du champ caché, même sans session
     $userId = $_POST['hidden_user_id'] ?? null;
     
-    error_log("User ID final: " . ($userId ?? 'NULL'));
-    
     if (!$userId) {
         $error = "Erreur : ID utilisateur non trouvé. Veuillez vous reconnecter.";
-        error_log("ERREUR : Pas de user_id dans POST");
     } else {
-        error_log("Utilisation de user_id depuis POST: " . $userId);
-        
         // Forcer la restauration de la session
         $_SESSION['user_id'] = $userId;
-        error_log("Session forcée avec user_id: " . $_SESSION['user_id']);
         
         require_once 'config/config.php';
         require_once 'core/Database.php';
-        error_log("Database et config chargés");
         
         $title = $_POST['title'] ?? '';
         $description = $_POST['description'] ?? '';
@@ -138,10 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $price = $_POST['price'] ?? '';
         $city = $_POST['city'] ?? '';
         $category = $_POST['category'] ?? '';
-        
-        // Debug: Afficher les données reçues
-        error_log("POST data: " . print_r($_POST, true));
-        error_log("FILES data: " . print_r($_FILES, true));
         
         // Gestion des images
         $images = [];
@@ -158,9 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     if (move_uploaded_file($tmp_name, $filePath)) {
                         $images[] = $filePath;
-                        error_log("Image uploaded: " . $filePath);
-                    } else {
-                        error_log("Failed to upload image: " . $tmp_name);
                     }
                 }
             }
@@ -177,42 +133,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $userId];
             
-            // Debug: Afficher les paramètres
-            error_log("Annonce params: " . print_r($params, true));
-            error_log("Images uploaded: " . count($images));
-            
             $result = $db->execute($sql, $params);
-            
-            error_log("Résultat execute: " . ($result ? 'SUCCESS' : 'FAILURE'));
             
             if ($result) {
                 $success = $t['success'] . " (Images: " . count($images) . " uploadées)";
-                error_log("SUCCÈS: " . $success);
                 
                 // Rediriger après succès
-                if (isset($_GET['debug'])) {
-                    error_log("Redirection vers user_dashboard.php?debug=1");
-                    header('Location: user_dashboard.php?debug=1&success=' . urlencode($success));
-                } else {
-                    error_log("Redirection vers user_dashboard.php");
-                    header('Location: user_dashboard.php?success=' . urlencode($success));
-                }
+                header('Location: user_dashboard.php?success=' . urlencode($success));
                 exit;
             } else {
                 $error = $t['error'] . ': Erreur lors de l\'insertion';
-                error_log("ERREUR: " . $error);
             }
             
         } catch (Exception $e) {
-            error_log("Database error: " . $e->getMessage());
             $error = $t['error'] . ': ' . $e->getMessage();
-            error_log("EXCEPTION: " . $error);
         }
         }
     }
 }
-
-error_log("=== FIN TRAITEMENT POST ===");
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -371,30 +309,6 @@ error_log("=== FIN TRAITEMENT POST ===");
                     </div>
                 <?php endif; ?>
                 
-                <!-- Debug information (à enlever en production) -->
-                <?php if (isset($_GET['debug']) && $_GET['debug'] === '1'): ?>
-                    <div class="alert alert-info mb-4">
-                        <h6>Debug Information:</h6>
-                        <p><strong>Session Status:</strong> <?= session_status() === PHP_SESSION_ACTIVE ? 'Active' : 'Inactive' ?></p>
-                        <p><strong>User ID:</strong> <?= $_SESSION['user_id'] ?? 'Not set' ?></p>
-                        <p><strong>Request Method:</strong> <?= $_SERVER['REQUEST_METHOD'] ?></p>
-                        <h6>POST Data:</h6>
-                        <pre><?= print_r($_POST, true) ?></pre>
-                        <h6>FILES Data:</h6>
-                        <pre><?= print_r($_FILES, true) ?></pre>
-                        
-                        <!-- Test simple de session -->
-                        <div class="mt-3">
-                            <h6>Test Session Simple:</h6>
-                            <form method="post" action="annonces_direct_fixed.php?debug=1">
-                                <input type="hidden" name="session_test" value="1">
-                                <input type="hidden" name="hidden_user_id" value="<?= $_SESSION['user_id'] ?? '' ?>">
-                                <button type="submit" class="btn btn-sm btn-primary">Tester Session POST</button>
-                            </form>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                
                 <form method="post" action="annonces_direct_fixed.php" enctype="multipart/form-data">
                     <!-- Champ caché pour maintenir l'ID utilisateur -->
                     <input type="hidden" name="hidden_user_id" value="<?= $_SESSION['user_id'] ?? '' ?>">
@@ -547,13 +461,3 @@ document.getElementById('images').addEventListener('change', function(e) {
 </script>
 </body>
 </html>
-
-<?php
-} catch (Exception $e) {
-    echo "<h1>Erreur détectée</h1>";
-    echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
-    echo "<p><strong>Fichier:</strong> " . $e->getFile() . "</p>";
-    echo "<p><strong>Ligne:</strong> " . $e->getLine() . "</p>";
-    echo "<pre>" . $e->getTraceAsString() . "</pre>";
-}
-?>
