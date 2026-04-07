@@ -1,24 +1,27 @@
 <?php
 // Dashboard client (pour les locataires et acheteurs)
 
-// Configuration agressive de la session AVANT de la démarrer
-ini_set('session.save_path', '/tmp');
-ini_set('session.cookie_domain', '');
-ini_set('session.cookie_path', '/');
-ini_set('session.cookie_httponly', 1);
-ini_set('session.cookie_samesite', 'Lax');
-ini_set('session.use_strict_mode', 0);
-ini_set('session.use_cookies', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.gc_maxlifetime', 86400);
-ini_set('session.cookie_lifetime', 86400);
-
-session_start();
-
-// Forcer la régénération de l'ID de session si nécessaire
-if (!isset($_SESSION['initialized'])) {
-    session_regenerate_id(false);
-    $_SESSION['initialized'] = true;
+// Vérifier si la session est déjà active
+if (session_status() === PHP_SESSION_NONE) {
+    // Configuration agressive de la session AVANT de la démarrer
+    ini_set('session.save_path', '/tmp');
+    ini_set('session.cookie_domain', '');
+    ini_set('session.cookie_path', '/');
+    ini_set('session.cookie_httponly', 1);
+    ini_set('session.cookie_samesite', 'Lax');
+    ini_set('session.use_strict_mode', 0);
+    ini_set('session.use_cookies', 1);
+    ini_set('session.use_only_cookies', 1);
+    ini_set('session.gc_maxlifetime', 86400);
+    ini_set('session.cookie_lifetime', 86400);
+    
+    session_start();
+    
+    // Forcer la régénération de l'ID de session si nécessaire
+    if (!isset($_SESSION['initialized'])) {
+        session_regenerate_id(false);
+        $_SESSION['initialized'] = true;
+    }
 }
 
 // Vérifier si l'utilisateur est connecté
@@ -47,36 +50,63 @@ $userStats = [
     'recent_searches' => 0
 ];
 
-// Récupérer les favoris du client
-$favoriteCount = $db->fetch("SELECT COUNT(*) as count FROM favorites WHERE user_id = ?", [$userId]);
-$userStats['total_favorites'] = $favoriteCount['count'] ?? 0;
+try {
+    // Récupérer les favoris du client
+    $favoriteCount = $db->fetch("SELECT COUNT(*) as count FROM favorites WHERE user_id = ?", [$userId]);
+    $userStats['total_favorites'] = $favoriteCount['count'] ?? 0;
+    
+    // Récupérer les réservations de voitures (si la table existe)
+    try {
+        $bookingCount = $db->fetch("SELECT COUNT(*) as count FROM car_bookings WHERE user_id = ?", [$userId]);
+        $userStats['total_bookings'] = $bookingCount['count'] ?? 0;
+    } catch (Exception $e) {
+        // La table car_bookings n'existe pas encore
+        $userStats['total_bookings'] = 0;
+    }
+    
+    // Récupérer les messages non lus
+    $messageCount = $db->fetch("SELECT COUNT(*) as count FROM messages WHERE receiver_id = ? AND is_read = 0", [$userId]);
+    $userStats['unread_messages'] = $messageCount['count'] ?? 0;
+} catch (Exception $e) {
+    // Erreur de base de données, utiliser des valeurs par défaut
+    error_log("Erreur dans customer_dashboard: " . $e->getMessage());
+}
 
-// Récupérer les réservations de voitures
-$bookingCount = $db->fetch("SELECT COUNT(*) as count FROM car_bookings WHERE user_id = ?", [$userId]);
-$userStats['total_bookings'] = $bookingCount['count'] ?? 0;
+// Récupérer les activités récentes avec gestion d'erreur
+$recentFavorites = [];
+$recentBookings = [];
+$recentMessages = [];
 
-// Récupérer les messages non lus
-$messageCount = $db->fetch("SELECT COUNT(*) as count FROM messages WHERE receiver_id = ? AND is_read = 0", [$userId]);
-$userStats['unread_messages'] = $messageCount['count'] ?? 0;
+try {
+    $recentFavorites = $db->fetchAll("SELECT f.*, a.titre, a.prix, a.ville, a.images
+        FROM favorites f 
+        LEFT JOIN annonces a ON f.annonce_id = a.id 
+        WHERE f.user_id = ? 
+        ORDER BY f.created_at DESC LIMIT 3", [$userId]);
+} catch (Exception $e) {
+    error_log("Erreur récupération favoris: " . $e->getMessage());
+}
 
-// Récupérer les activités récentes
-$recentFavorites = $db->fetchAll("SELECT f.*, a.titre, a.prix, a.ville, a.images
-    FROM favorites f 
-    LEFT JOIN annonces a ON f.annonce_id = a.id 
-    WHERE f.user_id = ? 
-    ORDER BY f.created_at DESC LIMIT 3", [$userId]);
+try {
+    $recentBookings = $db->fetchAll("SELECT cb.*, c.brand, c.model, c.daily_price
+        FROM car_bookings cb 
+        LEFT JOIN cars c ON cb.car_id = c.id 
+        WHERE cb.user_id = ? 
+        ORDER BY cb.created_at DESC LIMIT 3", [$userId]);
+} catch (Exception $e) {
+    // La table car_bookings n'existe pas encore
+    error_log("Erreur récupération réservations: " . $e->getMessage());
+}
 
-$recentBookings = $db->fetchAll("SELECT cb.*, c.brand, c.model, c.daily_price
-    FROM car_bookings cb 
-    LEFT JOIN cars c ON cb.car_id = c.id 
-    WHERE cb.user_id = ? 
-    ORDER BY cb.created_at DESC LIMIT 3", [$userId]);
-
-$recentMessages = $db->fetchAll("SELECT m.*, u.prenom, u.nom 
-    FROM messages m 
-    LEFT JOIN users u ON m.sender_id = u.id 
-    WHERE m.receiver_id = ? 
-    ORDER BY m.created_at DESC LIMIT 3", [$userId]);
+try {
+    $recentMessages = $db->fetchAll("SELECT m.*, u.prenom, u.nom 
+        FROM messages m 
+        LEFT JOIN users u ON m.sender_id = u.id 
+        WHERE m.receiver_id = ? 
+        ORDER BY m.created_at DESC LIMIT 3", [$userId]);
+} catch (Exception $e) {
+    error_log("Erreur récupération messages: " . $e->getMessage());
+}
 
 // Message de succès
 $success = '';
