@@ -47,12 +47,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Vérifier les identifiants
         $user = $db->fetch("SELECT * FROM users WHERE email = ? AND is_active = 1", [$email]);
         
+        error_log("Utilisateur trouvé: " . ($user ? 'OUI' : 'NON'));
+        if ($user) {
+            error_log("Role de l'utilisateur: " . $user['role']);
+            error_log("Mot de passe correct: " . (password_verify($password, $user['password']) ? 'OUI' : 'NON'));
+        }
+        
         if ($user && password_verify($password, $user['password'])) {
             // Connexion réussie
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['prenom'] . ' ' . $user['nom'];
             $_SESSION['user_role'] = $user['role'] ?? 'utilisateur';
+            
+            error_log("Session créée - User ID: " . $_SESSION['user_id'] . ", Role: " . $_SESSION['user_role']);
             
             // Rediriger vers le dashboard approprié
             $redirect = $_GET['redirect'] ?? '';

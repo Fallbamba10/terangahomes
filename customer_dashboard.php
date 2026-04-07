@@ -1,6 +1,5 @@
 <?php
 // Dashboard client (pour les locataires et acheteurs)
-session_start();
 
 // Configuration agressive de la session AVANT de la démarrer
 ini_set('session.save_path', '/tmp');
