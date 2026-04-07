@@ -45,37 +45,6 @@ if (!$annonce) {
 $db = Database::getInstance();
 $owner = $db->fetch("SELECT id, nom, email, telephone FROM users WHERE id = ?", [$annonce['user_id']]);
 
-// Traitement du formulaire de contact
-$messageSent = false;
-$contactError = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_owner'])) {
-    $message = $_POST['message'] ?? '';
-    $name = $_POST['name'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    
-    if (empty($message) || empty($name) || empty($email)) {
-        $contactError = "Veuillez remplir tous les champs obligatoires.";
-    } else {
-        try {
-            // Insérer le message dans la table messages
-            $sql = "INSERT INTO messages (sender_id, receiver_id, annonce_id, sujet, message, created_at) 
-                    VALUES (?, ?, ?, ?, ?, NOW())";
-            
-            $senderId = $_SESSION['user_id'] ?? null;
-            $receiverId = $annonce['user_id'];
-            $sujet = "Intérêt pour l'annonce : " . $annonce['titre'];
-            
-            $db->execute($sql, [$senderId, $receiverId, $annonceId, $sujet, $message]);
-            
-            $messageSent = true;
-        } catch (Exception $e) {
-            $contactError = "Erreur lors de l'envoi du message. Veuillez réessayer.";
-        }
-    }
-}
-
 // Récupérer les images
 $images = json_decode($annonce['images'] ?? '[]', true) ?: [];
 
@@ -114,15 +83,9 @@ $translations = [
         'type' => 'Type',
         'city' => 'Ville',
         'neighborhood' => 'Quartier',
-        'send_message' => 'Envoyer un message',
-        'your_name' => 'Votre nom',
-        'your_email' => 'Votre email',
-        'your_phone' => 'Votre téléphone',
-        'your_message' => 'Votre message',
-        'send' => 'Envoyer',
-        'message_sent' => 'Message envoyé avec succès !',
+        'contact_whatsapp' => 'Contacter via WhatsApp',
         'owner_info' => 'Informations du propriétaire',
-        'contact_methods' => 'Méthodes de contact'
+        'whatsapp_message' => 'Bonjour, je suis intéressé(e) par votre annonce'
     ],
     'en' => [
         'back_to_home' => 'Back to Home',
@@ -144,15 +107,9 @@ $translations = [
         'type' => 'Type',
         'city' => 'City',
         'neighborhood' => 'Neighborhood',
-        'send_message' => 'Send Message',
-        'your_name' => 'Your Name',
-        'your_email' => 'Your Email',
-        'your_phone' => 'Your Phone',
-        'your_message' => 'Your Message',
-        'send' => 'Send',
-        'message_sent' => 'Message sent successfully!',
+        'contact_whatsapp' => 'Contact via WhatsApp',
         'owner_info' => 'Owner Information',
-        'contact_methods' => 'Contact Methods'
+        'whatsapp_message' => 'Hello, I am interested in your property listing'
     ]
 ];
 
@@ -246,38 +203,13 @@ $t = $translations[$lang];
             padding: 30px;
             border-radius: 15px;
             margin-top: 30px;
+            text-align: center;
         }
         
-        .contact-form .form-control {
-            background: rgba(255, 255, 255, 0.9);
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.9);
             border: none;
             color: #333;
-        }
-        
-        .contact-form .form-control:focus {
-            background: white;
-            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
-        }
-        
-        .contact-form .form-label {
-            color: white;
-            font-weight: 500;
-        }
-        
-        .contact-form .form-control::placeholder {
-            color: #666;
-        }
-        
-        .alert-success {
-            background: rgba(40, 167, 69, 0.9);
-            border: none;
-            color: white;
-        }
-        
-        .alert-danger {
-            background: rgba(220, 53, 69, 0.9);
-            border: none;
-            color: white;
         }
         
         .price-tag {
@@ -372,68 +304,29 @@ $t = $translations[$lang];
         <div class="contact-section">
             <h3><i class="fas fa-phone me-2"></i><?= $t['contact_owner'] ?></h3>
             
-            <?php if ($messageSent): ?>
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle me-2"></i><?= $t['message_sent'] ?>
-                </div>
-            <?php endif; ?>
-            
-            <?php if ($contactError): ?>
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle me-2"></i><?= $contactError ?>
-                </div>
-            <?php endif; ?>
-            
-            <?php if ($owner): ?>
+            <?php if ($owner && !empty($owner['telephone'])): ?>
                 <div class="row mb-4">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h5><i class="fas fa-user me-2"></i><?= $t['owner_info'] ?></h5>
                         <p><strong>Nom :</strong> <?= htmlspecialchars($owner['nom']) ?></p>
-                        <?php if ($owner['telephone']): ?>
-                            <p><strong>Téléphone :</strong> <?= htmlspecialchars($owner['telephone']) ?></p>
-                        <?php endif; ?>
+                        <p><strong>Téléphone :</strong> <?= htmlspecialchars($owner['telephone']) ?></p>
                     </div>
-                    <div class="col-md-6">
-                        <h5><i class="fas fa-envelope me-2"></i><?= $t['contact_methods'] ?></h5>
-                        <p>Vous pouvez contacter le propriétaire via ce formulaire.</p>
-                    </div>
-                </div>
-            <?php endif; ?>
-            
-            <form method="post" class="contact-form">
-                <input type="hidden" name="contact_owner" value="1">
-                
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="name" class="form-label"><?= $t['your_name'] ?> *</label>
-                        <input type="text" class="form-control" id="name" name="name" required 
-                               value="<?= htmlspecialchars($_SESSION['user_name'] ?? '') ?>">
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="email" class="form-label"><?= $t['your_email'] ?> *</label>
-                        <input type="email" class="form-control" id="email" name="email" required 
-                               value="<?= htmlspecialchars($_SESSION['user_email'] ?? '') ?>">
-                    </div>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="phone" class="form-label"><?= $t['your_phone'] ?></label>
-                    <input type="tel" class="form-control" id="phone" name="phone" 
-                           placeholder="<?= $t['your_phone'] ?>">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="message" class="form-label"><?= $t['your_message'] ?> *</label>
-                    <textarea class="form-control" id="message" name="message" rows="4" required 
-                              placeholder="Bonjour, je suis intéressé(e) par cette annonce. Pouvez-vous me donner plus d'informations ?"></textarea>
                 </div>
                 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-light btn-lg">
-                        <i class="fas fa-paper-plane me-2"></i><?= $t['send'] ?>
-                    </button>
+                    <p class="mb-3">Cliquez sur le bouton ci-dessous pour contacter directement le propriétaire via WhatsApp</p>
+                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $owner['telephone']) ?>?text=<?= urlencode($t['whatsapp_message'] . ' : ' . $annonce['titre'] . ' - ' . $annonce['ville']) ?>" 
+                       target="_blank" 
+                       class="btn btn-light btn-lg">
+                        <i class="fab fa-whatsapp me-2"></i><?= $t['contact_whatsapp'] ?>
+                    </a>
                 </div>
-            </form>
+            <?php else: ?>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Les informations de contact du propriétaire ne sont pas disponibles pour le moment.
+                </div>
+            <?php endif; ?>
         </div>
         
         <!-- Back Button -->
