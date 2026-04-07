@@ -1,6 +1,25 @@
 <?php
 // Page de connexion
+
+// Configuration agressive de la session AVANT de la démarrer
+ini_set('session.save_path', '/tmp');
+ini_set('session.cookie_domain', '');
+ini_set('session.cookie_path', '/');
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.use_strict_mode', 0);
+ini_set('session.use_cookies', 1);
+ini_set('session.use_only_cookies', 1);
+ini_set('session.gc_maxlifetime', 86400);
+ini_set('session.cookie_lifetime', 86400);
+
 session_start();
+
+// Forcer la régénération de l'ID de session si nécessaire
+if (!isset($_SESSION['initialized'])) {
+    session_regenerate_id(false);
+    $_SESSION['initialized'] = true;
+}
 
 // Rediriger si déjà connecté
 if (isset($_SESSION['user_id'])) {
@@ -10,6 +29,10 @@ if (isset($_SESSION['user_id'])) {
 
 // Traitement du formulaire de connexion
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log("=== DÉBUT CONNEXION ===");
+    error_log("Email soumis: " . ($_POST['email'] ?? 'NOT SET'));
+    error_log("Session ID avant connexion: " . session_id());
+    
     require_once 'config/config.php';
     require_once 'core/Database.php';
     
@@ -33,8 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Rediriger vers le dashboard approprié
             if ($_SESSION['user_role'] === 'admin') {
+                error_log("Redirection vers admin_dashboard.php");
                 header('Location: admin_dashboard.php');
             } else {
+                error_log("Redirection vers user_dashboard.php");
                 header('Location: user_dashboard.php');
             }
             exit;
