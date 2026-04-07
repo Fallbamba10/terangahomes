@@ -1029,10 +1029,74 @@ switch ($price_filter) {
                         <i class="fas fa-search"></i> <?= $t['search_btn'] ?>
                     </button>
                 </form>
+            </div>
         </div>
-    </section>
-
-    <!-- Filters Section -->
+        
+        <?php if (isset($_SESSION['user_id'])): ?>
+        <!-- Section Propriétaire : Déposer une voiture -->
+        <section class="owner-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; margin: 40px auto; max-width: 900px; border-radius: 15px;">
+            <div class="container">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-car me-2"></i><?= $lang === 'fr' ? 'Déposer votre voiture' : 'List Your Car' ?>
+                </h2>
+                <p class="text-center mb-4">
+                    <?= $lang === 'fr' ? 'Vous avez une voiture à louer ? Déposez votre annonce ici !' : 'Have a car to rent? List your ad here!' ?>
+                </p>
+                
+                <div class="text-center">
+                    <a href="add_car.php" class="btn btn-light btn-lg">
+                        <i class="fas fa-plus-circle me-2"></i><?= $lang === 'fr' ? 'Ajouter ma voiture' : 'Add My Car' ?>
+                    </a>
+                </div>
+                
+                <?php
+                // Récupérer les voitures du propriétaire
+                require_once 'config/config.php';
+                require_once 'core/Database.php';
+                $db = Database::getInstance();
+                $ownerCars = $db->fetchAll("SELECT * FROM cars WHERE owner_id = ? ORDER BY created_at DESC", [$_SESSION['user_id']]);
+                
+                if (!empty($ownerCars)): ?>
+                    <div class="mt-5">
+                        <h3 class="text-center mb-4">
+                            <i class="fas fa-list me-2"></i><?= $lang === 'fr' ? 'Mes voitures déposées' : 'My Listed Cars' ?>
+                        </h3>
+                        
+                        <div class="row">
+                            <?php foreach ($ownerCars as $car): ?>
+                                <div class="col-md-6 col-lg-4 mb-4">
+                                    <div class="card h-100" style="border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                                        <img src="<?= $car['image'] ?? 'https://via.placeholder.com/400x250' ?>" class="card-img-top" alt="<?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?>" style="height: 200px; object-fit: cover;">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= htmlspecialchars($car['brand'] . ' ' . $car['model']) ?></h5>
+                                            <p class="card-text">
+                                                <strong><?= $lang === 'fr' ? 'Année' : 'Year' ?>:</strong> <?= $car['year'] ?><br>
+                                                <strong><?= $lang === 'fr' ? 'Prix/jour' : 'Daily Price' ?>:</strong> <?= number_format($car['daily_price'], 0, '.', ' ') ?> FCFA
+                                            </p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="badge <?= $car['available'] ? 'bg-success' : 'bg-secondary' ?>">
+                                                    <?= $car['available'] ? ($lang === 'fr' ? 'Disponible' : 'Available') : ($lang === 'fr' ? 'Indisponible' : 'Unavailable') ?>
+                                                </span>
+                                                <div>
+                                                    <a href="edit_car.php?id=<?= $car['id'] ?>" class="btn btn-sm btn-outline-primary me-2">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_car.php?id=<?= $car['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('<?= $lang === 'fr' ? 'Êtes-vous sûr de vouloir supprimer cette voiture ?' : 'Are you sure you want to delete this car?' ?>')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+            </div>
+        </section>
+        <?php endif; ?>
+        
+        <!-- Filters Section -->
     <section class="filters-section">
         <div class="filters-container">
             <div class="filter-group">
