@@ -31,8 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_name'] = $user['prenom'] . ' ' . $user['nom'];
             $_SESSION['user_role'] = $user['role'] ?? 'user';
             
-            // Rediriger vers le dashboard
-            header('Location: user_dashboard.php');
+            // Rediriger vers le dashboard approprié
+            if ($_SESSION['user_role'] === 'admin') {
+                header('Location: admin_dashboard.php');
+            } else {
+                header('Location: user_dashboard.php');
+            }
             exit;
         } else {
             $error = 'Email ou mot de passe incorrect';
