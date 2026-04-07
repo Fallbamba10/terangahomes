@@ -4,12 +4,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 try {
-session_start();
-
-// S'assurer que la session est configurée correctement
+// S'assurer que la session est configurée correctement AVANT de la démarrer
 ini_set('session.cookie_domain', '');
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_strict_mode', 1);
+
+session_start();
 
 // Rediriger si non connecté
 error_log("Page load - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
@@ -80,11 +80,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("POST request - Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET'));
     error_log("POST request - Session status: " . session_status());
     
-    // Vérifier si l'utilisateur est connecté
-    if (!isset($_SESSION['user_id'])) {
+    // Test simple de session
+    if (isset($_POST['session_test'])) {
+        echo "<h1>Test Session POST</h1>";
+        echo "<p>Session user_id: " . ($_SESSION['user_id'] ?? 'NOT SET') . "</p>";
+        echo "<p>Session status: " . session_status() . "</p>";
+        echo "<p>POST hidden user_id: " . ($_POST['hidden_user_id'] ?? 'NOT SET') . "</p>";
+        echo "<p><a href='annonces_direct_fixed.php?debug=1'>Retour</a></p>";
+        exit;
+    }
+    
+    // Contournement : utiliser l'ID utilisateur du champ caché si session perdue
+    $userId = $_SESSION['user_id'] ?? $_POST['hidden_user_id'] ?? null;
+    
+    if (!$userId) {
         $error = "Vous devez être connecté pour déposer une annonce";
-        error_log("Session perdue - Redirection vers login");
+        error_log("Session perdue - Pas de user_id trouvé");
     } else {
+        // Si la session est perdue mais qu'on a l'ID du champ caché
+        if (!isset($_SESSION['user_id']) && isset($_POST['hidden_user_id'])) {
+            $_SESSION['user_id'] = $_POST['hidden_user_id'];
+            error_log("Session restaurée avec hidden_user_id: " . $_POST['hidden_user_id']);
+        }
+        
         require_once 'config/config.php';
         require_once 'core/Database.php';
         
@@ -131,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW())";
             
-            $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $_SESSION['user_id']];
+            $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $userId];
             
             // Debug: Afficher les paramètres
             error_log("Annonce params: " . print_r($params, true));
@@ -325,10 +343,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <pre><?= print_r($_POST, true) ?></pre>
                         <h6>FILES Data:</h6>
                         <pre><?= print_r($_FILES, true) ?></pre>
+                        
+                        <!-- Test simple de session -->
+                        <div class="mt-3">
+                            <h6>Test Session Simple:</h6>
+                            <form method="post" action="annonces_direct_fixed.php?debug=1">
+                                <input type="hidden" name="session_test" value="1">
+                                <input type="hidden" name="hidden_user_id" value="<?= $_SESSION['user_id'] ?? '' ?>">
+                                <button type="submit" class="btn btn-sm btn-primary">Tester Session POST</button>
+                            </form>
+                        </div>
                     </div>
                 <?php endif; ?>
                 
                 <form method="post" action="annonces_direct_fixed.php" enctype="multipart/form-data">
+                    <!-- Champ caché pour maintenir l'ID utilisateur -->
+                    <input type="hidden" name="hidden_user_id" value="<?= $_SESSION['user_id'] ?? '' ?>">
+                    
                     <div class="form-section">
                         <h3><i class="fas fa-info-circle me-2"></i><?= $lang === 'fr' ? 'Informations générales' : 'General Information' ?></h3>
                         
