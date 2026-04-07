@@ -35,10 +35,31 @@ if ($action === 'create' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         'user_id' => $userId
     ];
     
+    // Gestion des images
+    $images = [];
+    if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+        $uploadDir = 'uploads/annonces/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+        
+        foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+            if ($_FILES['images']['error'][$key] === 0) {
+                $fileName = 'annonce_' . time() . '_' . $key . '.' . pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
+                $filePath = $uploadDir . $fileName;
+                
+                if (move_uploaded_file($tmp_name, $filePath)) {
+                    $images[] = $filePath;
+                }
+            }
+        }
+    }
+    $data['images'] = $images;
+    
     if (!empty($data['titre']) && !empty($data['description']) && !empty($data['type']) && !empty($data['prix']) && !empty($data['ville'])) {
         try {
-            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, superficie, chambres, salles_bain, meuble, climatisation, wifi, parking, user_id, statut, created_at) 
-                    VALUES (:titre, :description, :type, :prix, :ville, :quartier, :superficie, :chambres, :salles_bain, :meuble, :climatisation, :wifi, :parking, :user_id, 'pending', NOW())";
+            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, superficie, chambres, salles_bain, meuble, climatisation, wifi, parking, images, user_id, statut, created_at) 
+                    VALUES (:titre, :description, :type, :prix, :ville, :quartier, :superficie, :chambres, :salles_bain, :meuble, :climatisation, :wifi, :parking, :images, :user_id, 'pending', NOW())";
             
             $db->execute($sql, $data);
             
@@ -80,12 +101,49 @@ if ($action === 'edit' && isset($_GET['id'])) {
             'id' => $annonceId
         ];
         
+        // Gestion des images existantes
+        $existingImages = json_decode($annonce['images'] ?? '[]', true) ?: [];
+        $imagesToDelete = $_POST['delete_images'] ?? [];
+        
+        // Supprimer les images cochées
+        foreach ($imagesToDelete as $imagePath) {
+            if (in_array($imagePath, $existingImages)) {
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+                $existingImages = array_filter($existingImages, function($img) use ($imagePath) {
+                    return $img !== $imagePath;
+                });
+            }
+        }
+        
+        // Ajouter les nouvelles images
+        if (isset($_FILES['new_images']) && !empty($_FILES['new_images']['name'][0])) {
+            $uploadDir = 'uploads/annonces/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
+            foreach ($_FILES['new_images']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['new_images']['error'][$key] === 0) {
+                    $fileName = 'annonce_' . $annonceId . '_' . time() . '_' . $key . '.' . pathinfo($_FILES['new_images']['name'][$key], PATHINFO_EXTENSION);
+                    $filePath = $uploadDir . $fileName;
+                    
+                    if (move_uploaded_file($tmp_name, $filePath)) {
+                        $existingImages[] = $filePath;
+                    }
+                }
+            }
+        }
+        
+        $data['images'] = json_encode(array_values($existingImages));
+        
         if (!empty($data['titre']) && !empty($data['description']) && !empty($data['type']) && !empty($data['prix']) && !empty($data['ville'])) {
             try {
                 $sql = "UPDATE annonces SET titre = :titre, description = :description, type = :type, prix = :prix, 
                         ville = :ville, quartier = :quartier, superficie = :superficie, chambres = :chambres, 
                         salles_bain = :salles_bain, meuble = :meuble, climatisation = :climatisation, 
-                        wifi = :wifi, parking = :parking, updated_at = NOW()
+                        wifi = :wifi, parking = :parking, images = :images, updated_at = NOW()
                         WHERE id = :id AND user_id = :user_id";
                 
                 $data['user_id'] = $userId;
@@ -404,6 +462,41 @@ $stats = [
                                         <label class="form-check-label">Parking</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Gestion des images -->
+                        <div class="mb-4">
+                            <label class="form-label"><i class="fas fa-images me-2"></i>Images de l'annonce</label>
+                            
+                            <?php 
+                            $existingImages = json_decode($annonce['images'] ?? '[]', true) ?: [];
+                            if (!empty($existingImages)): 
+                            ?>
+                                <div class="mb-3">
+                                    <h6><i class="fas fa-trash me-2"></i>Images existantes (cochez pour supprimer)</h6>
+                                    <div class="row">
+                                        <?php foreach ($existingImages as $index => $image): ?>
+                                            <div class="col-md-3 mb-3">
+                                                <div class="card">
+                                                    <img src="<?= $image ?>" class="card-img-top" alt="Image <?= $index + 1 ?>" style="height: 150px; object-fit: cover;">
+                                                    <div class="card-body p-2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="delete_images[]" value="<?= $image ?>" id="delete_img_<?= $index ?>">
+                                                            <label class="form-check-label small" for="delete_img_<?= $index ?>">Supprimer</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="mb-3">
+                                <h6><i class="fas fa-plus me-2"></i>Ajouter de nouvelles images</h6>
+                                <input type="file" class="form-control" name="new_images[]" multiple accept="image/*">
+                                <small class="text-muted">Vous pouvez sélectionner plusieurs images (JPG, PNG, GIF, WebP - Max 5MB par image)</small>
                             </div>
                         </div>
                         

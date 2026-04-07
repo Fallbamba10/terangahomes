@@ -72,16 +72,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $city = $_POST['city'] ?? '';
     $category = $_POST['category'] ?? '';
     
+    // Gestion des images
+    $images = [];
+    if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
+        $uploadDir = 'uploads/annonces/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+        
+        foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
+            if ($_FILES['images']['error'][$key] === 0) {
+                $fileName = 'annonce_' . time() . '_' . $key . '.' . pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
+                $filePath = $uploadDir . $fileName;
+                
+                if (move_uploaded_file($tmp_name, $filePath)) {
+                    $images[] = $filePath;
+                }
+            }
+        }
+    }
+    
     if (empty($title) || empty($description) || empty($type) || empty($price) || empty($city)) {
         $error = $t['required_fields'];
     } else {
         $db = Database::getInstance();
         
         try {
-            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, user_id, statut, created_at) 
-                    VALUES (?, ?, ?, ?, ?, ?, 'pending', NOW())";
+            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, category, images, user_id, statut, created_at) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', NOW())";
             
-            $db->execute($sql, [$title, $description, $type, $price, $city, $_SESSION['user_id']]);
+            $db->execute($sql, [$title, $description, $type, $price, $city, $category, json_encode($images), $_SESSION['user_id']]);
             
             $success = $t['success'];
             
@@ -252,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 <?php endif; ?>
                 
-                <form method="post" action="annonces_direct_fixed.php">
+                <form method="post" action="annonces_direct_fixed.php" enctype="multipart/form-data">
                     <div class="form-section">
                         <h3><i class="fas fa-info-circle me-2"></i><?= $lang === 'fr' ? 'Informations générales' : 'General Information' ?></h3>
                         
@@ -319,6 +339,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     
+                    <!-- Section Images -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-images me-2"></i><?= $lang === 'fr' ? 'Images de l\'annonce' : 'Property Images' ?></h3>
+                        
+                        <div class="mb-3">
+                            <label for="images" class="form-label"><?= $lang === 'fr' ? 'Choisir des images' : 'Select Images' ?></label>
+                            <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*">
+                            <small class="text-muted"><?= $lang === 'fr' ? 'Vous pouvez sélectionner plusieurs images (JPG, PNG, GIF, WebP - Max 5MB par image)' : 'You can select multiple images (JPG, PNG, GIF, WebP - Max 5MB per image)' ?></small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div id="image-preview" class="row"></div>
+                        </div>
+                    </div>
+                    
                     <div class="d-flex justify-content-between gap-3">
                         <a href="accueil_booking_fixed.php" class="btn btn-cancel flex-fill">
                             <i class="fas fa-arrow-left me-2"></i><?= $t['cancel'] ?>
@@ -333,5 +368,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Prévisualisation des images
+document.getElementById('images').addEventListener('change', function(e) {
+    const preview = document.getElementById('image-preview');
+    preview.innerHTML = '';
+    
+    const files = Array.from(e.target.files);
+    
+    files.forEach((file, index) => {
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const col = document.createElement('div');
+                col.className = 'col-md-3 mb-3';
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'card-img-top';
+                img.style.height = '150px';
+                img.style.objectFit = 'cover';
+                img.alt = `Image ${index + 1}`;
+                
+                const cardBody = document.createElement('div');
+                cardBody.className = 'card-body p-2';
+                
+                const fileName = document.createElement('small');
+                fileName.className = 'text-muted d-block text-truncate';
+                fileName.textContent = file.name;
+                
+                const fileSize = document.createElement('small');
+                fileSize.className = 'text-muted';
+                fileSize.textContent = ` (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                
+                cardBody.appendChild(fileName);
+                cardBody.appendChild(fileSize);
+                
+                card.appendChild(img);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                preview.appendChild(col);
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+});
+</script>
 </body>
 </html>
