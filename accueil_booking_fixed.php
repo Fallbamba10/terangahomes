@@ -2968,7 +2968,7 @@ try {
                 <div class="property-image-booking">
                     <?php 
                     $images = json_decode($annonce['images'] ?? '[]', true);
-                    $firstImage = !empty($images) ? $images[0] : 'default.jpg';
+                    $firstImage = !empty($images) ? $images[0] : 'uploads/default.jpg';
                     $imageCount = count($images);
                     ?>
                     
@@ -2977,7 +2977,7 @@ try {
                         <div class="slider-container">
                             <?php foreach ($images as $index => $image): ?>
                                 <div class="slide <?= $index === 0 ? 'active' : '' ?>">
-                                    <img src="uploads/images/<?= $image ?>" alt="<?= htmlspecialchars($annonce['titre']) ?> - Photo <?= $index + 1 ?>">
+                                    <img src="<?= $image ?>" alt="<?= htmlspecialchars($annonce['titre']) ?> - Photo <?= $index + 1 ?>">
                                 </div>
                             <?php endforeach; ?>
                         </div>

@@ -224,9 +224,9 @@ $count = $favoriteModel->getFavoriteCount($userId);
                         </div>
                         <?php 
                         $images = json_decode($favorite['images'] ?? '[]', true);
-                        $firstImage = !empty($images) ? $images[0] : 'default.jpg';
+                        $firstImage = !empty($images) ? $images[0] : 'uploads/default.jpg';
                         ?>
-                        <img src="uploads/images/<?= $firstImage ?>" 
+                        <img src="<?= $firstImage ?>" 
                              class="card-img-top" alt="<?= htmlspecialchars($favorite['titre']) ?>"
                              style="height: 200px; object-fit: cover;">
                         <div class="card-body">
