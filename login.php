@@ -60,12 +60,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_SESSION['user_role'] === 'admin') {
                 error_log("Redirection vers admin_dashboard.php");
                 header('Location: admin_dashboard.php');
-            } else {
+            } elseif ($_SESSION['user_role'] === 'proprietaire') {
                 if ($redirect === 'book_car' && isset($_GET['car_id'])) {
                     header('Location: book_car.php?id=' . $_GET['car_id']);
                 } else {
                     error_log("Redirection vers user_dashboard.php");
                     header('Location: user_dashboard.php');
+                }
+            } else {
+                // client ou utilisateur normal
+                if ($redirect === 'book_car' && isset($_GET['car_id'])) {
+                    header('Location: book_car.php?id=' . $_GET['car_id']);
+                } else {
+                    error_log("Redirection vers customer_dashboard.php");
+                    header('Location: customer_dashboard.php');
                 }
             }
             exit;

@@ -39,8 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
     $telephone = $_POST['telephone'] ?? '';
+    $role = $_POST['role'] ?? '';
     
-    if (empty($prenom) || empty($nom) || empty($email) || empty($password)) {
+    if (empty($prenom) || empty($nom) || empty($email) || empty($password) || empty($role)) {
         $error = 'Veuillez remplir tous les champs obligatoires';
     } elseif ($password !== $confirm_password) {
         $error = 'Les mots de passe ne correspondent pas';
@@ -60,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 
                 $sql = "INSERT INTO users (prenom, nom, email, password, telephone, role, is_active, created_at) 
-                        VALUES (?, ?, ?, ?, ?, 'utilisateur', 1, NOW())";
+                        VALUES (?, ?, ?, ?, ?, ?, 1, NOW())";
                 
-                $result = $db->execute($sql, [$prenom, $nom, $email, $hashedPassword, $telephone]);
+                $result = $db->execute($sql, [$prenom, $nom, $email, $hashedPassword, $telephone, $role]);
                 
                 if ($result) {
                     $success = 'Inscription réussie ! Vous pouvez maintenant vous connecter.';
@@ -267,6 +268,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-floating">
                         <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone">
                         <label for="telephone">Téléphone</label>
+                    </div>
+                    
+                    <div class="form-floating">
+                        <select class="form-control" id="role" name="role" required>
+                            <option value="">Choisissez votre profil</option>
+                            <option value="client">Client (je cherche un logement/voiture)</option>
+                            <option value="proprietaire">Propriétaire (je veux déposer des annonces)</option>
+                        </select>
+                        <label for="role">Je suis un *</label>
                     </div>
                     
                     <div class="form-floating">
