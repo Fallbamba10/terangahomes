@@ -102,6 +102,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $city = $_POST['city'] ?? '';
         $category = $_POST['category'] ?? '';
         
+        // Caractéristiques
+        $chambres = $_POST['chambres'] ?? 0;
+        $salles_bain = $_POST['salles_bain'] ?? 0;
+        $superficie = $_POST['superficie'] ?? 0;
+        $etage = $_POST['etage'] ?? 0;
+        $meuble = isset($_POST['meuble']) ? 1 : 0;
+        $climatisation = isset($_POST['climatisation']) ? 1 : 0;
+        $wifi = isset($_POST['wifi']) ? 1 : 0;
+        $parking = isset($_POST['parking']) ? 1 : 0;
+        $piscine = isset($_POST['piscine']) ? 1 : 0;
+        $terrasse = isset($_POST['terrasse']) ? 1 : 0;
+        $jardin = isset($_POST['jardin']) ? 1 : 0;
+        $garage = isset($_POST['garage']) ? 1 : 0;
+        
         // Gestion des images
         $images = [];
         if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
@@ -128,10 +142,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $db = Database::getInstance();
         
         try {
-            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', NOW())";
+            $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at,
+                    chambres, salles_bain, superficie, etage, meuble, climatisation, wifi, parking, piscine, terrasse, jardin, garage) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', NOW(),
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
-            $params = [$title, $description, $type, $price, $city, $category, json_encode($images), $userId];
+            $params = [
+                $title, $description, $type, $price, $city, $category, json_encode($images), $userId,
+                $chambres, $salles_bain, $superficie, $etage, $meuble, $climatisation, $wifi, $parking, 
+                $piscine, $terrasse, $jardin, $garage
+            ];
             
             $result = $db->execute($sql, $params);
             
@@ -375,6 +395,118 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <option value="maison"><?= $lang === 'fr' ? 'Maison' : 'House' ?></option>
                                     <option value="terrain"><?= $lang === 'fr' ? 'Terrain' : 'Land' ?></option>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Section Caractéristiques -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-home me-2"></i><?= $lang === 'fr' ? 'Caractéristiques du bien' : 'Property Features' ?></h3>
+                        
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="chambres" class="form-label"><?= $lang === 'fr' ? 'Nombre de chambres' : 'Bedrooms' ?></label>
+                                <input type="number" class="form-control" id="chambres" name="chambres" min="0" 
+                                       placeholder="<?= $lang === 'fr' ? 'Ex: 3' : 'Ex: 3' ?>">
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="salles_bain" class="form-label"><?= $lang === 'fr' ? 'Salles de bain' : 'Bathrooms' ?></label>
+                                <input type="number" class="form-control" id="salles_bain" name="salles_bain" min="0" 
+                                       placeholder="<?= $lang === 'fr' ? 'Ex: 2' : 'Ex: 2' ?>">
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="superficie" class="form-label"><?= $lang === 'fr' ? 'Superficie (m²)' : 'Surface (m²)' ?></label>
+                                <input type="number" class="form-control" id="superficie" name="superficie" min="0" step="0.01" 
+                                       placeholder="<?= $lang === 'fr' ? 'Ex: 120' : 'Ex: 120' ?>">
+                            </div>
+                            
+                            <div class="col-md-3 mb-3">
+                                <label for="etage" class="form-label"><?= $lang === 'fr' ? 'Étage' : 'Floor' ?></label>
+                                <input type="number" class="form-control" id="etage" name="etage" min="0" 
+                                       placeholder="<?= $lang === 'fr' ? 'Ex: 2' : 'Ex: 2' ?>">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label"><?= $lang === 'fr' ? 'Équipements et options' : 'Amenities and Options' ?></label>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="meuble" name="meuble" value="1">
+                                            <label class="form-check-label" for="meuble">
+                                                <i class="fas fa-couch me-1"></i><?= $lang === 'fr' ? 'Meublé' : 'Furnished' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="climatisation" name="climatisation" value="1">
+                                            <label class="form-check-label" for="climatisation">
+                                                <i class="fas fa-snowflake me-1"></i><?= $lang === 'fr' ? 'Climatisation' : 'Air Conditioning' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="wifi" name="wifi" value="1">
+                                            <label class="form-check-label" for="wifi">
+                                                <i class="fas fa-wifi me-1"></i>WiFi
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="parking" name="parking" value="1">
+                                            <label class="form-check-label" for="parking">
+                                                <i class="fas fa-car me-1"></i><?= $lang === 'fr' ? 'Parking' : 'Parking' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row mt-2">
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="piscine" name="piscine" value="1">
+                                            <label class="form-check-label" for="piscine">
+                                                <i class="fas fa-swimming-pool me-1"></i><?= $lang === 'fr' ? 'Piscine' : 'Pool' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="terrasse" name="terrasse" value="1">
+                                            <label class="form-check-label" for="terrasse">
+                                                <i class="fas fa-umbrella-beach me-1"></i><?= $lang === 'fr' ? 'Terrasse' : 'Terrace' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="jardin" name="jardin" value="1">
+                                            <label class="form-check-label" for="jardin">
+                                                <i class="fas fa-tree me-1"></i><?= $lang === 'fr' ? 'Jardin' : 'Garden' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="garage" name="garage" value="1">
+                                            <label class="form-check-label" for="garage">
+                                                <i class="fas fa-warehouse me-1"></i><?= $lang === 'fr' ? 'Garage' : 'Garage' ?>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
