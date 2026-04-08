@@ -106,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $chambres = $_POST['chambres'] ?? 0;
         $salles_bain = $_POST['salles_bain'] ?? 0;
         $superficie = $_POST['superficie'] ?? 0;
-        $etage = $_POST['etage'] ?? 0;
         $meuble = isset($_POST['meuble']) ? 1 : 0;
         $climatisation = isset($_POST['climatisation']) ? 1 : 0;
         $wifi = isset($_POST['wifi']) ? 1 : 0;
@@ -143,14 +142,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         try {
             $sql = "INSERT INTO annonces (titre, description, type, prix, ville, quartier, images, user_id, statut, created_at,
-                    chambres, salles_bain, superficie, etage, meuble, climatisation, wifi, parking, piscine, terrasse, jardin, garage) 
+                    chambres, salles_bain, superficie, meuble, climatisation, wifi, parking, piscine) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'active', NOW(),
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    ?, ?, ?, ?, ?, ?, ?, ?)";
             
             $params = [
                 $title, $description, $type, $price, $city, $category, json_encode($images), $userId,
-                $chambres, $salles_bain, $superficie, $etage, $meuble, $climatisation, $wifi, $parking, 
-                $piscine, $terrasse, $jardin, $garage
+                $chambres, $salles_bain, $superficie, $meuble, $climatisation, $wifi, $parking, 
+                $piscine
             ];
             
             $result = $db->execute($sql, $params);
@@ -405,27 +404,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         <div class="row">
                             <div class="col-md-3 mb-3">
-                                <label for="chambres" class="form-label"><?= $lang === 'fr' ? 'Nombre de chambres' : 'Bedrooms' ?></label>
+                                <label for="chambres" class="form-label"><?= $lang === 'fr' ? 'Chambres' : 'Bedrooms' ?></label>
                                 <input type="number" class="form-control" id="chambres" name="chambres" min="0" 
                                        placeholder="<?= $lang === 'fr' ? 'Ex: 3' : 'Ex: 3' ?>">
                             </div>
-                            
                             <div class="col-md-3 mb-3">
                                 <label for="salles_bain" class="form-label"><?= $lang === 'fr' ? 'Salles de bain' : 'Bathrooms' ?></label>
                                 <input type="number" class="form-control" id="salles_bain" name="salles_bain" min="0" 
                                        placeholder="<?= $lang === 'fr' ? 'Ex: 2' : 'Ex: 2' ?>">
                             </div>
-                            
                             <div class="col-md-3 mb-3">
-                                <label for="superficie" class="form-label"><?= $lang === 'fr' ? 'Superficie (m²)' : 'Surface (m²)' ?></label>
-                                <input type="number" class="form-control" id="superficie" name="superficie" min="0" step="0.01" 
+                                <label for="superficie" class="form-label"><?= $lang === 'fr' ? 'Superficie (m²)' : 'Area (m²)' ?></label>
+                                <input type="number" class="form-control" id="superficie" name="superficie" min="0" step="0.01"
                                        placeholder="<?= $lang === 'fr' ? 'Ex: 120' : 'Ex: 120' ?>">
-                            </div>
-                            
-                            <div class="col-md-3 mb-3">
-                                <label for="etage" class="form-label"><?= $lang === 'fr' ? 'Étage' : 'Floor' ?></label>
-                                <input type="number" class="form-control" id="etage" name="etage" min="0" 
-                                       placeholder="<?= $lang === 'fr' ? 'Ex: 2' : 'Ex: 2' ?>">
                             </div>
                         </div>
                         
