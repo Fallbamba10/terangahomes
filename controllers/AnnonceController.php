@@ -122,13 +122,22 @@ class AnnonceController extends Controller {
                         'size' => $files['size'][$key]
                     ];
                     
+                    error_log("Tentative upload: " . print_r($file, true));
+                    
                     $upload = $this->uploadImage($file, 'annonces');
+                    error_log("Résultat upload: " . print_r($upload, true));
+                    
                     if ($upload['success']) {
                         $images[] = $upload['path'];
+                        error_log("Image ajoutée: " . $upload['path']);
+                    } else {
+                        error_log("Erreur upload: " . $upload['error']);
                     }
                 }
             }
         }
+        
+        error_log("Images finales: " . print_r($images, true));
         
         // Préparer les données
         $data = [
