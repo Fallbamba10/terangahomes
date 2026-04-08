@@ -243,7 +243,7 @@
                                             <?php foreach ($existingImages as $index => $image): ?>
                                                 <div class="col-md-3 mb-2">
                                                     <div class="position-relative">
-                                                        <img src="<?= APP_URL ?>/uploads/images/<?= $image ?>" 
+                                                        <img src="<?= APP_URL ?>/uploads/annonces/<?= $image ?>" 
                                                              class="img-fluid rounded" style="height: 100px; object-fit: cover;">
                                                         <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1" 
                                                                 onclick="removeImage(<?= $index ?>)">

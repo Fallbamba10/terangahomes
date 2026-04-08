@@ -44,7 +44,7 @@
                                 $images = json_decode($annonce['images'] ?? '[]', true);
                                 $firstImage = !empty($images) ? $images[0] : 'default.jpg';
                                 ?>
-                                <img src="<?= APP_URL ?>/uploads/images/<?= $firstImage ?>" 
+                                <img src="<?= APP_URL ?>/uploads/annonces/<?= $firstImage ?>" 
                                      class="img-fluid rounded" alt="<?= htmlspecialchars($annonce['titre']) ?>">
                             </div>
                             <div class="col-md-8">

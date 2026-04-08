@@ -20,14 +20,14 @@
                 if (!empty($images)):
                 ?>
                 <div id="mainImage" class="main-image mb-3">
-                    <img src="<?= APP_URL ?>/uploads/images/<?= $images[0] ?>" 
+                    <img src="<?= APP_URL ?>/uploads/annonces/<?= $images[0] ?>" 
                          class="img-fluid rounded" alt="<?= htmlspecialchars($annonce['titre']) ?>">
                 </div>
                 <div class="thumbnail-gallery d-flex gap-2 overflow-auto">
                     <?php foreach ($images as $index => $image): ?>
                         <div class="thumbnail-item <?= $index === 0 ? 'active' : '' ?>" 
                              onclick="changeMainImage('<?= $image ?>', this)">
-                            <img src="<?= APP_URL ?>/uploads/images/<?= $image ?>" 
+                            <img src="<?= APP_URL ?>/uploads/annonces/<?= $image ?>" 
                                  class="img-thumbnail" alt="Miniature <?= $index + 1 ?>">
                         </div>
                     <?php endforeach; ?>
@@ -208,7 +208,7 @@
                     $sim_images = json_decode($sim_annonce['images'] ?? '[]', true);
                     $sim_firstImage = !empty($sim_images) ? $sim_images[0] : 'default.jpg';
                     ?>
-                    <img src="<?= APP_URL ?>/uploads/images/<?= $sim_firstImage ?>" 
+                    <img src="<?= APP_URL ?>/uploads/annonces/<?= $sim_firstImage ?>" 
                          class="card-img-top" alt="<?= htmlspecialchars($sim_annonce['titre']) ?>">
                     <div class="card-body">
                         <h6 class="card-title"><?= htmlspecialchars($sim_annonce['titre']) ?></h6>
@@ -325,7 +325,7 @@
 
 <script>
 function changeMainImage(imagePath, thumbnail) {
-    document.querySelector('#mainImage img').src = '<?= APP_URL ?>/uploads/images/' + imagePath;
+    document.querySelector('#mainImage img').src = '<?= APP_URL ?>/uploads/annonces/' + imagePath;
     
     // Update active thumbnail
     document.querySelectorAll('.thumbnail-item').forEach(item => {
