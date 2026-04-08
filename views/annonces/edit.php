@@ -40,7 +40,7 @@
                         </div>
                     <?php endif; ?>
                     
-                    <form method="POST" action="<?= APP_URL ?>/annonces/<?= $annonce['id'] ?>/update" enctype="multipart/form-data" id="annonceForm">
+                    <form method="POST" action="<?= APP_URL ?>/controllers/router.php?action=update&id=<?= $annonce['id'] ?>" enctype="multipart/form-data" id="annonceForm">
                         <!-- Basic Information -->
                         <div class="row mb-4">
                             <div class="col-12">
