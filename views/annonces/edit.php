@@ -234,7 +234,9 @@
                                 </div>
                                 
                                 <?php 
+                                error_log("Images brutes de l'annonce: " . ($annonce['images'] ?? 'NULL'));
                                 $existingImages = json_decode($annonce['images'] ?? '[]', true);
+                                error_log("Images décodées: " . print_r($existingImages, true));
                                 if (!empty($existingImages)): 
                                 ?>
                                     <div class="mt-3">
