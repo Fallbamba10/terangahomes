@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("Email soumis: " . ($_POST['email'] ?? 'NOT SET'));
     error_log("Session ID avant connexion: " . session_id());
     
-    require_once 'config/config.php';
-    require_once 'core/Database.php';
+    require_once 'src/config/config.php';
+    require_once 'src/core/Database.php';
     
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';

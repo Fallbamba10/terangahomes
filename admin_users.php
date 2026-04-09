@@ -1,8 +1,8 @@
 <?php
 // Page de gestion des utilisateurs pour l'admin
 
-require_once 'config/config.php';
-require_once 'core/Database.php';
+require_once 'src/config/config.php';
+require_once 'src/core/Database.php';
 
 session_start();
 if (!isset($_SESSION['user_id']) || ($_SESSION['user_role'] ?? 'utilisateur') !== 'admin') {

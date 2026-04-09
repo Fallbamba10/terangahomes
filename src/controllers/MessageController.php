@@ -1,4 +1,6 @@
 <?php
+require_once '../core/Controller.php';
+
 class MessageController extends Controller {
     
     public function index() {

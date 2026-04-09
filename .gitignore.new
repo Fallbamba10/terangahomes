@@ -1,0 +1,59 @@
+# Fichiers temporaires et de debug
+temp/
+scripts/fix_paths.php
+check_images.php
+
+# Logs
+*.log
+logs/
+error_log
+
+# Fichiers de configuration sensibles
+.env
+config/local.php
+
+# Uploads (garder seulement en développement)
+uploads/*
+!uploads/.gitkeep
+
+# Dossiers de cache
+cache/
+tmp/
+
+# Fichiers de l'IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de backup
+*.bak
+*.backup
+
+# Documentation générée
+docs/_build/
+docs/api/
+
+# Tests
+tests/
+*.test.php
+coverage/
+
+# Node.js (si utilisé)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Composer (si utilisé)
+vendor/
+composer.lock
+
+# Fichiers temporaires PHP
+*.tmp
+*.temp

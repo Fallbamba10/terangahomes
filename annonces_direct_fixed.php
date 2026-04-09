@@ -92,8 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Forcer la restauration de la session
         $_SESSION['user_id'] = $userId;
         
-        require_once 'config/config.php';
-        require_once 'core/Database.php';
+        require_once 'src/config/config.php';
+        require_once 'src/core/Database.php';
         
         $title = $_POST['title'] ?? '';
         $description = $_POST['description'] ?? '';

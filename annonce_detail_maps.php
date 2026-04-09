@@ -20,9 +20,9 @@ if (!isset($_SESSION['initialized'])) {
     $_SESSION['initialized'] = true;
 }
 
-require_once 'config/config.php';
-require_once 'core/Database.php';
-require_once 'models/Annonce.php';
+require_once 'src/config/config.php';
+require_once 'src/core/Database.php';
+require_once 'src/models/Annonce.php';
 
 // Récupérer l'ID de l'annonce
 $annonceId = $_GET['id'] ?? null;

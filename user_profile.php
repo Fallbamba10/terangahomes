@@ -27,8 +27,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once 'config/config.php';
-require_once 'core/Database.php';
+require_once 'src/config/config.php';
+require_once 'src/core/Database.php';
 
 $db = Database::getInstance();
 $userId = $_SESSION['user_id'];

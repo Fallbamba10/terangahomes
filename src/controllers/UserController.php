@@ -1,4 +1,6 @@
 <?php
+require_once '../core/Controller.php';
+
 class UserController extends Controller {
     
     public function dashboard() {

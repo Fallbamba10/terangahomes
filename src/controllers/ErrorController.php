@@ -1,4 +1,6 @@
 <?php
+require_once '../core/Controller.php';
+
 class ErrorController extends Controller {
     
     public function notFound() {

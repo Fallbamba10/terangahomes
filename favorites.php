@@ -21,9 +21,9 @@ if (!isset($_SESSION['initialized'])) {
     $_SESSION['initialized'] = true;
 }
 
-require_once 'config/config.php';
-require_once 'core/Database.php';
-require_once 'models/Favorite.php';
+require_once 'src/config/config.php';
+require_once 'src/core/Database.php';
+require_once 'src/models/Favorite.php';
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {

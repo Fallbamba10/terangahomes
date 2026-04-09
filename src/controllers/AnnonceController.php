@@ -1,4 +1,7 @@
 <?php
+require_once '../core/Controller.php';
+require_once '../models/Annonce.php';
+
 class AnnonceController extends Controller {
     private $annonceModel;
     

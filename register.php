@@ -30,8 +30,8 @@ if (isset($_SESSION['user_id'])) {
 
 // Traitement du formulaire d'inscription
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require_once 'config/config.php';
-    require_once 'core/Database.php';
+    require_once 'src/config/config.php';
+    require_once 'src/core/Database.php';
     
     $prenom = $_POST['prenom'] ?? '';
     $nom = $_POST['nom'] ?? '';

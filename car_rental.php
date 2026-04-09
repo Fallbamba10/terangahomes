@@ -1051,8 +1051,8 @@ switch ($price_filter) {
                 
                 <?php
                 // Récupérer les voitures du propriétaire
-                require_once 'config/config.php';
-                require_once 'core/Database.php';
+                require_once 'src/config/config.php';
+                require_once 'src/core/Database.php';
                 $db = Database::getInstance();
                 $ownerCars = $db->fetchAll("SELECT * FROM cars WHERE owner_id = ? ORDER BY created_at DESC", [$_SESSION['user_id']]);
                 

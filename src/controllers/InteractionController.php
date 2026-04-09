@@ -1,4 +1,6 @@
 <?php
+require_once '../core/Controller.php';
+
 class InteractionController extends Controller {
     
     public function addFavorite($id) {

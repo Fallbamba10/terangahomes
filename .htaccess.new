@@ -1,0 +1,25 @@
+# Rediriger vers le dossier public
+RewriteEngine On
+RewriteRule ^(.*)$ public/$1 [L]
+
+# Options de sécurité
+Options -Indexes
+ServerSignature Off
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(sql|log|txt|md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Cache des fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+</IfModule>
